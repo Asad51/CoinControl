@@ -1,6 +1,5 @@
 # format options
---allman true
---indent tab
+--indent 4
 --extensionacl on-declarations
 --indentcase true
 --xcodeindentation true
