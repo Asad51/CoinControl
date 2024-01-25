@@ -1,0 +1,13 @@
+# format options
+--allman true
+--indent tab
+--extensionacl on-declarations
+--indentcase true
+--xcodeindentation true
+
+# file options
+--exclude Pods,Generated
+
+# rules
+--enable blankLinesAroundMark
+--disable acronyms
