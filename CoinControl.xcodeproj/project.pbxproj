@@ -11,6 +11,11 @@
 		DC80FF722B62D23A002A94C7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80FF712B62D23A002A94C7 /* ContentView.swift */; };
 		DC80FF742B62D23B002A94C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC80FF732B62D23B002A94C7 /* Assets.xcassets */; };
 		DC80FF772B62D23B002A94C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC80FF762B62D23B002A94C7 /* Preview Assets.xcassets */; };
+		DCDB798E2B6412050062E3B8 /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = DCDB798D2B6412050062E3B8 /* CocoaLumberjack */; };
+		DCDB79902B6412050062E3B8 /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCDB798F2B6412050062E3B8 /* CocoaLumberjackSwift */; };
+		DCDB79922B6412050062E3B8 /* CocoaLumberjackSwiftLogBackend in Frameworks */ = {isa = PBXBuildFile; productRef = DCDB79912B6412050062E3B8 /* CocoaLumberjackSwiftLogBackend */; };
+		DCDB79982B6412530062E3B8 /* CCLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDB79972B6412530062E3B8 /* CCLogger.swift */; };
+		DCDB799C2B64130D0062E3B8 /* CCLogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDB799B2B64130D0062E3B8 /* CCLogFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,8 @@
 		DC80FF712B62D23A002A94C7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DC80FF732B62D23B002A94C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC80FF762B62D23B002A94C7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DCDB79972B6412530062E3B8 /* CCLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCLogger.swift; sourceTree = "<group>"; };
+		DCDB799B2B64130D0062E3B8 /* CCLogFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCLogFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +33,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCDB79902B6412050062E3B8 /* CocoaLumberjackSwift in Frameworks */,
+				DCDB79922B6412050062E3B8 /* CocoaLumberjackSwiftLogBackend in Frameworks */,
+				DCDB798E2B6412050062E3B8 /* CocoaLumberjack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,8 +61,9 @@
 		DC80FF6E2B62D23A002A94C7 /* CoinControl */ = {
 			isa = PBXGroup;
 			children = (
-				DC80FF6F2B62D23A002A94C7 /* CoinControlApp.swift */,
-				DC80FF712B62D23A002A94C7 /* ContentView.swift */,
+				DCDB79932B6412110062E3B8 /* App */,
+				DCDB79952B6412250062E3B8 /* Views */,
+				DCDB79942B6412180062E3B8 /* Utility */,
 				DC80FF732B62D23B002A94C7 /* Assets.xcassets */,
 				DC80FF752B62D23B002A94C7 /* Preview Content */,
 			);
@@ -65,6 +76,39 @@
 				DC80FF762B62D23B002A94C7 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DCDB79932B6412110062E3B8 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				DC80FF6F2B62D23A002A94C7 /* CoinControlApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		DCDB79942B6412180062E3B8 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				DCDB79962B6412370062E3B8 /* Logger */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		DCDB79952B6412250062E3B8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DC80FF712B62D23A002A94C7 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DCDB79962B6412370062E3B8 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				DCDB79972B6412530062E3B8 /* CCLogger.swift */,
+				DCDB799B2B64130D0062E3B8 /* CCLogFormatter.swift */,
+			);
+			path = Logger;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -84,6 +128,11 @@
 			dependencies = (
 			);
 			name = CoinControl;
+			packageProductDependencies = (
+				DCDB798D2B6412050062E3B8 /* CocoaLumberjack */,
+				DCDB798F2B6412050062E3B8 /* CocoaLumberjackSwift */,
+				DCDB79912B6412050062E3B8 /* CocoaLumberjackSwiftLogBackend */,
+			);
 			productName = CoinControl;
 			productReference = DC80FF6C2B62D23A002A94C7 /* CoinControl.app */;
 			productType = "com.apple.product-type.application";
@@ -112,6 +161,9 @@
 				Base,
 			);
 			mainGroup = DC80FF632B62D23A002A94C7;
+			packageReferences = (
+				DCDB798C2B6412050062E3B8 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
+			);
 			productRefGroup = DC80FF6D2B62D23A002A94C7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -159,7 +211,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC80FF722B62D23A002A94C7 /* ContentView.swift in Sources */,
+				DCDB799C2B64130D0062E3B8 /* CCLogFormatter.swift in Sources */,
 				DC80FF702B62D23A002A94C7 /* CoinControlApp.swift in Sources */,
+				DCDB79982B6412530062E3B8 /* CCLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,6 +435,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DCDB798C2B6412050062E3B8 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CocoaLumberjack/CocoaLumberjack.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.8.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DCDB798D2B6412050062E3B8 /* CocoaLumberjack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCDB798C2B6412050062E3B8 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
+			productName = CocoaLumberjack;
+		};
+		DCDB798F2B6412050062E3B8 /* CocoaLumberjackSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCDB798C2B6412050062E3B8 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
+			productName = CocoaLumberjackSwift;
+		};
+		DCDB79912B6412050062E3B8 /* CocoaLumberjackSwiftLogBackend */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCDB798C2B6412050062E3B8 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
+			productName = CocoaLumberjackSwiftLogBackend;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DC80FF642B62D23A002A94C7 /* Project object */;
 }
