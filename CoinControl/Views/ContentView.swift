@@ -8,17 +8,37 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var selectedTab = BottomTab.records
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            Color.l22Df7
+                .ignoresSafeArea()
+
+            VStack {
+                ZStack(alignment: .bottomTrailing) {
+                    TabView(selection: $selectedTab) {
+                        Text("Transaction")
+                            .tag(BottomTab.records)
+
+                        Text("Summary")
+                            .tag(BottomTab.stats)
+
+                        Text("Accounts")
+                            .tag(BottomTab.accounts)
+                    }
+                    .tabViewStyle(.page(indexDisplayMode: .never))
+                }
+
+                Spacer()
+
+                BottomTabBar(selectedTab: $selectedTab)
+            }
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(Settings())
 }

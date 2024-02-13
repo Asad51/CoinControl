@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct CoinControlApp: App {
+    @StateObject private var settings = Settings()
+
     init() {
         CCLogger.initialize()
 
@@ -18,6 +20,7 @@ struct CoinControlApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(settings)
         }
     }
 }

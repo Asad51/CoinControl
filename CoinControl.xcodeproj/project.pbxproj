@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC2AC5EC2B76AF2600B7053D /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */; };
 		DC80FF702B62D23A002A94C7 /* CoinControlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80FF6F2B62D23A002A94C7 /* CoinControlApp.swift */; };
 		DC80FF722B62D23A002A94C7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80FF712B62D23A002A94C7 /* ContentView.swift */; };
 		DC80FF742B62D23B002A94C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC80FF732B62D23B002A94C7 /* Assets.xcassets */; };
@@ -16,9 +17,13 @@
 		DCDB79922B6412050062E3B8 /* CocoaLumberjackSwiftLogBackend in Frameworks */ = {isa = PBXBuildFile; productRef = DCDB79912B6412050062E3B8 /* CocoaLumberjackSwiftLogBackend */; };
 		DCDB79982B6412530062E3B8 /* CCLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDB79972B6412530062E3B8 /* CCLogger.swift */; };
 		DCDB799C2B64130D0062E3B8 /* CCLogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDB799B2B64130D0062E3B8 /* CCLogFormatter.swift */; };
+		DCDC4E4B2B7BD0DB002C3321 /* BottomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC4E4A2B7BD0DB002C3321 /* BottomTabBar.swift */; };
+		DCDC4E552B7BE622002C3321 /* BottomTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC4E542B7BE622002C3321 /* BottomTab.swift */; };
+		DCDC4E592B7BECFF002C3321 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC4E582B7BECFF002C3321 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		DC80FF6C2B62D23A002A94C7 /* CoinControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC80FF6F2B62D23A002A94C7 /* CoinControlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinControlApp.swift; sourceTree = "<group>"; };
 		DC80FF712B62D23A002A94C7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -26,6 +31,9 @@
 		DC80FF762B62D23B002A94C7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DCDB79972B6412530062E3B8 /* CCLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCLogger.swift; sourceTree = "<group>"; };
 		DCDB799B2B64130D0062E3B8 /* CCLogFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCLogFormatter.swift; sourceTree = "<group>"; };
+		DCDC4E4A2B7BD0DB002C3321 /* BottomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabBar.swift; sourceTree = "<group>"; };
+		DCDC4E542B7BE622002C3321 /* BottomTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTab.swift; sourceTree = "<group>"; };
+		DCDC4E582B7BECFF002C3321 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				DCDB79932B6412110062E3B8 /* App */,
+				DCDC4E4C2B7BD0EC002C3321 /* Models */,
 				DCDB79952B6412250062E3B8 /* Views */,
 				DCDB79942B6412180062E3B8 /* Utility */,
 				DC80FF732B62D23B002A94C7 /* Assets.xcassets */,
@@ -98,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				DC80FF712B62D23A002A94C7 /* ContentView.swift */,
+				DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */,
+				DCDC4E4A2B7BD0DB002C3321 /* BottomTabBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -109,6 +120,15 @@
 				DCDB799B2B64130D0062E3B8 /* CCLogFormatter.swift */,
 			);
 			path = Logger;
+			sourceTree = "<group>";
+		};
+		DCDC4E4C2B7BD0EC002C3321 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DCDC4E542B7BE622002C3321 /* BottomTab.swift */,
+				DCDC4E582B7BECFF002C3321 /* Settings.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,7 +221,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Set git path\nif [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\n# Enter project directory\ncd $SRCROOT\n\n# Run SwiftFormat with git specifying git directory(must)\nif which swiftformat >/dev/null; then\n    git --git-dir .git diff --name-only | grep -e '\\(.*\\).swift$' | while read fileName; do\n        swiftformat \"${fileName}\" --lint;\n    done\nelse\n    echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\nexit 0\n";
+			shellScript = "# Set git path\nif [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\n# Enter project directory\ncd $SRCROOT\n\n# Run SwiftFormat with git specifying git directory(must)\nif which swiftformat >/dev/null; then\n    git --git-dir .git diff --name-only | grep -e '\\(.*\\).swift$' | while read fileName; do\n        swiftformat \"${fileName}\" --lint --swiftversion 5.5;\n    done\nelse\n    echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\nexit 0\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -210,10 +230,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCDC4E4B2B7BD0DB002C3321 /* BottomTabBar.swift in Sources */,
 				DC80FF722B62D23A002A94C7 /* ContentView.swift in Sources */,
+				DCDC4E592B7BECFF002C3321 /* Settings.swift in Sources */,
 				DCDB799C2B64130D0062E3B8 /* CCLogFormatter.swift in Sources */,
+				DC2AC5EC2B76AF2600B7053D /* FloatingButton.swift in Sources */,
 				DC80FF702B62D23A002A94C7 /* CoinControlApp.swift in Sources */,
 				DCDB79982B6412530062E3B8 /* CCLogger.swift in Sources */,
+				DCDC4E552B7BE622002C3321 /* BottomTab.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
