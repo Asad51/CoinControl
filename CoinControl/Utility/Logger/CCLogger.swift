@@ -152,7 +152,7 @@ enum CCLogger {
     ///   - tag: Log tag.
     ///   - async: asynchronous logging option.
     ///   - ddlog: DDLog instance reference.
-    static func DWLogDebug(
+    static func debug(
         _ message: Any = "",
         level: DDLogLevel = .debug,
         context: Int = 0,
@@ -184,7 +184,7 @@ enum CCLogger {
     ///   - tag: Log tag.
     ///   - async: asynchronous logging option.
     ///   - ddlog: DDLog instance reference.
-    static func DWLogVerbose(
+    static func verbose(
         _ message: Any = "",
         level: DDLogLevel = .verbose,
         context: Int = 0,

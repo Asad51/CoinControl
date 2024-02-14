@@ -17,6 +17,9 @@
 		DCC6CCE92B7D161200336C4B /* Record+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCE52B7D161200336C4B /* Record+CoreDataProperties.swift */; };
 		DCC6CCF02B7D1AAD00336C4B /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCEE2B7D1AAD00336C4B /* Category+CoreDataClass.swift */; };
 		DCC6CCF12B7D1AAD00336C4B /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCEF2B7D1AAD00336C4B /* Category+CoreDataProperties.swift */; };
+		DCC6CCF52B7D2BC600336C4B /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCF42B7D2BC600336C4B /* PersistenceController.swift */; };
+		DCC6CCF92B7D33FC00336C4B /* CoreDataPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCF82B7D33FC00336C4B /* CoreDataPreview.swift */; };
+		DCCA7D7A2B7D3BB000199111 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCA7D792B7D3BB000199111 /* PreviewData.swift */; };
 		DCDB798E2B6412050062E3B8 /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = DCDB798D2B6412050062E3B8 /* CocoaLumberjack */; };
 		DCDB79902B6412050062E3B8 /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCDB798F2B6412050062E3B8 /* CocoaLumberjackSwift */; };
 		DCDB79922B6412050062E3B8 /* CocoaLumberjackSwiftLogBackend in Frameworks */ = {isa = PBXBuildFile; productRef = DCDB79912B6412050062E3B8 /* CocoaLumberjackSwiftLogBackend */; };
@@ -39,6 +42,9 @@
 		DCC6CCE52B7D161200336C4B /* Record+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Record+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DCC6CCEE2B7D1AAD00336C4B /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DCC6CCEF2B7D1AAD00336C4B /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DCC6CCF42B7D2BC600336C4B /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		DCC6CCF82B7D33FC00336C4B /* CoreDataPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPreview.swift; sourceTree = "<group>"; };
+		DCCA7D792B7D3BB000199111 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		DCDB79972B6412530062E3B8 /* CCLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCLogger.swift; sourceTree = "<group>"; };
 		DCDB799B2B64130D0062E3B8 /* CCLogFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCLogFormatter.swift; sourceTree = "<group>"; };
 		DCDC4E4A2B7BD0DB002C3321 /* BottomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabBar.swift; sourceTree = "<group>"; };
@@ -93,6 +99,8 @@
 		DC80FF752B62D23B002A94C7 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				DCCA7D792B7D3BB000199111 /* PreviewData.swift */,
+				DCC6CCF82B7D33FC00336C4B /* CoreDataPreview.swift */,
 				DC80FF762B62D23B002A94C7 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -102,7 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				DCC6CCDD2B7D11DA00336C4B /* Models */,
-				DCC6CCDA2B7D116E00336C4B /* CoinControlModel.xcdatamodeld */,
+				DCC6CCF42B7D2BC600336C4B /* PersistenceController.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -110,6 +118,7 @@
 		DCC6CCDD2B7D11DA00336C4B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DCC6CCDA2B7D116E00336C4B /* CoinControlModel.xcdatamodeld */,
 				DCC6CCEE2B7D1AAD00336C4B /* Category+CoreDataClass.swift */,
 				DCC6CCEF2B7D1AAD00336C4B /* Category+CoreDataProperties.swift */,
 				DCC6CCE42B7D161200336C4B /* Record+CoreDataClass.swift */,
@@ -262,8 +271,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCC6CCE82B7D161200336C4B /* Record+CoreDataClass.swift in Sources */,
+				DCCA7D7A2B7D3BB000199111 /* PreviewData.swift in Sources */,
+				DCC6CCF52B7D2BC600336C4B /* PersistenceController.swift in Sources */,
 				DCC6CCF12B7D1AAD00336C4B /* Category+CoreDataProperties.swift in Sources */,
 				DCC6CCF02B7D1AAD00336C4B /* Category+CoreDataClass.swift in Sources */,
+				DCC6CCF92B7D33FC00336C4B /* CoreDataPreview.swift in Sources */,
 				DCDC4E4B2B7BD0DB002C3321 /* BottomTabBar.swift in Sources */,
 				DC80FF722B62D23A002A94C7 /* ContentView.swift in Sources */,
 				DCDC4E592B7BECFF002C3321 /* Settings.swift in Sources */,

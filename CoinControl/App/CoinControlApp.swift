@@ -5,15 +5,19 @@
 //  Created by Md. Asadul Islam on 25/1/24.
 //
 
+import CoreData
 import SwiftUI
 
 @main
 struct CoinControlApp: App {
     @StateObject private var settings = Settings()
 
-    init() {
-        CCLogger.initialize()
+    private let persistenceController: PersistenceController
 
+    init() {
+        persistenceController = PersistenceController()
+
+        CCLogger.initialize()
         CCLogger.info("Launching application...")
     }
 
@@ -21,6 +25,7 @@ struct CoinControlApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(settings)
+                .environment(\.managedObjectContext, persistenceController.viewContext)
         }
     }
 }

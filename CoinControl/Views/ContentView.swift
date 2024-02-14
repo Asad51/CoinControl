@@ -39,6 +39,7 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
-        .environmentObject(Settings())
+    CoreDataPreview(\.records) {
+        ContentView()
+    }
 }
