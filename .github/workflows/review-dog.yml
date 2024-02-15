@@ -1,0 +1,27 @@
+# Workflow Name
+name: Review Dog
+
+# Controls when the action will run
+on: [pull_request]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # Job name
+  review-dog:
+    # The type of runner that the job will run on
+    runs-on: macos-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - name: Print versions
+      run: |
+        swift --version | head -n 1
+        curl --version | head -n 1 | awk '{ print $1" "$2 }'
+        git --version
+        mint --version | xargs echo mint
+        swiftformat --version | xargs echo swiftformat
+        reviewdog --version | xargs echo reviewdog
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 100
