@@ -1,0 +1,72 @@
+# Workflow Name
+name: Review Dog
+
+# Controls when the action will run
+on: [pull_request]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # Job name
+  review-dog:
+    # The type of runner that the job will run on
+    runs-on: macos-latest
+
+    # Environment variable
+    env:
+      REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+      REVIEWDOG_INSECURE_SKIP_VERIFY: true
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - name: Install Dependencies
+      uses: reviewdog/action-setup@v1 # https://github.com/marketplace/actions/setup-reviewdog
+      with:
+        reviewdog_version: latest 
+
+    - name: Print versions
+      run: |
+        swift --version | head -n 1
+        git --version
+        swiftformat --version | xargs echo swiftformat
+        reviewdog --version | xargs echo reviewdog
+
+    # This action checks-out repository under $GITHUB_WORKSPACE, so workflow can access it.
+    - name: Checkout code
+      uses: actions/checkout@v4 # https://github.com/marketplace/actions/checkout
+
+    # References:
+    #   - https://github.com/reviewdog/reviewdog/issues/1158
+    #   - https://github.com/actions/checkout/issues/766    
+    - name: Add Safe Directory
+      run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+    
+    # GitHub Action that enables conditional execution of workflow steps and jobs, based on the files modified by pull request.
+    - name: Filter paths
+      id: filters
+      uses: dorny/paths-filter@v2 # https://github.com/marketplace/actions/paths-changes-filter-strictly
+      with:
+        # Enable listing of files matching each filter.
+        # Paths to files will be available in `${FILTER_NAME}_files` output variable.
+        list-files: csv
+        # For swift files, changed files will be checked by linter.
+        # It doesn't make sense to lint deleted files.
+        # Therefore we specify we are only interested in added or modified files for swift filter.
+        filters: |
+          swift:
+            - added|modified: '**/*.swift'
+
+    - name: Check Format
+      if: ${{ steps.filters.outputs.swift == 'true' }}
+      run: |
+        echo ${{ steps.filters.outputs.swift_files }} | tr , "\n" > diffSwiftFileList.txt
+        swiftformat --lint --filelist diffSwiftFileList.txt 2>&1 | reviewdog -efm="%f:%l:%c: %m" -diff="git diff ${{ github.base_ref }}" -reporter="github-pr-review"
+
+    - name: Suggest Format
+      if: ${{ steps.filters.outputs.swift == 'true' }}
+      run: |
+        swiftformat -filelist diffSwiftFileList.txt
+        TMPFILE=$(mktemp)
+        git diff >"${TMPFILE}"
+        git stash -u
+        reviewdog -f=diff -f.diff.strip=1 -diff="git diff ${{ github.base_ref }}" -reporter="github-pr-review" <"${TMPFILE}"
+        git stash drop
