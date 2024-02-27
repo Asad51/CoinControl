@@ -28,6 +28,8 @@
 		DCDC4E4B2B7BD0DB002C3321 /* BottomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC4E4A2B7BD0DB002C3321 /* BottomTabBar.swift */; };
 		DCDC4E552B7BE622002C3321 /* BottomTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC4E542B7BE622002C3321 /* BottomTab.swift */; };
 		DCDC4E592B7BECFF002C3321 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC4E582B7BECFF002C3321 /* Settings.swift */; };
+		DCE689ED2B7FDD390074ED6D /* AccountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE689EC2B7FDD390074ED6D /* AccountType.swift */; };
+		DCE689F02B7FDD820074ED6D /* RecordRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE689EF2B7FDD820074ED6D /* RecordRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		DCDC4E4A2B7BD0DB002C3321 /* BottomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabBar.swift; sourceTree = "<group>"; };
 		DCDC4E542B7BE622002C3321 /* BottomTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTab.swift; sourceTree = "<group>"; };
 		DCDC4E582B7BECFF002C3321 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		DCE689EC2B7FDD390074ED6D /* AccountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountType.swift; sourceTree = "<group>"; };
+		DCE689EF2B7FDD820074ED6D /* RecordRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +150,7 @@
 		DCDB79952B6412250062E3B8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DCE689EE2B7FDD5C0074ED6D /* Records */,
 				DC80FF712B62D23A002A94C7 /* ContentView.swift */,
 				DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */,
 				DCDC4E4A2B7BD0DB002C3321 /* BottomTabBar.swift */,
@@ -167,8 +172,17 @@
 			children = (
 				DCDC4E542B7BE622002C3321 /* BottomTab.swift */,
 				DCDC4E582B7BECFF002C3321 /* Settings.swift */,
+				DCE689EC2B7FDD390074ED6D /* AccountType.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		DCE689EE2B7FDD5C0074ED6D /* Records */ = {
+			isa = PBXGroup;
+			children = (
+				DCE689EF2B7FDD820074ED6D /* RecordRow.swift */,
+			);
+			path = Records;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,9 +297,11 @@
 				DC2AC5EC2B76AF2600B7053D /* FloatingButton.swift in Sources */,
 				DCC6CCE92B7D161200336C4B /* Record+CoreDataProperties.swift in Sources */,
 				DC80FF702B62D23A002A94C7 /* CoinControlApp.swift in Sources */,
+				DCE689ED2B7FDD390074ED6D /* AccountType.swift in Sources */,
 				DCDB79982B6412530062E3B8 /* CCLogger.swift in Sources */,
 				DCDC4E552B7BE622002C3321 /* BottomTab.swift in Sources */,
 				DCC6CCDC2B7D116E00336C4B /* CoinControlModel.xcdatamodeld in Sources */,
+				DCE689F02B7FDD820074ED6D /* RecordRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
