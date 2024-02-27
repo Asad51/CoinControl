@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC1190E42B8E63BA00AD7222 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E32B8E63BA00AD7222 /* AppCenterAnalytics */; };
+		DC1190E62B8E63BA00AD7222 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E52B8E63BA00AD7222 /* AppCenterCrashes */; };
+		DC1190E82B8E63BA00AD7222 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E72B8E63BA00AD7222 /* AppCenterDistribute */; };
+		DC1190EA2B8E63CC00AD7222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1190E92B8E63CC00AD7222 /* AppDelegate.swift */; };
 		DC2AC5EC2B76AF2600B7053D /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */; };
 		DC80FF702B62D23A002A94C7 /* CoinControlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80FF6F2B62D23A002A94C7 /* CoinControlApp.swift */; };
 		DC80FF722B62D23A002A94C7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80FF712B62D23A002A94C7 /* ContentView.swift */; };
@@ -33,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DC1190E92B8E63CC00AD7222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		DC80FF6C2B62D23A002A94C7 /* CoinControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC80FF6F2B62D23A002A94C7 /* CoinControlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinControlApp.swift; sourceTree = "<group>"; };
@@ -61,6 +66,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC1190E42B8E63BA00AD7222 /* AppCenterAnalytics in Frameworks */,
+				DC1190E62B8E63BA00AD7222 /* AppCenterCrashes in Frameworks */,
+				DC1190E82B8E63BA00AD7222 /* AppCenterDistribute in Frameworks */,
 				DCDB79902B6412050062E3B8 /* CocoaLumberjackSwift in Frameworks */,
 				DCDB79922B6412050062E3B8 /* CocoaLumberjackSwiftLogBackend in Frameworks */,
 				DCDB798E2B6412050062E3B8 /* CocoaLumberjack in Frameworks */,
@@ -135,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				DC80FF6F2B62D23A002A94C7 /* CoinControlApp.swift */,
+				DC1190E92B8E63CC00AD7222 /* AppDelegate.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -206,6 +215,9 @@
 				DCDB798D2B6412050062E3B8 /* CocoaLumberjack */,
 				DCDB798F2B6412050062E3B8 /* CocoaLumberjackSwift */,
 				DCDB79912B6412050062E3B8 /* CocoaLumberjackSwiftLogBackend */,
+				DC1190E32B8E63BA00AD7222 /* AppCenterAnalytics */,
+				DC1190E52B8E63BA00AD7222 /* AppCenterCrashes */,
+				DC1190E72B8E63BA00AD7222 /* AppCenterDistribute */,
 			);
 			productName = CoinControl;
 			productReference = DC80FF6C2B62D23A002A94C7 /* CoinControl.app */;
@@ -237,6 +249,7 @@
 			mainGroup = DC80FF632B62D23A002A94C7;
 			packageReferences = (
 				DCDB798C2B6412050062E3B8 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
+				DC1190E22B8E63BA00AD7222 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 			);
 			productRefGroup = DC80FF6D2B62D23A002A94C7 /* Products */;
 			projectDirPath = "";
@@ -286,6 +299,7 @@
 			files = (
 				DCC6CCE82B7D161200336C4B /* Record+CoreDataClass.swift in Sources */,
 				DCCA7D7A2B7D3BB000199111 /* PreviewData.swift in Sources */,
+				DC1190EA2B8E63CC00AD7222 /* AppDelegate.swift in Sources */,
 				DCC6CCF52B7D2BC600336C4B /* PersistenceController.swift in Sources */,
 				DCC6CCF12B7D1AAD00336C4B /* Category+CoreDataProperties.swift in Sources */,
 				DCC6CCF02B7D1AAD00336C4B /* Category+CoreDataClass.swift in Sources */,
@@ -525,6 +539,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DC1190E22B8E63BA00AD7222 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.4;
+			};
+		};
 		DCDB798C2B6412050062E3B8 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/CocoaLumberjack/CocoaLumberjack.git";
@@ -536,6 +558,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DC1190E32B8E63BA00AD7222 /* AppCenterAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC1190E22B8E63BA00AD7222 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterAnalytics;
+		};
+		DC1190E52B8E63BA00AD7222 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC1190E22B8E63BA00AD7222 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		DC1190E72B8E63BA00AD7222 /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC1190E22B8E63BA00AD7222 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
+		};
 		DCDB798D2B6412050062E3B8 /* CocoaLumberjack */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DCDB798C2B6412050062E3B8 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
