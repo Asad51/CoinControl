@@ -10,6 +10,8 @@ import SwiftUI
 
 @main
 struct CoinControlApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     @StateObject private var settings = Settings()
 
     private let persistenceController: PersistenceController
