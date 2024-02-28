@@ -38,8 +38,10 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    CoreDataPreview(\.records) {
-        ContentView()
+#if DEBUG
+    #Preview {
+        CoreDataPreview(\.records) {
+            ContentView()
+        }
     }
-}
+#endif
