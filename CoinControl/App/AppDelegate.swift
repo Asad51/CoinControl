@@ -12,7 +12,7 @@ import UIKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        AppCenter.start(withAppSecret: "16274a8c-9ae2-46e1-a145-5724eeb2320c", services: [
+        AppCenter.start(withAppSecret: "41711e8d-cbcd-4d45-b905-3115c2f813ed", services: [
             Crashes.self, Analytics.self])
         return true
     }
