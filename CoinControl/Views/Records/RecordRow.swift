@@ -40,8 +40,10 @@ struct RecordRow: View {
     }
 }
 
-#Preview {
-    CoreDataPreview(\.record) { record in
-        RecordRow(record: record)
+#if DEBUG
+    #Preview {
+        CoreDataPreview(\.record) { record in
+            RecordRow(record: record)
+        }
     }
-}
+#endif
