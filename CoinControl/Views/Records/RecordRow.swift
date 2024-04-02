@@ -32,8 +32,9 @@ struct RecordRow: View {
 
                 Spacer()
 
-                Text(String(format: "$%.2f", record.amount))
+                Text(String(format: "$%.2f", abs(record.amount)))
                     .font(.title3)
+                    .foregroundStyle(record.amount < 0 ? .red : .blue)
                     .frame(alignment: .trailing)
             }
         }
@@ -42,8 +43,8 @@ struct RecordRow: View {
 
 #if DEBUG
     #Preview {
-        CoreDataPreview(\.record) { record in
-            RecordRow(record: record)
+        CoreDataPreview(\.records) { records in
+            RecordRow(record: records[1])
         }
     }
 #endif

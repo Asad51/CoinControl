@@ -40,7 +40,7 @@ struct ContentView: View {
 
 #if DEBUG
     #Preview {
-        CoreDataPreview(\.records) {
+        CoreDataPreview(\.records) { _ in
             ContentView()
         }
     }
