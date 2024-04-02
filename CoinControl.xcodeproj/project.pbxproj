@@ -12,6 +12,7 @@
 		DC1190E82B8E63BA00AD7222 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E72B8E63BA00AD7222 /* AppCenterDistribute */; };
 		DC1190EA2B8E63CC00AD7222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1190E92B8E63CC00AD7222 /* AppDelegate.swift */; };
 		DC2AC5EC2B76AF2600B7053D /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */; };
+		DC6B39802BBC64F0005AA038 /* RecordsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6B397F2BBC64F0005AA038 /* RecordsList.swift */; };
 		DC80FF702B62D23A002A94C7 /* CoinControlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80FF6F2B62D23A002A94C7 /* CoinControlApp.swift */; };
 		DC80FF722B62D23A002A94C7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80FF712B62D23A002A94C7 /* ContentView.swift */; };
 		DC80FF742B62D23B002A94C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC80FF732B62D23B002A94C7 /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 /* Begin PBXFileReference section */
 		DC1190E92B8E63CC00AD7222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
+		DC6B397F2BBC64F0005AA038 /* RecordsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsList.swift; sourceTree = "<group>"; };
 		DC80FF6C2B62D23A002A94C7 /* CoinControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC80FF6F2B62D23A002A94C7 /* CoinControlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinControlApp.swift; sourceTree = "<group>"; };
 		DC80FF712B62D23A002A94C7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -117,6 +119,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DC6B39812BBC6EAB005AA038 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		DC80FF632B62D23A002A94C7 = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +154,7 @@
 				DCDB79952B6412250062E3B8 /* Views */,
 				DCC6CCD92B7D112300336C4B /* Persistence */,
 				DCDB79942B6412180062E3B8 /* Utility */,
+				DC6B39812BBC6EAB005AA038 /* Extensions */,
 				DC80FF752B62D23B002A94C7 /* Preview Content */,
 				DC80FF732B62D23B002A94C7 /* Assets.xcassets */,
 			);
@@ -250,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				DCE689EF2B7FDD820074ED6D /* RecordRow.swift */,
+				DC6B397F2BBC64F0005AA038 /* RecordsList.swift */,
 			);
 			path = Records;
 			sourceTree = "<group>";
@@ -419,6 +430,7 @@
 			files = (
 				DCC6CCE82B7D161200336C4B /* Record+CoreDataClass.swift in Sources */,
 				DCCA7D7A2B7D3BB000199111 /* PreviewData.swift in Sources */,
+				DC6B39802BBC64F0005AA038 /* RecordsList.swift in Sources */,
 				DC1190EA2B8E63CC00AD7222 /* AppDelegate.swift in Sources */,
 				DCC6CCF52B7D2BC600336C4B /* PersistenceController.swift in Sources */,
 				DCC6CCF12B7D1AAD00336C4B /* Category+CoreDataProperties.swift in Sources */,
