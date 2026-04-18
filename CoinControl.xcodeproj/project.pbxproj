@@ -12,16 +12,11 @@
 		DC1190E82B8E63BA00AD7222 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E72B8E63BA00AD7222 /* AppCenterDistribute */; };
 		DC1190EA2B8E63CC00AD7222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1190E92B8E63CC00AD7222 /* AppDelegate.swift */; };
 		DC2AC5EC2B76AF2600B7053D /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */; };
-		DC6B39802BBC64F0005AA038 /* RecordsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6B397F2BBC64F0005AA038 /* RecordsList.swift */; };
 		DC80FF702B62D23A002A94C7 /* CoinControlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80FF6F2B62D23A002A94C7 /* CoinControlApp.swift */; };
 		DC80FF722B62D23A002A94C7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80FF712B62D23A002A94C7 /* ContentView.swift */; };
 		DC80FF742B62D23B002A94C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC80FF732B62D23B002A94C7 /* Assets.xcassets */; };
 		DC80FF772B62D23B002A94C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC80FF762B62D23B002A94C7 /* Preview Assets.xcassets */; };
 		DCC6CCDC2B7D116E00336C4B /* CoinControlModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCDA2B7D116E00336C4B /* CoinControlModel.xcdatamodeld */; };
-		DCC6CCE82B7D161200336C4B /* Record+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCE42B7D161200336C4B /* Record+CoreDataClass.swift */; };
-		DCC6CCE92B7D161200336C4B /* Record+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCE52B7D161200336C4B /* Record+CoreDataProperties.swift */; };
-		DCC6CCF02B7D1AAD00336C4B /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCEE2B7D1AAD00336C4B /* Category+CoreDataClass.swift */; };
-		DCC6CCF12B7D1AAD00336C4B /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCEF2B7D1AAD00336C4B /* Category+CoreDataProperties.swift */; };
 		DCC6CCF52B7D2BC600336C4B /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCF42B7D2BC600336C4B /* PersistenceController.swift */; };
 		DCC6CCF92B7D33FC00336C4B /* CoreDataPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCF82B7D33FC00336C4B /* CoreDataPreview.swift */; };
 		DCCA7D7A2B7D3BB000199111 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCA7D792B7D3BB000199111 /* PreviewData.swift */; };
@@ -33,11 +28,17 @@
 		DCDB79922B6412050062E3B8 /* CocoaLumberjackSwiftLogBackend in Frameworks */ = {isa = PBXBuildFile; productRef = DCDB79912B6412050062E3B8 /* CocoaLumberjackSwiftLogBackend */; };
 		DCDB79982B6412530062E3B8 /* CCLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDB79972B6412530062E3B8 /* CCLogger.swift */; };
 		DCDB799C2B64130D0062E3B8 /* CCLogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDB799B2B64130D0062E3B8 /* CCLogFormatter.swift */; };
-		DCDC4E4B2B7BD0DB002C3321 /* BottomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC4E4A2B7BD0DB002C3321 /* BottomTabBar.swift */; };
+		DCDC4E4B2B7BD0DB002C3321 /* BottomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC4E4A2B7BD0DB002C3321 /* BottomTabView.swift */; };
 		DCDC4E552B7BE622002C3321 /* BottomTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC4E542B7BE622002C3321 /* BottomTab.swift */; };
 		DCDC4E592B7BECFF002C3321 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC4E582B7BECFF002C3321 /* Settings.swift */; };
 		DCE689ED2B7FDD390074ED6D /* AccountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE689EC2B7FDD390074ED6D /* AccountType.swift */; };
-		DCE689F02B7FDD820074ED6D /* RecordRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE689EF2B7FDD820074ED6D /* RecordRow.swift */; };
+		DCEEEF882F93E2BF00E7BB6A /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEEEF852F93E2BF00E7BB6A /* Category+CoreDataProperties.swift */; };
+		DCEEEF892F93E2BF00E7BB6A /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEEEF842F93E2BF00E7BB6A /* Category+CoreDataClass.swift */; };
+		DCEEEF8A2F93E2BF00E7BB6A /* Transaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEEEF872F93E2BF00E7BB6A /* Transaction+CoreDataProperties.swift */; };
+		DCEEEF8B2F93E2BF00E7BB6A /* Transaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEEEF862F93E2BF00E7BB6A /* Transaction+CoreDataClass.swift */; };
+		DCEEEF8D2F93ECD700E7BB6A /* TransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEEEF8C2F93ECD700E7BB6A /* TransactionsView.swift */; };
+		DCEEEF8F2F93EEE500E7BB6A /* DailySectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEEEF8E2F93EEE500E7BB6A /* DailySectionView.swift */; };
+		DCEEEF912F93EF1200E7BB6A /* TransactionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEEEF902F93EF1200E7BB6A /* TransactionRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,17 +61,12 @@
 /* Begin PBXFileReference section */
 		DC1190E92B8E63CC00AD7222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
-		DC6B397F2BBC64F0005AA038 /* RecordsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsList.swift; sourceTree = "<group>"; };
 		DC80FF6C2B62D23A002A94C7 /* CoinControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC80FF6F2B62D23A002A94C7 /* CoinControlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinControlApp.swift; sourceTree = "<group>"; };
 		DC80FF712B62D23A002A94C7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DC80FF732B62D23B002A94C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC80FF762B62D23B002A94C7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DCC6CCDB2B7D116E00336C4B /* CoinControlModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoinControlModel.xcdatamodel; sourceTree = "<group>"; };
-		DCC6CCE42B7D161200336C4B /* Record+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Record+CoreDataClass.swift"; sourceTree = "<group>"; };
-		DCC6CCE52B7D161200336C4B /* Record+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Record+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		DCC6CCEE2B7D1AAD00336C4B /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
-		DCC6CCEF2B7D1AAD00336C4B /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DCC6CCF42B7D2BC600336C4B /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		DCC6CCF82B7D33FC00336C4B /* CoreDataPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPreview.swift; sourceTree = "<group>"; };
 		DCCA7D792B7D3BB000199111 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
@@ -81,11 +77,17 @@
 		DCD054612B90CB7D002A7A32 /* CoinControlUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinControlUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		DCDB79972B6412530062E3B8 /* CCLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCLogger.swift; sourceTree = "<group>"; };
 		DCDB799B2B64130D0062E3B8 /* CCLogFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCLogFormatter.swift; sourceTree = "<group>"; };
-		DCDC4E4A2B7BD0DB002C3321 /* BottomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabBar.swift; sourceTree = "<group>"; };
+		DCDC4E4A2B7BD0DB002C3321 /* BottomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabView.swift; sourceTree = "<group>"; };
 		DCDC4E542B7BE622002C3321 /* BottomTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTab.swift; sourceTree = "<group>"; };
 		DCDC4E582B7BECFF002C3321 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		DCE689EC2B7FDD390074ED6D /* AccountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountType.swift; sourceTree = "<group>"; };
-		DCE689EF2B7FDD820074ED6D /* RecordRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRow.swift; sourceTree = "<group>"; };
+		DCEEEF842F93E2BF00E7BB6A /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DCEEEF852F93E2BF00E7BB6A /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DCEEEF862F93E2BF00E7BB6A /* Transaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DCEEEF872F93E2BF00E7BB6A /* Transaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DCEEEF8C2F93ECD700E7BB6A /* TransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsView.swift; sourceTree = "<group>"; };
+		DCEEEF8E2F93EEE500E7BB6A /* DailySectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySectionView.swift; sourceTree = "<group>"; };
+		DCEEEF902F93EF1200E7BB6A /* TransactionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,11 +185,11 @@
 		DCC6CCDD2B7D11DA00336C4B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DCEEEF842F93E2BF00E7BB6A /* Category+CoreDataClass.swift */,
+				DCEEEF852F93E2BF00E7BB6A /* Category+CoreDataProperties.swift */,
+				DCEEEF862F93E2BF00E7BB6A /* Transaction+CoreDataClass.swift */,
+				DCEEEF872F93E2BF00E7BB6A /* Transaction+CoreDataProperties.swift */,
 				DCC6CCDA2B7D116E00336C4B /* CoinControlModel.xcdatamodeld */,
-				DCC6CCEE2B7D1AAD00336C4B /* Category+CoreDataClass.swift */,
-				DCC6CCEF2B7D1AAD00336C4B /* Category+CoreDataProperties.swift */,
-				DCC6CCE42B7D161200336C4B /* Record+CoreDataClass.swift */,
-				DCC6CCE52B7D161200336C4B /* Record+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -229,10 +231,10 @@
 		DCDB79952B6412250062E3B8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DCE689EE2B7FDD5C0074ED6D /* Records */,
+				DCE689EE2B7FDD5C0074ED6D /* Transactions */,
 				DC80FF712B62D23A002A94C7 /* ContentView.swift */,
 				DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */,
-				DCDC4E4A2B7BD0DB002C3321 /* BottomTabBar.swift */,
+				DCDC4E4A2B7BD0DB002C3321 /* BottomTabView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -256,13 +258,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		DCE689EE2B7FDD5C0074ED6D /* Records */ = {
+		DCE689EE2B7FDD5C0074ED6D /* Transactions */ = {
 			isa = PBXGroup;
 			children = (
-				DCE689EF2B7FDD820074ED6D /* RecordRow.swift */,
-				DC6B397F2BBC64F0005AA038 /* RecordsList.swift */,
+				DCEEEF902F93EF1200E7BB6A /* TransactionRowView.swift */,
+				DCEEEF8E2F93EEE500E7BB6A /* DailySectionView.swift */,
+				DCEEEF8C2F93ECD700E7BB6A /* TransactionsView.swift */,
 			);
-			path = Records;
+			path = Transactions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -419,7 +422,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Set git path\nif [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\n# Enter project directory\ncd $SRCROOT\n\n# Run SwiftFormat with git specifying git directory(must)\nif which swiftformat >/dev/null; then\n    git --git-dir .git diff --name-only | grep -e '\\(.*\\).swift$' | while read fileName; do\n        swiftformat \"${fileName}\" --lint --swiftversion 5.5;\n    done\nelse\n    echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\nexit 0\n";
+			shellScript = "# Set git path\nif [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\n# Enter project directory\ncd $SRCROOT\n\n# Run SwiftFormat with git specifying git directory(must)\nif which swiftformat >/dev/null; then\n    git --git-dir .git diff --name-only | grep -e '\\(.*\\).swift$' | while read fileName; do\n        swiftformat \"${fileName}\" --lint --swiftversion 5.5 --lenient;\n    done\nelse\n    echo \"warning: SwiftFormat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\nexit 0\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -428,26 +431,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCC6CCE82B7D161200336C4B /* Record+CoreDataClass.swift in Sources */,
 				DCCA7D7A2B7D3BB000199111 /* PreviewData.swift in Sources */,
-				DC6B39802BBC64F0005AA038 /* RecordsList.swift in Sources */,
+				DCEEEF8F2F93EEE500E7BB6A /* DailySectionView.swift in Sources */,
 				DC1190EA2B8E63CC00AD7222 /* AppDelegate.swift in Sources */,
 				DCC6CCF52B7D2BC600336C4B /* PersistenceController.swift in Sources */,
-				DCC6CCF12B7D1AAD00336C4B /* Category+CoreDataProperties.swift in Sources */,
-				DCC6CCF02B7D1AAD00336C4B /* Category+CoreDataClass.swift in Sources */,
+				DCEEEF882F93E2BF00E7BB6A /* Category+CoreDataProperties.swift in Sources */,
+				DCEEEF892F93E2BF00E7BB6A /* Category+CoreDataClass.swift in Sources */,
+				DCEEEF912F93EF1200E7BB6A /* TransactionRowView.swift in Sources */,
+				DCEEEF8A2F93E2BF00E7BB6A /* Transaction+CoreDataProperties.swift in Sources */,
+				DCEEEF8B2F93E2BF00E7BB6A /* Transaction+CoreDataClass.swift in Sources */,
 				DCC6CCF92B7D33FC00336C4B /* CoreDataPreview.swift in Sources */,
-				DCDC4E4B2B7BD0DB002C3321 /* BottomTabBar.swift in Sources */,
+				DCDC4E4B2B7BD0DB002C3321 /* BottomTabView.swift in Sources */,
 				DC80FF722B62D23A002A94C7 /* ContentView.swift in Sources */,
 				DCDC4E592B7BECFF002C3321 /* Settings.swift in Sources */,
 				DCDB799C2B64130D0062E3B8 /* CCLogFormatter.swift in Sources */,
 				DC2AC5EC2B76AF2600B7053D /* FloatingButton.swift in Sources */,
-				DCC6CCE92B7D161200336C4B /* Record+CoreDataProperties.swift in Sources */,
 				DC80FF702B62D23A002A94C7 /* CoinControlApp.swift in Sources */,
 				DCE689ED2B7FDD390074ED6D /* AccountType.swift in Sources */,
 				DCDB79982B6412530062E3B8 /* CCLogger.swift in Sources */,
 				DCDC4E552B7BE622002C3321 /* BottomTab.swift in Sources */,
 				DCC6CCDC2B7D116E00336C4B /* CoinControlModel.xcdatamodeld in Sources */,
-				DCE689F02B7FDD820074ED6D /* RecordRow.swift in Sources */,
+				DCEEEF8D2F93ECD700E7BB6A /* TransactionsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

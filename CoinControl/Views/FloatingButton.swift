@@ -19,13 +19,13 @@ struct FloatingButton: View {
     var body: some View {
         Button(action: action, label: {
             Image(systemName: systemImage)
-                .font(.system(size: 25))
+                .font(.system(size: 24))
                 .foregroundStyle(.white)
         })
         .frame(width: 60, height: 60)
         .background(.red)
         .clipShape(Circle())
-        .shadow(radius: 10)
+        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 3)
     }
 }
 
