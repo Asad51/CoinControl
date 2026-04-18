@@ -11,4 +11,15 @@ enum AccountType {
     case cash
     case card
     case accounts
+
+    var title: String {
+        switch self {
+            case .cash:
+                return "Cash"
+            case .card:
+                return "Card"
+            case .accounts:
+                return "Accounts"
+        }
+    }
 }

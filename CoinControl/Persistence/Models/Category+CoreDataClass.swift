@@ -2,12 +2,16 @@
 //  Category+CoreDataClass.swift
 //  CoinControl
 //
-//  Created by Md. Asadul Islam on 14/2/24.
+//  Created by Md. Asadul Islam on 18/4/26.
 //
 //
 
-import CoreData
-import Foundation
+public import Foundation
+public import CoreData
+
+public typealias CategoryCoreDataClassSet = NSSet
 
 @objc(Category)
-public class Category: NSManagedObject {}
+public class Category: NSManagedObject {
+
+}

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var selectedTab = BottomTab.records
+    @State private var selectedTab = BottomTab.transactions
 
     var body: some View {
         ZStack {
@@ -18,8 +18,8 @@ struct ContentView: View {
             VStack {
                 ZStack(alignment: .bottomTrailing) {
                     TabView(selection: $selectedTab) {
-                        Text("Transaction")
-                            .tag(BottomTab.records)
+                        TransactionsView()
+                            .tag(BottomTab.transactions)
 
                         Text("Summary")
                             .tag(BottomTab.stats)
@@ -32,7 +32,7 @@ struct ContentView: View {
 
                 Spacer()
 
-                BottomTabBar(selectedTab: $selectedTab)
+                BottomTabView(selectedTab: $selectedTab)
             }
         }
     }
@@ -40,7 +40,7 @@ struct ContentView: View {
 
 #if DEBUG
     #Preview {
-        CoreDataPreview(\.records) { _ in
+        CoreDataPreview(\.transactions) { _ in
             ContentView()
         }
     }
