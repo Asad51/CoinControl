@@ -2,20 +2,44 @@
 //  Category+CoreDataProperties.swift
 //  CoinControl
 //
-//  Created by Md. Asadul Islam on 14/2/24.
+//  Created by Md. Asadul Islam on 18/4/26.
 //
 //
 
-import CoreData
-import Foundation
+public import Foundation
+public import CoreData
 
-public extension Category {
-    @nonobjc class func fetchRequest() -> NSFetchRequest<Category> {
-        return NSFetchRequest<Category>(entityName: "Category")
+public typealias CategoryCoreDataPropertiesSet = NSSet
+
+extension Category {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Category> {
+        return NSFetchRequest<Category>(entityName: "CategoryEntity")
     }
 
-    @NSManaged var name: String
-    @NSManaged var slug: String
+    @NSManaged public var name: String
+    @NSManaged public var id: UUID
+    @NSManaged public var icon: String
+    @NSManaged public var desc: String
+    @NSManaged public var transactions: NSSet
 }
 
-extension Category: Identifiable {}
+// MARK: Generated accessors for transactions
+extension Category {
+
+    @objc(addTransactionsObject:)
+    @NSManaged public func addToTransactions(_ value: Transaction)
+
+    @objc(removeTransactionsObject:)
+    @NSManaged public func removeFromTransactions(_ value: Transaction)
+
+    @objc(addTransactions:)
+    @NSManaged public func addToTransactions(_ values: NSSet)
+
+    @objc(removeTransactions:)
+    @NSManaged public func removeFromTransactions(_ values: NSSet)
+
+}
+
+extension Category : Identifiable {
+
+}

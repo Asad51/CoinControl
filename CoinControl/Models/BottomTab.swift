@@ -8,14 +8,14 @@
 import Foundation
 
 enum BottomTab: String, CaseIterable {
-    case records
+    case transactions
     case stats
     case accounts
 
     var title: String {
         switch self {
-            case .records:
-                "Records"
+            case .transactions:
+                "Trans."
             case .stats:
                 "Stats"
             case .accounts:
@@ -25,12 +25,12 @@ enum BottomTab: String, CaseIterable {
 
     var systemImage: String {
         switch self {
-            case .records:
-                "text.book.closed"
+            case .transactions:
+                "book.pages"
             case .stats:
-                "list.bullet.rectangle"
+                "chart.bar.xaxis"
             case .accounts:
-                "dollarsign.circle"
+                "dollarsign.bank.building.fill"
         }
     }
 }

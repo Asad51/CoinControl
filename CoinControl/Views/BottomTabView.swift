@@ -1,5 +1,5 @@
 //
-//  BottomTabBar.swift
+//  BottomTabView.swift
 //  CoinControl
 //
 //  Created by Md. Asadul Islam on 13/2/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BottomTabBar: View {
+struct BottomTabView: View {
     @EnvironmentObject private var settings: Settings
 
     @Binding var selectedTab: BottomTab
@@ -55,7 +55,7 @@ struct BottomTabBar: View {
 
         VStack(spacing: 0) {
             Spacer()
-            BottomTabBar(selectedTab: .constant(BottomTab.records))
+            BottomTabView(selectedTab: .constant(BottomTab.transactions))
         }
     }
     .environmentObject(Settings())
