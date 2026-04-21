@@ -2,33 +2,28 @@
 //  Transaction+CoreDataProperties.swift
 //  CoinControl
 //
-//  Created by Md. Asadul Islam on 18/4/26.
+//  Created by Md. Asadul Islam on 19/4/26.
 //
 //
 
-public import Foundation
-public import CoreData
-
+import CoreData
+import Foundation
 
 public typealias TransactionCoreDataPropertiesSet = NSSet
 
 extension Transaction {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Transaction> {
-        return NSFetchRequest<Transaction>(entityName: "TransactionEntity")
+    @nonobjc class func fetchRequest() -> NSFetchRequest<Transaction> {
+        NSFetchRequest<Transaction>(entityName: "TransactionEntity")
     }
 
-    @NSManaged public var title: String
-    @NSManaged public var account: String
-    @NSManaged public var amount: Double
-    @NSManaged public var date: Date
-    @NSManaged public var note: String
-    @NSManaged public var isExpense: Bool
+    @NSManaged var amount: Double
+    @NSManaged var date: Date
     @NSManaged public var id: UUID
-    @NSManaged public var category: Category
-
+    @NSManaged var type: Int16
+    @NSManaged var note: String
+    @NSManaged var title: String
+    @NSManaged var category: Category?
+    @NSManaged var account: Account?
 }
 
-extension Transaction : Identifiable {
-
-}
+extension Transaction: Identifiable {}

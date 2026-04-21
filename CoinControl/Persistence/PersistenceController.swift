@@ -9,6 +9,8 @@ import CoreData
 import Foundation
 
 struct PersistenceController {
+    static let shared = PersistenceController()
+
     let container: NSPersistentContainer
     var viewContext: NSManagedObjectContext {
         container.viewContext

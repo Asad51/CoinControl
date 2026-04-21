@@ -14,11 +14,7 @@ struct CoinControlApp: App {
 
     @StateObject private var settings = Settings()
 
-    private let persistenceController: PersistenceController
-
     init() {
-        persistenceController = PersistenceController()
-
         CCLogger.initialize()
         CCLogger.info("Launching application...")
     }
@@ -27,7 +23,7 @@ struct CoinControlApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(settings)
-                .environment(\.managedObjectContext, persistenceController.viewContext)
+                .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
         }
     }
 }

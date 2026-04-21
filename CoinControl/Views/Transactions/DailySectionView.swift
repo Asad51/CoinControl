@@ -8,16 +8,12 @@
 import SwiftUI
 
 struct DailySectionView: View {
-    let date: Date
-    let items: [Transaction]
+    private let viewModel: DailySectionViewModel
     let onRowTapped: (Transaction) -> Void
 
-    var dailyExpense: Double {
-        items.filter(\.isExpense).reduce(0) { $0 + $1.amount }
-    }
-
-    var dailyIncome: Double {
-        items.filter { !$0.isExpense }.reduce(0) { $0 + $1.amount }
+    init(date: Date, items: [Transaction], onRowTapped: @escaping (Transaction) -> Void) {
+        viewModel = DailySectionViewModel(date: date, items: items)
+        self.onRowTapped = onRowTapped
     }
 
     var body: some View {
@@ -25,10 +21,10 @@ struct DailySectionView: View {
             // Date Header
             HStack {
                 HStack(alignment: .lastTextBaseline, spacing: 4) {
-                    Text(dateFormatter(date, format: "dd"))
+                    Text(viewModel.formattedDate(format: "dd"))
                         .font(.title2).bold()
                         .foregroundColor(.primary)
-                    Text(dateFormatter(date, format: "EEE MM.yyyy"))
+                    Text(viewModel.formattedDate(format: "EEE MM.yyyy"))
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .padding(.horizontal, 6)
@@ -40,9 +36,9 @@ struct DailySectionView: View {
                 Spacer()
 
                 HStack(spacing: 16) {
-                    Text("৳ \(String(format: "%.2f", dailyIncome))")
+                    Text("৳ \(String(format: "%.2f", viewModel.dailyIncome))")
                         .foregroundColor(.blue)
-                    Text("৳ \(String(format: "%.2f", dailyExpense))")
+                    Text("৳ \(String(format: "%.2f", viewModel.dailyExpense))")
                         .foregroundColor(.red)
                 }
                 .font(.system(.subheadline, design: .monospaced))
@@ -52,7 +48,7 @@ struct DailySectionView: View {
             .background(Color(UIColor.secondarySystemBackground))
 
             // Items list
-            ForEach(items) { item in
+            ForEach(viewModel.items) { item in
                 Button(action: {
                     onRowTapped(item)
                 }) {
@@ -64,17 +60,11 @@ struct DailySectionView: View {
             Divider()
         }
     }
-
-    func dateFormatter(_ date: Date, format: String) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = format
-        return formatter.string(from: date)
-    }
 }
 
 #if DEBUG
     #Preview {
-        CoreDataPreview(\.transactions) { transactions in
+        CoreDataPreview(items: \.transactions) { transactions in
             DailySectionView(date: Date().addingTimeInterval(-100_000), items: transactions) { _ in
             }
         }

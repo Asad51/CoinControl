@@ -19,12 +19,12 @@ struct TransactionRowView: View {
                         .fill(Color.orange.opacity(0.2))
                         .frame(width: 32, height: 32)
 
-                    Image(systemName: item.category.icon)
+                    Text(item.category?.icon ?? ".")
                         .foregroundColor(.orange)
                         .font(.system(size: 14))
                 }
 
-                Text(item.category.name)
+                Text(item.category?.name ?? "")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                     .frame(width: 70, alignment: .leading)
@@ -36,7 +36,7 @@ struct TransactionRowView: View {
                 Text(item.title)
                     .font(.body)
                     .foregroundColor(.primary)
-                Text(item.account)
+                Text(item.account?.name ?? "")
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
@@ -45,7 +45,7 @@ struct TransactionRowView: View {
 
             // Amount
             Text("৳ \(String(format: "%.2f", item.amount))")
-                .foregroundColor(item.isExpense ? .red : .blue)
+                .foregroundColor(item.type == 0 ? .red : .blue)
                 .font(.system(.subheadline, design: .monospaced))
         }
         .padding(.horizontal)
@@ -56,8 +56,8 @@ struct TransactionRowView: View {
 
 #if DEBUG
     #Preview {
-        CoreDataPreview(\.transactions) { transactions in
-            TransactionRowView(item: transactions[0])
+        CoreDataPreview(item: \.transaction) { transaction in
+            TransactionRowView(item: transaction)
         }
     }
 #endif
