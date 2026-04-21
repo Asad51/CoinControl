@@ -10,23 +10,13 @@ import SwiftUI
 
 struct TransactionsView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
-    // Fetch transactions sorted by date descending
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Transaction.date, ascending: false)],
-        animation: .default
-    )
-    private var transactions: FetchedResults<Transaction>
+    @StateObject private var viewModel: TransactionsViewModel
 
     @State private var showingAddEditScreen = false
     @State private var selectedTransaction: Transaction?
 
-    // Group transactions by Date
-    var groupedTransactions: [(Date, [Transaction])] {
-        let grouped = Dictionary(grouping: Array(transactions)) { item in
-            Calendar.current.startOfDay(for: item.date)
-        }
-        return grouped.sorted { $0.key > $1.key }
+    init() {
+        _viewModel = StateObject(wrappedValue: TransactionsViewModel())
     }
 
     var body: some View {
@@ -41,7 +31,7 @@ struct TransactionsView: View {
 
                     ScrollView {
                         LazyVStack(spacing: 0) {
-                            ForEach(groupedTransactions, id: \.0) { date, dailyItems in
+                            ForEach(viewModel.groupedTransactions, id: \.0) { date, dailyItems in
                                 DailySectionView(date: date, items: dailyItems) { transaction in
                                     // Handle row tap
                                     selectedTransaction = transaction
@@ -61,8 +51,8 @@ struct TransactionsView: View {
             }
             .navigationBarHidden(true)
             .sheet(isPresented: $showingAddEditScreen) {
-                // Placeholder for your future Add/Edit screen
-                Text(selectedTransaction == nil ? "Add Transaction View" : "Edit Transaction View")
+                TransactionAddEditView(transactionToEdit: selectedTransaction)
+                    .environment(\.managedObjectContext, viewContext)
             }
         }
     }
@@ -70,7 +60,7 @@ struct TransactionsView: View {
 
 #if DEBUG
     #Preview {
-        CoreDataPreview(\.transactions) { _ in
+        CoreDataPreview(items: \.transactions) { _ in
             TransactionsView()
         }
     }
