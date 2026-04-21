@@ -8,7 +8,7 @@ import Foundation
 
 protocol TransactionServiceProtocol {
     func getTransactionsFRC() -> NSFetchedResultsController<Transaction>
-    func saveTransaction(id: UUID?, type: Int16, amount: Double, date: Date, note: String, category: Category?, account: Account?) throws
+    func saveTransaction(id: UUID?, type: Int16, amount: Double, date: Date, title: String, note: String, category: Category?, account: Account?) throws
     func deleteTransaction(_ transaction: Transaction) throws
 }
 
@@ -31,10 +31,10 @@ class TransactionService: TransactionServiceProtocol {
         )
     }
 
-    func saveTransaction(id: UUID?, type: Int16, amount: Double, date: Date, note: String, category: Category?, account: Account?) throws {
+    func saveTransaction(id: UUID?, type: Int16, amount: Double, date: Date, title: String, note: String, category: Category?, account: Account?) throws {
         let transaction: Transaction
 
-        if let id = id {
+        if let id {
             let request = Transaction.fetchRequest()
             request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
             if let existing = try context.fetch(request).first {
@@ -52,6 +52,7 @@ class TransactionService: TransactionServiceProtocol {
         transaction.amount = amount
         transaction.date = date
         transaction.note = note
+        transaction.title = title
         transaction.category = category
         transaction.account = account
 

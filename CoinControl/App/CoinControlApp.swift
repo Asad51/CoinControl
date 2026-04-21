@@ -17,6 +17,8 @@ struct CoinControlApp: App {
     init() {
         CCLogger.initialize()
         CCLogger.info("Launching application...")
+
+        InitialDataService().checkAndInsertInitialData()
     }
 
     var body: some Scene {
