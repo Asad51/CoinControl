@@ -43,9 +43,10 @@ struct TransactionAddEditView: View {
 
                     Spacer()
 
-                    HStack(spacing: 20) {
-                        Image(systemName: "star.fill")
-                        Image(systemName: "list.bullet.clipboard")
+                    Button(viewModel.isEditing ? "Update" : "Save") {
+                        if viewModel.save() {
+                            dismiss()
+                        }
                     }
                 }
                 .foregroundColor(.primary)
@@ -129,7 +130,19 @@ struct TransactionAddEditView: View {
                             }
                             .padding(.vertical, 8)
 
-                            // Note text field - matching dark line from your image
+                            VStack(alignment: .leading, spacing: 10) {
+                                Text("Title")
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+
+                                TextField("Title", text: $viewModel.title)
+
+                                Rectangle()
+                                    .fill(Color(UIColor.label))
+                                    .frame(height: 1)
+                            }
+                            .padding(.vertical, 8)
+
                             VStack(alignment: .leading, spacing: 10) {
                                 Text("Note")
                                     .font(.subheadline)
@@ -138,7 +151,7 @@ struct TransactionAddEditView: View {
                                 TextField("Optional notes", text: $viewModel.note)
 
                                 Rectangle()
-                                    .fill(Color(UIColor.label)) // Match dark line from image
+                                    .fill(Color(UIColor.label))
                                     .frame(height: 1)
                             }
                             .padding(.vertical, 8)
@@ -148,15 +161,14 @@ struct TransactionAddEditView: View {
                 }
             }
             .navigationBarHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(viewModel.isEditing ? "Update" : "Save") {
-                        if viewModel.save() {
-                            dismiss()
-                        }
-                    }
-                }
-            }
         }
     }
 }
+
+#if DEBUG
+    #Preview {
+        CoreDataPreview(item: \.transaction) { _ in
+            TransactionAddEditView()
+        }
+    }
+#endif

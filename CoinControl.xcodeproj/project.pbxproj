@@ -14,6 +14,7 @@
 		DC09B7BB2F97C0E900ED426E /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC09B7B92F97C0E900ED426E /* TransactionService.swift */; };
 		DC09B7BC2F97C0E900ED426E /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC09B7B72F97C0E900ED426E /* AccountService.swift */; };
 		DC09B7BD2F97C0E900ED426E /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC09B7B82F97C0E900ED426E /* CategoryService.swift */; };
+		DC09B7BF2F97C96E00ED426E /* InitialDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC09B7BE2F97C96E00ED426E /* InitialDataService.swift */; };
 		DC1190E42B8E63BA00AD7222 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E32B8E63BA00AD7222 /* AppCenterAnalytics */; };
 		DC1190E62B8E63BA00AD7222 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E52B8E63BA00AD7222 /* AppCenterCrashes */; };
 		DC1190E82B8E63BA00AD7222 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E72B8E63BA00AD7222 /* AppCenterDistribute */; };
@@ -78,6 +79,7 @@
 		DC09B7B72F97C0E900ED426E /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
 		DC09B7B82F97C0E900ED426E /* CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
 		DC09B7B92F97C0E900ED426E /* TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
+		DC09B7BE2F97C96E00ED426E /* InitialDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialDataService.swift; sourceTree = "<group>"; };
 		DC1190E92B8E63CC00AD7222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		DC80FF6C2B62D23A002A94C7 /* CoinControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,6 +161,7 @@
 		DC09B7BA2F97C0E900ED426E /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				DC09B7BE2F97C96E00ED426E /* InitialDataService.swift */,
 				DC09B7B72F97C0E900ED426E /* AccountService.swift */,
 				DC09B7B82F97C0E900ED426E /* CategoryService.swift */,
 				DC09B7B92F97C0E900ED426E /* TransactionService.swift */,
@@ -487,6 +490,7 @@
 				DCEEEF8F2F93EEE500E7BB6A /* DailySectionView.swift in Sources */,
 				DC1190EA2B8E63CC00AD7222 /* AppDelegate.swift in Sources */,
 				DCC6CCF52B7D2BC600336C4B /* PersistenceController.swift in Sources */,
+				DC09B7BF2F97C96E00ED426E /* InitialDataService.swift in Sources */,
 				DCEEEF882F93E2BF00E7BB6A /* Category+CoreDataProperties.swift in Sources */,
 				DC09B7B32F97BC5500ED426E /* DailySectionViewModel.swift in Sources */,
 				DC09B7B42F97BC5500ED426E /* CategoryGridViewModel.swift in Sources */,

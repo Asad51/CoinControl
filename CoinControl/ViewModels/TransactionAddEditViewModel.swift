@@ -11,6 +11,7 @@ class TransactionAddEditViewModel: ObservableObject {
     @Published var transactionType: TransactionType = .expense
     @Published var date = Date()
     @Published var amountText: String = ""
+    @Published var title: String = ""
     @Published var note: String = ""
     @Published var selectedCategory: Category?
     @Published var selectedAccount: Account?
@@ -42,6 +43,7 @@ class TransactionAddEditViewModel: ObservableObject {
             transactionType = TransactionType(rawValue: transaction.type) ?? .expense
             date = transaction.date
             amountText = String(format: "%.2f", transaction.amount)
+            title = title
             note = transaction.note
             selectedCategory = transaction.category
             selectedAccount = transaction.account
@@ -80,6 +82,7 @@ class TransactionAddEditViewModel: ObservableObject {
                 type: transactionType.rawValue,
                 amount: amount,
                 date: date,
+                title: title,
                 note: note,
                 category: selectedCategory ?? categories.last,
                 account: selectedAccount ?? accounts.first
