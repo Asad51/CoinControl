@@ -20,6 +20,12 @@
 		DC1190E82B8E63BA00AD7222 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E72B8E63BA00AD7222 /* AppCenterDistribute */; };
 		DC1190EA2B8E63CC00AD7222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1190E92B8E63CC00AD7222 /* AppDelegate.swift */; };
 		DC2AC5EC2B76AF2600B7053D /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */; };
+		DC38B4F92F99363300879577 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC38B4F82F99363300879577 /* GoogleService-Info.plist */; };
+		DC38B4FC2F99372900879577 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DC38B4FB2F99372900879577 /* FirebaseAnalytics */; };
+		DC38B4FE2F99372900879577 /* FirebaseAnalyticsCore in Frameworks */ = {isa = PBXBuildFile; productRef = DC38B4FD2F99372900879577 /* FirebaseAnalyticsCore */; };
+		DC38B5002F99372900879577 /* FirebaseAnalyticsIdentitySupport in Frameworks */ = {isa = PBXBuildFile; productRef = DC38B4FF2F99372900879577 /* FirebaseAnalyticsIdentitySupport */; };
+		DC38B5022F99372900879577 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = DC38B5012F99372900879577 /* FirebaseCore */; };
+		DC38B5042F99372900879577 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = DC38B5032F99372900879577 /* FirebaseCrashlytics */; };
 		DC80FF702B62D23A002A94C7 /* CoinControlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80FF6F2B62D23A002A94C7 /* CoinControlApp.swift */; };
 		DC80FF722B62D23A002A94C7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80FF712B62D23A002A94C7 /* ContentView.swift */; };
 		DC80FF742B62D23B002A94C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC80FF732B62D23B002A94C7 /* Assets.xcassets */; };
@@ -82,6 +88,7 @@
 		DC09B7BE2F97C96E00ED426E /* InitialDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialDataService.swift; sourceTree = "<group>"; };
 		DC1190E92B8E63CC00AD7222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
+		DC38B4F82F99363300879577 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DC80FF6C2B62D23A002A94C7 /* CoinControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC80FF6F2B62D23A002A94C7 /* CoinControlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinControlApp.swift; sourceTree = "<group>"; };
 		DC80FF712B62D23A002A94C7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -121,12 +128,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC38B4FC2F99372900879577 /* FirebaseAnalytics in Frameworks */,
 				DC1190E42B8E63BA00AD7222 /* AppCenterAnalytics in Frameworks */,
+				DC38B5002F99372900879577 /* FirebaseAnalyticsIdentitySupport in Frameworks */,
 				DC1190E62B8E63BA00AD7222 /* AppCenterCrashes in Frameworks */,
 				DC1190E82B8E63BA00AD7222 /* AppCenterDistribute in Frameworks */,
+				DC38B5042F99372900879577 /* FirebaseCrashlytics in Frameworks */,
 				DCDB79902B6412050062E3B8 /* CocoaLumberjackSwift in Frameworks */,
+				DC38B5022F99372900879577 /* FirebaseCore in Frameworks */,
 				DCDB79922B6412050062E3B8 /* CocoaLumberjackSwiftLogBackend in Frameworks */,
 				DCDB798E2B6412050062E3B8 /* CocoaLumberjack in Frameworks */,
+				DC38B4FE2F99372900879577 /* FirebaseAnalyticsCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +204,7 @@
 		DC80FF6E2B62D23A002A94C7 /* CoinControl */ = {
 			isa = PBXGroup;
 			children = (
+				DC38B4F82F99363300879577 /* GoogleService-Info.plist */,
 				DC09B7BA2F97C0E900ED426E /* Services */,
 				DCDB79932B6412110062E3B8 /* App */,
 				DCDC4E4C2B7BD0EC002C3321 /* Models */,
@@ -333,7 +346,8 @@
 				DC80FF682B62D23A002A94C7 /* Sources */,
 				DC80FF692B62D23A002A94C7 /* Frameworks */,
 				DC80FF6A2B62D23A002A94C7 /* Resources */,
-				DC80FF822B62E9DF002A94C7 /* ShellScript */,
+				DC80FF822B62E9DF002A94C7 /* SwiftFormat Script */,
+				DC38B5052F9938F100879577 /* Crash Analytics Script */,
 			);
 			buildRules = (
 			);
@@ -347,6 +361,11 @@
 				DC1190E32B8E63BA00AD7222 /* AppCenterAnalytics */,
 				DC1190E52B8E63BA00AD7222 /* AppCenterCrashes */,
 				DC1190E72B8E63BA00AD7222 /* AppCenterDistribute */,
+				DC38B4FB2F99372900879577 /* FirebaseAnalytics */,
+				DC38B4FD2F99372900879577 /* FirebaseAnalyticsCore */,
+				DC38B4FF2F99372900879577 /* FirebaseAnalyticsIdentitySupport */,
+				DC38B5012F99372900879577 /* FirebaseCore */,
+				DC38B5032F99372900879577 /* FirebaseCrashlytics */,
 			);
 			productName = CoinControl;
 			productReference = DC80FF6C2B62D23A002A94C7 /* CoinControl.app */;
@@ -423,6 +442,7 @@
 			packageReferences = (
 				DCDB798C2B6412050062E3B8 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
 				DC1190E22B8E63BA00AD7222 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
+				DC38B4FA2F99372900879577 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = DC80FF6D2B62D23A002A94C7 /* Products */;
 			projectDirPath = "";
@@ -442,6 +462,7 @@
 			files = (
 				DC80FF772B62D23B002A94C7 /* Preview Assets.xcassets in Resources */,
 				DC80FF742B62D23B002A94C7 /* Assets.xcassets in Resources */,
+				DC38B4F92F99363300879577 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,7 +483,31 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		DC80FF822B62E9DF002A94C7 /* ShellScript */ = {
+		DC38B5052F9938F100879577 /* Crash Analytics Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}.debug.dylib",
+			);
+			name = "Crash Analytics Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%Build/*}SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
+		DC80FF822B62E9DF002A94C7 /* SwiftFormat Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -471,6 +516,7 @@
 			);
 			inputPaths = (
 			);
+			name = "SwiftFormat Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -683,10 +729,11 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"CoinControl/Preview Content\"";
 				DEVELOPMENT_TEAM = 3Y9S8RQJ87;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Coin Control";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
@@ -725,7 +772,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"CoinControl/Preview Content\"";
 				DEVELOPMENT_TEAM = 3Y9S8RQJ87;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Coin Control";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
@@ -873,6 +920,14 @@
 				minimumVersion = 5.0.4;
 			};
 		};
+		DC38B4FA2F99372900879577 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.12.1;
+			};
+		};
 		DCDB798C2B6412050062E3B8 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/CocoaLumberjack/CocoaLumberjack.git";
@@ -898,6 +953,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DC1190E22B8E63BA00AD7222 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterDistribute;
+		};
+		DC38B4FB2F99372900879577 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC38B4FA2F99372900879577 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		DC38B4FD2F99372900879577 /* FirebaseAnalyticsCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC38B4FA2F99372900879577 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsCore;
+		};
+		DC38B4FF2F99372900879577 /* FirebaseAnalyticsIdentitySupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC38B4FA2F99372900879577 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsIdentitySupport;
+		};
+		DC38B5012F99372900879577 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC38B4FA2F99372900879577 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		DC38B5032F99372900879577 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC38B4FA2F99372900879577 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 		DCDB798D2B6412050062E3B8 /* CocoaLumberjack */ = {
 			isa = XCSwiftPackageProductDependency;
