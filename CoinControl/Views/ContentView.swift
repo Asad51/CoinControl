@@ -21,7 +21,7 @@ struct ContentView: View {
                         TransactionsView()
                             .tag(BottomTab.transactions)
 
-                        Text("Summary")
+                        StatsView()
                             .tag(BottomTab.stats)
 
                         Text("Accounts")
