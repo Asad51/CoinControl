@@ -19,6 +19,10 @@ class StatsViewModel: ObservableObject {
     @Published var stats: [CategoryStat] = []
     @Published var totalExpenses: Double = 0.0
 
+    // Properties for viewing transactions of a specific category
+    @Published var selectedCategory: Category? = nil
+    @Published var categoryTransactions: [Transaction] = []
+
     private let context: NSManagedObjectContext
     private let calendar = Calendar.current
 
@@ -40,7 +44,7 @@ class StatsViewModel: ObservableObject {
                 endDate = calendar.date(byAdding: .year, value: 1, to: startDate)!.addingTimeInterval(-1)
             case .period:
                 // For custom period, default to current month or a specific range
-                break
+            break
         }
         fetchStats()
     }
@@ -68,8 +72,30 @@ class StatsViewModel: ObservableObject {
         do {
             let transactions = try context.fetch(request)
             calculateStats(from: transactions)
+
+            // If we are currently viewing a category's transactions, update that list too
+            if let selected = selectedCategory {
+                fetchTransactions(for: selected)
+            }
         } catch {
             print("Fetch failed: \(error)")
+        }
+    }
+
+    /// Fetches all expense transactions for a specific category within the current date range.
+    func fetchTransactions(for category: Category) {
+        let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
+            NSPredicate(format: "category == %@", category),
+            NSPredicate(format: "type == %d", TransactionType.expense.rawValue),
+            NSPredicate(format: "date >= %@ AND date <= %@", startDate as NSDate, endDate as NSDate),
+        ])
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Transaction.date, ascending: false)]
+
+        do {
+            categoryTransactions = try context.fetch(request)
+        } catch {
+            print("Fetch category transactions failed: \(error)")
         }
     }
 
@@ -100,16 +126,16 @@ class StatsViewModel: ObservableObject {
     var dateRangeString: String {
         let formatter = DateFormatter()
         switch selectedPeriod {
-            case .weekly,
-                 .period:
-                formatter.dateFormat = "MM.dd"
-                return "\(formatter.string(from: startDate)) ~ \(formatter.string(from: endDate))"
-            case .monthly:
-                formatter.dateFormat = "MMM yyyy"
-                return formatter.string(from: startDate)
-            case .annually:
-                formatter.dateFormat = "yyyy"
-                return formatter.string(from: startDate)
+        case .weekly,
+             .period:
+            formatter.dateFormat = "MM.dd"
+            return "\(formatter.string(from: startDate)) ~ \(formatter.string(from: endDate))"
+        case .monthly:
+            formatter.dateFormat = "MMM yyyy"
+            return formatter.string(from: startDate)
+        case .annually:
+            formatter.dateFormat = "yyyy"
+            return formatter.string(from: startDate)
         }
     }
 }
