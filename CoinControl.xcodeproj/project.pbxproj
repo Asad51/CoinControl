@@ -31,6 +31,7 @@
 		DC80FF742B62D23B002A94C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC80FF732B62D23B002A94C7 /* Assets.xcassets */; };
 		DC80FF772B62D23B002A94C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC80FF762B62D23B002A94C7 /* Preview Assets.xcassets */; };
 		DCC208132F9BD31B00AF45A8 /* CategoryPieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC208122F9BD31B00AF45A8 /* CategoryPieChartView.swift */; };
+		DCC208152F9BDE3700AF45A8 /* SimplifiedTransactionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC208142F9BDE3700AF45A8 /* SimplifiedTransactionRow.swift */; };
 		DCC6CCDC2B7D116E00336C4B /* CoinControlModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCDA2B7D116E00336C4B /* CoinControlModel.xcdatamodeld */; };
 		DCC6CCF52B7D2BC600336C4B /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCF42B7D2BC600336C4B /* PersistenceController.swift */; };
 		DCC6CCF92B7D33FC00336C4B /* CoreDataPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCF82B7D33FC00336C4B /* CoreDataPreview.swift */; };
@@ -101,6 +102,7 @@
 		DC80FF732B62D23B002A94C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC80FF762B62D23B002A94C7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DCC208122F9BD31B00AF45A8 /* CategoryPieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPieChartView.swift; sourceTree = "<group>"; };
+		DCC208142F9BDE3700AF45A8 /* SimplifiedTransactionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplifiedTransactionRow.swift; sourceTree = "<group>"; };
 		DCC6CCDB2B7D116E00336C4B /* CoinControlModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoinControlModel.xcdatamodel; sourceTree = "<group>"; };
 		DCC6CCF42B7D2BC600336C4B /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		DCC6CCF82B7D33FC00336C4B /* CoreDataPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPreview.swift; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 		DCEE53592F9A652600241BFE /* Stats */ = {
 			isa = PBXGroup;
 			children = (
+				DCC208142F9BDE3700AF45A8 /* SimplifiedTransactionRow.swift */,
 				DCC208122F9BD31B00AF45A8 /* CategoryPieChartView.swift */,
 				DCEE535A2F9A652E00241BFE /* StatsView.swift */,
 				DCEE535C2F9A6A4B00241BFE /* StatRow.swift */,
@@ -571,6 +574,7 @@
 				DC09B7B52F97BC5500ED426E /* TransactionsViewModel.swift in Sources */,
 				DC09B7B62F97BC5500ED426E /* TransactionAddEditViewModel.swift in Sources */,
 				DCEEEF892F93E2BF00E7BB6A /* Category+CoreDataClass.swift in Sources */,
+				DCC208152F9BDE3700AF45A8 /* SimplifiedTransactionRow.swift in Sources */,
 				DCEEEF912F93EF1200E7BB6A /* TransactionRowView.swift in Sources */,
 				DCEEEF8A2F93E2BF00E7BB6A /* Transaction+CoreDataProperties.swift in Sources */,
 				DCEE535B2F9A652E00241BFE /* StatsView.swift in Sources */,

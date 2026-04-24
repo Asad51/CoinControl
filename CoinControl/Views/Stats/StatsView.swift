@@ -76,14 +76,54 @@ struct StatsView: View {
 
                 ScrollView {
                     VStack(spacing: 30) {
-                        // Pie chart breakdown of expenses by category
-                        CategoryPieChartView(stats: viewModel.stats, selectedStatValue: $selectedStatValue)
+                        if let selectedCategory = viewModel.selectedCategory {
+                            // --- TRANSACTION LIST VIEW (Simplified) ---
+                            VStack(alignment: .leading, spacing: 16) {
+                                HStack {
+                                    Button(action: { viewModel.selectedCategory = nil }) {
+                                        HStack {
+                                            Image(systemName: "chevron.left")
+                                            Text("Back to Chart")
+                                        }
+                                        .font(.subheadline)
+                                    }
+                                    Spacer()
+                                    Text(selectedCategory.name)
+                                        .font(.headline)
+                                }
+                                .padding(.horizontal)
 
-                        // Detailed list of category statistics
-                        VStack(spacing: 0) {
-                            ForEach(viewModel.stats) { stat in
-                                StatRow(stat: stat)
-                                Divider()
+                                if viewModel.categoryTransactions.isEmpty {
+                                    Text("No transactions for this period")
+                                        .foregroundColor(.secondary)
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                        .padding(.top, 40)
+                                } else {
+                                    VStack(spacing: 0) {
+                                        ForEach(viewModel.categoryTransactions) { transaction in
+                                            SimplifiedTransactionRow(transaction: transaction)
+                                            Divider()
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            // --- CHART VIEW ---
+                            VStack(spacing: 30) {
+                                CategoryPieChartView(stats: viewModel.stats, selectedStatValue: $selectedStatValue)
+
+                                // Detailed list of category statistics
+                                VStack(spacing: 0) {
+                                    ForEach(viewModel.stats) { stat in
+                                        StatRow(stat: stat)
+                                            .contentShape(Rectangle())
+                                            .onTapGesture {
+                                                viewModel.selectedCategory = stat.category
+                                                viewModel.fetchTransactions(for: stat.category)
+                                            }
+                                        Divider()
+                                    }
+                                }
                             }
                         }
                     }
