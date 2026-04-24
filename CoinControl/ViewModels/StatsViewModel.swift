@@ -29,18 +29,18 @@ class StatsViewModel: ObservableObject {
 
     func updateDateRange() {
         switch selectedPeriod {
-        case .weekly:
-            startDate = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: currentDate))!
-            endDate = calendar.date(byAdding: .day, value: 6, to: startDate)!
-        case .monthly:
-            startDate = calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate))!
-            endDate = calendar.date(byAdding: .month, value: 1, to: startDate)!.addingTimeInterval(-1)
-        case .annually:
-            startDate = calendar.date(from: calendar.dateComponents([.year], from: currentDate))!
-            endDate = calendar.date(byAdding: .year, value: 1, to: startDate)!.addingTimeInterval(-1)
-        case .period:
-            // For custom period, default to current month or a specific range
-            break
+            case .weekly:
+                startDate = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: currentDate))!
+                endDate = calendar.date(byAdding: .day, value: 6, to: startDate)!
+            case .monthly:
+                startDate = calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate))!
+                endDate = calendar.date(byAdding: .month, value: 1, to: startDate)!.addingTimeInterval(-1)
+            case .annually:
+                startDate = calendar.date(from: calendar.dateComponents([.year], from: currentDate))!
+                endDate = calendar.date(byAdding: .year, value: 1, to: startDate)!.addingTimeInterval(-1)
+            case .period:
+                // For custom period, default to current month or a specific range
+                break
         }
         fetchStats()
     }
@@ -48,10 +48,10 @@ class StatsViewModel: ObservableObject {
     func navigate(direction: Int) {
         let component: Calendar.Component
         switch selectedPeriod {
-        case .weekly: component = .weekOfYear
-        case .monthly: component = .month
-        case .annually: component = .year
-        case .period: component = .month
+            case .weekly: component = .weekOfYear
+            case .monthly: component = .month
+            case .annually: component = .year
+            case .period: component = .month
         }
         currentDate = calendar.date(byAdding: component, value: direction, to: currentDate) ?? currentDate
         updateDateRange()
@@ -76,7 +76,7 @@ class StatsViewModel: ObservableObject {
     private func calculateStats(from transactions: [Transaction]) {
         let grouped = Dictionary(grouping: transactions) { $0.category! }
         let total = transactions.reduce(0) { $0 + $1.amount }
-        self.totalExpenses = total
+        totalExpenses = total
 
         // Sort by amount descending to assign colors (Red for top)
         let sortedData = grouped.map { category, items -> (Category, Double) in
@@ -87,7 +87,7 @@ class StatsViewModel: ObservableObject {
         // Color palette mimicking your images
         let palette: [Color] = [.red, .orange, .yellow, .green, .blue, .purple, .gray]
 
-        self.stats = sortedData.enumerated().map { index, item in
+        stats = sortedData.enumerated().map { index, item in
             CategoryStat(
                 category: item.0,
                 amount: item.1,
@@ -100,18 +100,16 @@ class StatsViewModel: ObservableObject {
     var dateRangeString: String {
         let formatter = DateFormatter()
         switch selectedPeriod {
-        case .weekly,
-             .period:
-            formatter.dateFormat = "MM.dd"
-            return "\(formatter.string(from: startDate)) ~ \(formatter.string(from: endDate))"
-        case .monthly:
-            formatter.dateFormat = "MMM yyyy"
-            return formatter.string(from: startDate)
-        case .annually:
-            formatter.dateFormat = "yyyy"
-            return formatter.string(from: startDate)
+            case .weekly,
+                 .period:
+                formatter.dateFormat = "MM.dd"
+                return "\(formatter.string(from: startDate)) ~ \(formatter.string(from: endDate))"
+            case .monthly:
+                formatter.dateFormat = "MMM yyyy"
+                return formatter.string(from: startDate)
+            case .annually:
+                formatter.dateFormat = "yyyy"
+                return formatter.string(from: startDate)
         }
     }
 }
-
-

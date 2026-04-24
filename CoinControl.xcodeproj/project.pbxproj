@@ -30,6 +30,7 @@
 		DC80FF722B62D23A002A94C7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80FF712B62D23A002A94C7 /* ContentView.swift */; };
 		DC80FF742B62D23B002A94C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC80FF732B62D23B002A94C7 /* Assets.xcassets */; };
 		DC80FF772B62D23B002A94C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC80FF762B62D23B002A94C7 /* Preview Assets.xcassets */; };
+		DCC208132F9BD31B00AF45A8 /* CategoryPieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC208122F9BD31B00AF45A8 /* CategoryPieChartView.swift */; };
 		DCC6CCDC2B7D116E00336C4B /* CoinControlModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCDA2B7D116E00336C4B /* CoinControlModel.xcdatamodeld */; };
 		DCC6CCF52B7D2BC600336C4B /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCF42B7D2BC600336C4B /* PersistenceController.swift */; };
 		DCC6CCF92B7D33FC00336C4B /* CoreDataPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCF82B7D33FC00336C4B /* CoreDataPreview.swift */; };
@@ -99,6 +100,7 @@
 		DC80FF712B62D23A002A94C7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DC80FF732B62D23B002A94C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC80FF762B62D23B002A94C7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DCC208122F9BD31B00AF45A8 /* CategoryPieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPieChartView.swift; sourceTree = "<group>"; };
 		DCC6CCDB2B7D116E00336C4B /* CoinControlModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoinControlModel.xcdatamodel; sourceTree = "<group>"; };
 		DCC6CCF42B7D2BC600336C4B /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		DCC6CCF82B7D33FC00336C4B /* CoreDataPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPreview.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 		DCEE53592F9A652600241BFE /* Stats */ = {
 			isa = PBXGroup;
 			children = (
+				DCC208122F9BD31B00AF45A8 /* CategoryPieChartView.swift */,
 				DCEE535A2F9A652E00241BFE /* StatsView.swift */,
 				DCEE535C2F9A6A4B00241BFE /* StatRow.swift */,
 			);
@@ -561,6 +564,7 @@
 				DCC6CCF52B7D2BC600336C4B /* PersistenceController.swift in Sources */,
 				DC09B7BF2F97C96E00ED426E /* InitialDataService.swift in Sources */,
 				DCEEEF882F93E2BF00E7BB6A /* Category+CoreDataProperties.swift in Sources */,
+				DCC208132F9BD31B00AF45A8 /* CategoryPieChartView.swift in Sources */,
 				DCEE53562F9A641900241BFE /* StatsPeriod.swift in Sources */,
 				DC09B7B32F97BC5500ED426E /* DailySectionViewModel.swift in Sources */,
 				DC09B7B42F97BC5500ED426E /* CategoryGridViewModel.swift in Sources */,

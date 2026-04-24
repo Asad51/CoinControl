@@ -8,14 +8,17 @@
 import Charts
 import SwiftUI
 
+/// The main statistics view that provides an overview of expenses by category.
 struct StatsView: View {
     @StateObject private var viewModel = StatsViewModel()
+
+    /// Holds the raw value of the selected angle in the pie chart.
     @State private var selectedStatValue: Double? = nil
 
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                // Header navigation
+                // Header navigation: Period selection and date range display
                 HStack {
                     Button(action: { viewModel.navigate(direction: -1) }) {
                         Image(systemName: "chevron.left")
@@ -31,7 +34,7 @@ struct StatsView: View {
 
                     Spacer()
 
-                    // Period Picker (Dropdown style)
+                    // Period Picker (Weekly, Monthly, Annually, etc.)
                     Menu {
                         Picker("Period", selection: $viewModel.selectedPeriod) {
                             ForEach(StatsPeriod.allCases) { period in
@@ -54,11 +57,12 @@ struct StatsView: View {
                 }
                 .padding()
 
-                // Income/Expense Toggles
+                // Income/Expense Summary Toggles
                 HStack(spacing: 0) {
                     Text("Income")
                         .frame(maxWidth: .infinity)
                         .foregroundColor(.secondary)
+
                     VStack(spacing: 8) {
                         Text("Expenses ৳ \(String(format: "%.2f", viewModel.totalExpenses))")
                             .fontWeight(.bold)
@@ -72,47 +76,10 @@ struct StatsView: View {
 
                 ScrollView {
                     VStack(spacing: 30) {
-                        // --- SWIFT CHARTS PIE CHART ---
-                        if #available(iOS 17.0, *) {
-                            Chart(viewModel.stats) { stat in
-                                SectorMark(
-                                    angle: .value("Amount", stat.amount),
-                                    innerRadius: selectedStatValue == stat.amount ? 0.4 : 0,
-                                    angularInset: selectedStatValue == stat.amount ? 4 : 1
-                                )
-                                .foregroundStyle(stat.color)
-                                .annotation(position: .overlay) {
-                                    if stat.percentage > 5 {
-                                        VStack {
-                                            Text(stat.category.name)
-                                                .font(.caption2)
-                                            Text("\(Int(stat.percentage))%")
-                                                .font(.caption2).bold()
-                                        }
-                                        .padding(4)
-                                        .background(Color(UIColor.systemBackground).opacity(0.8))
-                                        .cornerRadius(4)
-                                    }
-                                }
-                            }
-                            .chartAngleSelection(value: $selectedStatValue)
-                            .frame(height: 300)
-                            .padding(.top)
-                        } else {
-                            // Fallback for iOS versions earlier than 17.0 where SectorMark isn't available
-                            VStack(spacing: 8) {
-                                Image(systemName: "chart.pie")
-                                    .font(.largeTitle)
-                                    .foregroundColor(.secondary)
-                                Text("Category breakdown requires iOS 17")
-                                    .font(.footnote)
-                                    .foregroundColor(.secondary)
-                            }
-                            .frame(height: 300)
-                            .padding(.top)
-                        }
+                        // Pie chart breakdown of expenses by category
+                        CategoryPieChartView(stats: viewModel.stats, selectedStatValue: $selectedStatValue)
 
-                        // --- STATS LIST ---
+                        // Detailed list of category statistics
                         VStack(spacing: 0) {
                             ForEach(viewModel.stats) { stat in
                                 StatRow(stat: stat)
@@ -129,9 +96,9 @@ struct StatsView: View {
 }
 
 #if DEBUG
-#Preview {
-    CoreDataPreview(items: \.transactions) { _ in
-        StatsView()
+    #Preview {
+        CoreDataPreview(items: \.transactions) { _ in
+            StatsView()
+        }
     }
-}
 #endif
