@@ -10,22 +10,19 @@ import SwiftUI
 
 struct CoreDataPreview<Content: View, PersistenceModel: Hashable>: View {
     private let content: Content
-    private let persistenceController: PersistenceController
 
     init(item keyPath: KeyPath<PreviewData, (NSManagedObjectContext) -> PersistenceModel>, @ViewBuilder content: (PersistenceModel) -> Content) {
-        persistenceController = PersistenceController(inMemory: true)
         let data = PreviewData()
         let closure = data[keyPath: keyPath]
-        let item = closure(persistenceController.viewContext)
+        let item = closure(PersistenceController.preview.viewContext)
 
         self.content = content(item)
     }
 
     init(items keyPath: KeyPath<PreviewData, (NSManagedObjectContext) -> [PersistenceModel]>, @ViewBuilder content: ([PersistenceModel]) -> Content) {
-        persistenceController = PersistenceController(inMemory: true)
         let data = PreviewData()
         let closure = data[keyPath: keyPath]
-        let items = closure(persistenceController.viewContext)
+        let items = closure(PersistenceController.preview.viewContext)
 
         self.content = content(items)
     }
@@ -33,6 +30,6 @@ struct CoreDataPreview<Content: View, PersistenceModel: Hashable>: View {
     var body: some View {
         content
             .environmentObject(Settings())
-            .environment(\.managedObjectContext, persistenceController.viewContext)
+            .environment(\.managedObjectContext, PersistenceController.preview.viewContext)
     }
 }

@@ -30,6 +30,7 @@
 		DC80FF722B62D23A002A94C7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80FF712B62D23A002A94C7 /* ContentView.swift */; };
 		DC80FF742B62D23B002A94C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC80FF732B62D23B002A94C7 /* Assets.xcassets */; };
 		DC80FF772B62D23B002A94C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC80FF762B62D23B002A94C7 /* Preview Assets.xcassets */; };
+		DCC208132F9BD31B00AF45A8 /* CategoryPieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC208122F9BD31B00AF45A8 /* CategoryPieChartView.swift */; };
 		DCC6CCDC2B7D116E00336C4B /* CoinControlModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCDA2B7D116E00336C4B /* CoinControlModel.xcdatamodeld */; };
 		DCC6CCF52B7D2BC600336C4B /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCF42B7D2BC600336C4B /* PersistenceController.swift */; };
 		DCC6CCF92B7D33FC00336C4B /* CoreDataPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCF82B7D33FC00336C4B /* CoreDataPreview.swift */; };
@@ -45,6 +46,11 @@
 		DCDC4E4B2B7BD0DB002C3321 /* BottomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC4E4A2B7BD0DB002C3321 /* BottomTabView.swift */; };
 		DCDC4E552B7BE622002C3321 /* BottomTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC4E542B7BE622002C3321 /* BottomTab.swift */; };
 		DCDC4E592B7BECFF002C3321 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC4E582B7BECFF002C3321 /* Settings.swift */; };
+		DCEE53562F9A641900241BFE /* StatsPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE53552F9A641900241BFE /* StatsPeriod.swift */; };
+		DCEE53582F9A646F00241BFE /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE53572F9A646F00241BFE /* StatsViewModel.swift */; };
+		DCEE535B2F9A652E00241BFE /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE535A2F9A652E00241BFE /* StatsView.swift */; };
+		DCEE535D2F9A6A4B00241BFE /* StatRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE535C2F9A6A4B00241BFE /* StatRow.swift */; };
+		DCEE535F2F9A6A9E00241BFE /* CategoryStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE535E2F9A6A9E00241BFE /* CategoryStat.swift */; };
 		DCEEEF882F93E2BF00E7BB6A /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEEEF852F93E2BF00E7BB6A /* Category+CoreDataProperties.swift */; };
 		DCEEEF892F93E2BF00E7BB6A /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEEEF842F93E2BF00E7BB6A /* Category+CoreDataClass.swift */; };
 		DCEEEF8A2F93E2BF00E7BB6A /* Transaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEEEF872F93E2BF00E7BB6A /* Transaction+CoreDataProperties.swift */; };
@@ -94,6 +100,7 @@
 		DC80FF712B62D23A002A94C7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DC80FF732B62D23B002A94C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC80FF762B62D23B002A94C7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		DCC208122F9BD31B00AF45A8 /* CategoryPieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPieChartView.swift; sourceTree = "<group>"; };
 		DCC6CCDB2B7D116E00336C4B /* CoinControlModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoinControlModel.xcdatamodel; sourceTree = "<group>"; };
 		DCC6CCF42B7D2BC600336C4B /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		DCC6CCF82B7D33FC00336C4B /* CoreDataPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPreview.swift; sourceTree = "<group>"; };
@@ -108,6 +115,11 @@
 		DCDC4E4A2B7BD0DB002C3321 /* BottomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabView.swift; sourceTree = "<group>"; };
 		DCDC4E542B7BE622002C3321 /* BottomTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTab.swift; sourceTree = "<group>"; };
 		DCDC4E582B7BECFF002C3321 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		DCEE53552F9A641900241BFE /* StatsPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsPeriod.swift; sourceTree = "<group>"; };
+		DCEE53572F9A646F00241BFE /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
+		DCEE535A2F9A652E00241BFE /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		DCEE535C2F9A6A4B00241BFE /* StatRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatRow.swift; sourceTree = "<group>"; };
+		DCEE535E2F9A6A9E00241BFE /* CategoryStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryStat.swift; sourceTree = "<group>"; };
 		DCEEEF842F93E2BF00E7BB6A /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DCEEEF852F93E2BF00E7BB6A /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DCEEEF862F93E2BF00E7BB6A /* Transaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -162,6 +174,7 @@
 		DC09B7AE2F97B2E700ED426E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				DCEE53572F9A646F00241BFE /* StatsViewModel.swift */,
 				DC09B7AF2F97BC5500ED426E /* CategoryGridViewModel.swift */,
 				DC09B7B02F97BC5500ED426E /* DailySectionViewModel.swift */,
 				DC09B7B12F97BC5500ED426E /* TransactionAddEditViewModel.swift */,
@@ -288,6 +301,7 @@
 		DCDB79952B6412250062E3B8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DCEE53592F9A652600241BFE /* Stats */,
 				DCF99F8B2F9547430021812E /* Helpers */,
 				DCE689EE2B7FDD5C0074ED6D /* Transactions */,
 				DC80FF712B62D23A002A94C7 /* ContentView.swift */,
@@ -309,6 +323,8 @@
 		DCDC4E4C2B7BD0EC002C3321 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DCEE535E2F9A6A9E00241BFE /* CategoryStat.swift */,
+				DCEE53552F9A641900241BFE /* StatsPeriod.swift */,
 				DCF99F792F9526C30021812E /* TransactionType.swift */,
 				DCDC4E542B7BE622002C3321 /* BottomTab.swift */,
 				DCDC4E582B7BECFF002C3321 /* Settings.swift */,
@@ -326,6 +342,16 @@
 				DCEEEF8C2F93ECD700E7BB6A /* TransactionsView.swift */,
 			);
 			path = Transactions;
+			sourceTree = "<group>";
+		};
+		DCEE53592F9A652600241BFE /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				DCC208122F9BD31B00AF45A8 /* CategoryPieChartView.swift */,
+				DCEE535A2F9A652E00241BFE /* StatsView.swift */,
+				DCEE535C2F9A6A4B00241BFE /* StatRow.swift */,
+			);
+			path = Stats;
 			sourceTree = "<group>";
 		};
 		DCF99F8B2F9547430021812E /* Helpers */ = {
@@ -538,6 +564,8 @@
 				DCC6CCF52B7D2BC600336C4B /* PersistenceController.swift in Sources */,
 				DC09B7BF2F97C96E00ED426E /* InitialDataService.swift in Sources */,
 				DCEEEF882F93E2BF00E7BB6A /* Category+CoreDataProperties.swift in Sources */,
+				DCC208132F9BD31B00AF45A8 /* CategoryPieChartView.swift in Sources */,
+				DCEE53562F9A641900241BFE /* StatsPeriod.swift in Sources */,
 				DC09B7B32F97BC5500ED426E /* DailySectionViewModel.swift in Sources */,
 				DC09B7B42F97BC5500ED426E /* CategoryGridViewModel.swift in Sources */,
 				DC09B7B52F97BC5500ED426E /* TransactionsViewModel.swift in Sources */,
@@ -545,6 +573,7 @@
 				DCEEEF892F93E2BF00E7BB6A /* Category+CoreDataClass.swift in Sources */,
 				DCEEEF912F93EF1200E7BB6A /* TransactionRowView.swift in Sources */,
 				DCEEEF8A2F93E2BF00E7BB6A /* Transaction+CoreDataProperties.swift in Sources */,
+				DCEE535B2F9A652E00241BFE /* StatsView.swift in Sources */,
 				DCEEEF8B2F93E2BF00E7BB6A /* Transaction+CoreDataClass.swift in Sources */,
 				DCF99F8F2F9547C70021812E /* TransactionAddEditView.swift in Sources */,
 				DCC6CCF92B7D33FC00336C4B /* CoreDataPreview.swift in Sources */,
@@ -553,7 +582,9 @@
 				DCDC4E592B7BECFF002C3321 /* Settings.swift in Sources */,
 				DCDB799C2B64130D0062E3B8 /* CCLogFormatter.swift in Sources */,
 				DC2AC5EC2B76AF2600B7053D /* FloatingButton.swift in Sources */,
+				DCEE53582F9A646F00241BFE /* StatsViewModel.swift in Sources */,
 				DCF99F892F95303E0021812E /* Account+CoreDataClass.swift in Sources */,
+				DCEE535F2F9A6A9E00241BFE /* CategoryStat.swift in Sources */,
 				DC09B7BB2F97C0E900ED426E /* TransactionService.swift in Sources */,
 				DC09B7BC2F97C0E900ED426E /* AccountService.swift in Sources */,
 				DC09B7BD2F97C0E900ED426E /* CategoryService.swift in Sources */,
@@ -565,6 +596,7 @@
 				DCDC4E552B7BE622002C3321 /* BottomTab.swift in Sources */,
 				DCC6CCDC2B7D116E00336C4B /* CoinControlModel.xcdatamodeld in Sources */,
 				DCF99F7A2F9526C30021812E /* TransactionType.swift in Sources */,
+				DCEE535D2F9A6A4B00241BFE /* StatRow.swift in Sources */,
 				DCEEEF8D2F93ECD700E7BB6A /* TransactionsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -742,7 +774,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -781,7 +813,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
