@@ -43,7 +43,7 @@ class TransactionAddEditViewModel: ObservableObject {
             transactionType = TransactionType(rawValue: transaction.type) ?? .expense
             date = transaction.date
             amountText = String(format: "%.2f", transaction.amount)
-            title = title
+            title = transaction.title
             note = transaction.note
             selectedCategory = transaction.category
             selectedAccount = transaction.account
