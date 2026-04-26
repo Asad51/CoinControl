@@ -44,7 +44,7 @@ class StatsViewModel: ObservableObject {
                 endDate = calendar.date(byAdding: .year, value: 1, to: startDate)!.addingTimeInterval(-1)
             case .period:
                 // For custom period, default to current month or a specific range
-            break
+                break
         }
         fetchStats()
     }
@@ -126,16 +126,16 @@ class StatsViewModel: ObservableObject {
     var dateRangeString: String {
         let formatter = DateFormatter()
         switch selectedPeriod {
-        case .weekly,
-             .period:
-            formatter.dateFormat = "MM.dd"
-            return "\(formatter.string(from: startDate)) ~ \(formatter.string(from: endDate))"
-        case .monthly:
-            formatter.dateFormat = "MMM yyyy"
-            return formatter.string(from: startDate)
-        case .annually:
-            formatter.dateFormat = "yyyy"
-            return formatter.string(from: startDate)
+            case .weekly,
+                 .period:
+                formatter.dateFormat = "MM.dd"
+                return "\(formatter.string(from: startDate)) ~ \(formatter.string(from: endDate))"
+            case .monthly:
+                formatter.dateFormat = "MMM yyyy"
+                return formatter.string(from: startDate)
+            case .annually:
+                formatter.dateFormat = "yyyy"
+                return formatter.string(from: startDate)
         }
     }
 }
