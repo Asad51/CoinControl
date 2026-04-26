@@ -87,7 +87,7 @@ struct PreviewData {
         transaction2.category = categories.first { $0.name == "Other" } ?? categories.last!
         transaction2.account = accounts.first { $0.name == "Bank" } ?? accounts.first!
         transaction2.amount = 14444.0
-        transaction1.type = 1
+        transaction2.type = 1
         transaction2.note = "Salary + Bonus"
 
         let transaction3 = Transaction(context: context)
@@ -101,5 +101,17 @@ struct PreviewData {
         transaction3.note = "Consumed tea with Mr. Maruf."
 
         return [transaction1, transaction2, transaction3]
+    }}
+
+    var accounts: (NSManagedObjectContext) -> [Account] {{ context in
+        let accountNames = ["Cash", "Card", "Bank"]
+        var accounts: [Account] = []
+        for name in accountNames {
+            let acct = Account(context: context)
+            acct.id = UUID()
+            acct.name = name
+            accounts.append(acct)
+        }
+        return accounts
     }}
 }
