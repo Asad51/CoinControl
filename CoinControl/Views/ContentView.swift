@@ -24,7 +24,7 @@ struct ContentView: View {
                         StatsView()
                             .tag(BottomTab.stats)
 
-                        Text("Accounts")
+                        AccountsView()
                             .tag(BottomTab.accounts)
                     }
                     .tabViewStyle(.page(indexDisplayMode: .never))

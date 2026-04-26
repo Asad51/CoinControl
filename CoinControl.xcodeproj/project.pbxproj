@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DCAAAAAAAA0002 /* AccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAAAAAAAA0001 /* AccountsViewModel.swift */; };
+		DCAAAAAAAA0004 /* AccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAAAAAAAA0003 /* AccountsView.swift */; };
 		DC09B7B32F97BC5500ED426E /* DailySectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC09B7B02F97BC5500ED426E /* DailySectionViewModel.swift */; };
 		DC09B7B42F97BC5500ED426E /* CategoryGridViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC09B7AF2F97BC5500ED426E /* CategoryGridViewModel.swift */; };
 		DC09B7B52F97BC5500ED426E /* TransactionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC09B7B22F97BC5500ED426E /* TransactionsViewModel.swift */; };
@@ -36,6 +38,7 @@
 		DCC6CCF52B7D2BC600336C4B /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCF42B7D2BC600336C4B /* PersistenceController.swift */; };
 		DCC6CCF92B7D33FC00336C4B /* CoreDataPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCF82B7D33FC00336C4B /* CoreDataPreview.swift */; };
 		DCCA7D7A2B7D3BB000199111 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCA7D792B7D3BB000199111 /* PreviewData.swift */; };
+		DCD054AB2B90CB60002A7A32 /* AccountsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD054AA2B90CB60002A7A32 /* AccountsViewModelTests.swift */; };
 		DCD054532B90CB60002A7A32 /* CoinControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD054522B90CB60002A7A32 /* CoinControlTests.swift */; };
 		DCD054602B90CB7D002A7A32 /* CoinControlUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD0545F2B90CB7D002A7A32 /* CoinControlUITests.swift */; };
 		DCD054622B90CB7D002A7A32 /* CoinControlUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD054612B90CB7D002A7A32 /* CoinControlUITestsLaunchTests.swift */; };
@@ -85,6 +88,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DCAAAAAAAA0001 /* AccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModel.swift; sourceTree = "<group>"; };
+		DCAAAAAAAA0003 /* AccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsView.swift; sourceTree = "<group>"; };
 		DC09B7AF2F97BC5500ED426E /* CategoryGridViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryGridViewModel.swift; sourceTree = "<group>"; };
 		DC09B7B02F97BC5500ED426E /* DailySectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySectionViewModel.swift; sourceTree = "<group>"; };
 		DC09B7B12F97BC5500ED426E /* TransactionAddEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionAddEditViewModel.swift; sourceTree = "<group>"; };
@@ -108,6 +113,7 @@
 		DCC6CCF82B7D33FC00336C4B /* CoreDataPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPreview.swift; sourceTree = "<group>"; };
 		DCCA7D792B7D3BB000199111 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		DCD054502B90CB60002A7A32 /* CoinControlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoinControlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCD054AA2B90CB60002A7A32 /* AccountsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModelTests.swift; sourceTree = "<group>"; };
 		DCD054522B90CB60002A7A32 /* CoinControlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinControlTests.swift; sourceTree = "<group>"; };
 		DCD0545D2B90CB7D002A7A32 /* CoinControlUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoinControlUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCD0545F2B90CB7D002A7A32 /* CoinControlUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinControlUITests.swift; sourceTree = "<group>"; };
@@ -176,6 +182,7 @@
 		DC09B7AE2F97B2E700ED426E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				DCAAAAAAAA0001 /* AccountsViewModel.swift */,
 				DCEE53572F9A646F00241BFE /* StatsViewModel.swift */,
 				DC09B7AF2F97BC5500ED426E /* CategoryGridViewModel.swift */,
 				DC09B7B02F97BC5500ED426E /* DailySectionViewModel.swift */,
@@ -194,6 +201,14 @@
 				DC09B7B92F97C0E900ED426E /* TransactionService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		DCAAAAAAAA0005 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				DCAAAAAAAA0003 /* AccountsView.swift */,
+			);
+			path = Accounts;
 			sourceTree = "<group>";
 		};
 		DC80FF632B62D23A002A94C7 = {
@@ -269,6 +284,7 @@
 		DCD054512B90CB60002A7A32 /* CoinControlTests */ = {
 			isa = PBXGroup;
 			children = (
+				DCD054AA2B90CB60002A7A32 /* AccountsViewModelTests.swift */,
 				DCD054522B90CB60002A7A32 /* CoinControlTests.swift */,
 			);
 			path = CoinControlTests;
@@ -303,6 +319,7 @@
 		DCDB79952B6412250062E3B8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DCAAAAAAAA0005 /* Accounts */,
 				DCEE53592F9A652600241BFE /* Stats */,
 				DCF99F8B2F9547430021812E /* Helpers */,
 				DCE689EE2B7FDD5C0074ED6D /* Transactions */,
@@ -561,6 +578,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCAAAAAAAA0002 /* AccountsViewModel.swift in Sources */,
+				DCAAAAAAAA0004 /* AccountsView.swift in Sources */,
 				DCCA7D7A2B7D3BB000199111 /* PreviewData.swift in Sources */,
 				DCEEEF8F2F93EEE500E7BB6A /* DailySectionView.swift in Sources */,
 				DC1190EA2B8E63CC00AD7222 /* AppDelegate.swift in Sources */,
@@ -609,6 +628,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCD054AB2B90CB60002A7A32 /* AccountsViewModelTests.swift in Sources */,
 				DCD054532B90CB60002A7A32 /* CoinControlTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
