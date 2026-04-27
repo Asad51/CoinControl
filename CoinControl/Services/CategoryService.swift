@@ -8,6 +8,7 @@ import Foundation
 
 protocol CategoryServiceProtocol {
     func fetchCategories() throws -> [Category]
+    func fetchCategories(by type: Int16) throws -> [Category]
 }
 
 class CategoryService: CategoryServiceProtocol {
@@ -19,6 +20,13 @@ class CategoryService: CategoryServiceProtocol {
 
     func fetchCategories() throws -> [Category] {
         let request = Category.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Category.name, ascending: true)]
+        return try context.fetch(request)
+    }
+
+    func fetchCategories(by type: Int16) throws -> [Category] {
+        let request = Category.fetchRequest()
+        request.predicate = NSPredicate(format: "type == %d", type)
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Category.name, ascending: true)]
         return try context.fetch(request)
     }

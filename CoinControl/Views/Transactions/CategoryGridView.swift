@@ -15,15 +15,17 @@ struct CategoryGridView: View {
 
     // Pass selection back to main view
     @Binding var selectedCategory: Category?
+    let type: Int16
 
     // 3-column grid structure matching your image
     private var gridItems: [GridItem] {
         [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     }
 
-    init(selectedCategory: Binding<Category?>) {
+    init(selectedCategory: Binding<Category?>, type: Int16) {
         _selectedCategory = selectedCategory
-        _viewModel = StateObject(wrappedValue: CategoryGridViewModel())
+        self.type = type
+        _viewModel = StateObject(wrappedValue: CategoryGridViewModel(type: type))
     }
 
     var body: some View {

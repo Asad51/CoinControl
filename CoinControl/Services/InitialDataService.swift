@@ -32,7 +32,7 @@ class InitialDataService {
     }
 
     private func insertCategories() {
-        let categories = [
+        let expenseCategories = [
             ("Food", "🍜"),
             ("Social Life", "👥"),
             ("Pets", "🐶"),
@@ -48,11 +48,29 @@ class InitialDataService {
             ("Others", "✨"),
         ]
 
-        for (name, icon) in categories {
+        for (name, icon) in expenseCategories {
             let category = Category(context: context)
             category.id = UUID()
             category.name = name
             category.icon = icon
+            category.type = TransactionType.expense.rawValue
+            category.desc = ""
+        }
+
+        let incomeCategories = [
+            ("Allowance", "💵"),
+            ("Salary", "💰"),
+            ("Petty cash", "👛"),
+            ("Bonus", "🧧"),
+            ("Others", "✨"),
+        ]
+
+        for (name, icon) in incomeCategories {
+            let category = Category(context: context)
+            category.id = UUID()
+            category.name = name
+            category.icon = icon
+            category.type = TransactionType.income.rawValue
             category.desc = ""
         }
     }
