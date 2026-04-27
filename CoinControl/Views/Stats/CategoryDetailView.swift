@@ -98,7 +98,7 @@ struct CategoryDetailView: View {
                         }
                         .frame(height: 200)
                         .chartXAxis {
-                            AxisMarks(values: .stride(by: .month)) { value in
+                            AxisMarks(values: .stride(by: .month)) { _ in
                                 AxisValueLabel(format: .dateTime.month(.abbreviated))
                                     .foregroundStyle(.secondary)
                             }
@@ -139,4 +139,3 @@ struct CategoryDetailView: View {
         }
     }
 }
-

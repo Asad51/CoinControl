@@ -9,29 +9,31 @@ import CoreData
 import Foundation
 
 struct PreviewData {
-    var transaction: (NSManagedObjectContext) -> Transaction {{ context in
-        let category = Category(context: context)
-        category.id = UUID()
-        category.name = "Groceries"
-        category.icon = "cart"
-        category.desc = "groceries"
+    var transaction: (NSManagedObjectContext) -> Transaction {
+        { context in
+            let category = Category(context: context)
+            category.id = UUID()
+            category.name = "Groceries"
+            category.icon = "cart"
+            category.desc = "groceries"
 
-        let account = Account(context: context)
-        account.id = UUID()
-        account.name = "Cash"
+            let account = Account(context: context)
+            account.id = UUID()
+            account.name = "Cash"
 
-        let transaction = Transaction(context: context)
-        transaction.id = UUID()
-        transaction.title = "Chicken"
-        transaction.date = Date().addingTimeInterval(-100_000)
-        transaction.category = category
-        transaction.account = account
-        transaction.amount = 10.61
-        transaction.type = TransactionType.expense.rawValue
-        transaction.note = "Bought 6kgs of chicken."
+            let transaction = Transaction(context: context)
+            transaction.id = UUID()
+            transaction.title = "Chicken"
+            transaction.date = Date().addingTimeInterval(-100_000)
+            transaction.category = category
+            transaction.account = account
+            transaction.amount = 10.61
+            transaction.type = TransactionType.expense.rawValue
+            transaction.note = "Bought 6kgs of chicken."
 
-        return transaction
-    }}
+            return transaction
+        }
+    }
 
     var transactions: (NSManagedObjectContext) -> [Transaction] {{ context in
         // Create Mock Categories for the grid
