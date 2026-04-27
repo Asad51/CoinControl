@@ -23,6 +23,7 @@ class TransactionAddEditViewModel: ObservableObject {
     private let categoryService: CategoryServiceProtocol
     private let accountService: AccountServiceProtocol
     private let transactionToEdit: Transaction?
+    private var cancellables = Set<AnyCancellable>()
 
     var isEditing: Bool {
         transactionToEdit != nil
@@ -49,12 +50,33 @@ class TransactionAddEditViewModel: ObservableObject {
             selectedAccount = transaction.account
         }
 
+        setupSubscribers()
         fetchDependencies()
+    }
+
+    private func setupSubscribers() {
+        $transactionType
+            .dropFirst()
+            .sink { [weak self] newType in
+                self?.filterCategories(for: newType)
+            }
+            .store(in: &cancellables)
+    }
+
+    private func filterCategories(for type: TransactionType) {
+        do {
+            categories = try categoryService.fetchCategories(by: type.rawValue)
+            if !isEditing || selectedCategory?.type != type.rawValue {
+                selectedCategory = categories.first
+            }
+        } catch {
+            print("Failed to filter categories: \(error)")
+        }
     }
 
     private func fetchDependencies() {
         do {
-            categories = try categoryService.fetchCategories()
+            categories = try categoryService.fetchCategories(by: transactionType.rawValue)
             accounts = try accountService.fetchAccounts()
 
             // Set defaults if not editing
@@ -63,7 +85,7 @@ class TransactionAddEditViewModel: ObservableObject {
                     selectedAccount = accounts.first
                 }
                 if selectedCategory == nil {
-                    selectedCategory = categories.last
+                    selectedCategory = categories.first
                 }
             }
         } catch {
@@ -84,12 +106,23 @@ class TransactionAddEditViewModel: ObservableObject {
                 date: date,
                 title: title,
                 note: note,
-                category: selectedCategory ?? categories.last,
+                category: selectedCategory ?? categories.first,
                 account: selectedAccount ?? accounts.first
             )
             return true
         } catch {
             print("Failed to save transaction: \(error)")
+            return false
+        }
+    }
+
+    func delete() -> Bool {
+        guard let transaction = transactionToEdit else { return false }
+        do {
+            try transactionService.deleteTransaction(transaction)
+            return true
+        } catch {
+            print("Failed to delete transaction: \(error)")
             return false
         }
     }

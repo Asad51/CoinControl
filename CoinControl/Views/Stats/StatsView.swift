@@ -59,16 +59,35 @@ struct StatsView: View {
 
                 // Income/Expense Summary Toggles
                 HStack(spacing: 0) {
-                    Text("Income")
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(.secondary)
+                    // Income Toggle
+                    Button(action: { 
+                        viewModel.selectedType = .income
+                        viewModel.fetchStats()
+                    }) {
+                        VStack(spacing: 8) {
+                            Text("Income ৳ \(String(format: "%.2f", viewModel.totalIncome))")
+                                .fontWeight(viewModel.selectedType == .income ? .bold : .regular)
+                                .foregroundColor(viewModel.selectedType == .income ? .primary : .secondary)
+                            Rectangle()
+                                .fill(viewModel.selectedType == .income ? Color.blue : Color.clear)
+                                .frame(height: 3)
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
 
-                    VStack(spacing: 8) {
-                        Text("Expenses ৳ \(String(format: "%.2f", viewModel.totalExpenses))")
-                            .fontWeight(.bold)
-                        Rectangle()
-                            .fill(Color.red)
-                            .frame(height: 3)
+                    // Expense Toggle
+                    Button(action: { 
+                        viewModel.selectedType = .expense
+                        viewModel.fetchStats()
+                    }) {
+                        VStack(spacing: 8) {
+                            Text("Expenses ৳ \(String(format: "%.2f", viewModel.totalExpenses))")
+                                .fontWeight(viewModel.selectedType == .expense ? .bold : .regular)
+                                .foregroundColor(viewModel.selectedType == .expense ? .primary : .secondary)
+                            Rectangle()
+                                .fill(viewModel.selectedType == .expense ? Color.red : Color.clear)
+                                .frame(height: 3)
+                        }
                     }
                     .frame(maxWidth: .infinity)
                 }

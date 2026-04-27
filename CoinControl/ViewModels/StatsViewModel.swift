@@ -12,12 +12,14 @@ import SwiftUI
 @MainActor
 class StatsViewModel: ObservableObject {
     @Published var selectedPeriod: StatsPeriod = .monthly
+    @Published var selectedType: TransactionType = .expense
     @Published var currentDate = Date()
     @Published var startDate = Date()
     @Published var endDate = Date()
 
     @Published var stats: [CategoryStat] = []
     @Published var totalExpenses: Double = 0.0
+    @Published var totalIncome: Double = 0.0
 
     private let context: NSManagedObjectContext
     private let calendar = Calendar.current
@@ -58,16 +60,18 @@ class StatsViewModel: ObservableObject {
     }
 
     func fetchStats() {
+        // Fetch all transactions in range to get both totals
         let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
-        // Filter: Expenses only and within date range
-        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
-            NSPredicate(format: "type == %d", TransactionType.expense.rawValue),
-            NSPredicate(format: "date >= %@ AND date <= %@", startDate as NSDate, endDate as NSDate),
-        ])
+        request.predicate = NSPredicate(format: "date >= %@ AND date <= %@", startDate as NSDate, endDate as NSDate)
 
         do {
-            let transactions = try context.fetch(request)
-            calculateStats(from: transactions)
+            let allTransactions = try context.fetch(request)
+            
+            totalIncome = allTransactions.filter { $0.type == TransactionType.income.rawValue }.reduce(0) { $0 + $1.amount }
+            totalExpenses = allTransactions.filter { $0.type == TransactionType.expense.rawValue }.reduce(0) { $0 + $1.amount }
+
+            let filteredTransactions = allTransactions.filter { $0.type == selectedType.rawValue }
+            calculateStats(from: filteredTransactions)
         } catch {
             print("Fetch failed: \(error)")
         }
@@ -76,22 +80,26 @@ class StatsViewModel: ObservableObject {
     private func calculateStats(from transactions: [Transaction]) {
         let grouped = Dictionary(grouping: transactions) { $0.category! }
         let total = transactions.reduce(0) { $0 + $1.amount }
-        totalExpenses = total
 
-        // Sort by amount descending to assign colors (Red for top)
+        // Sort by amount descending
         let sortedData = grouped.map { category, items -> (Category, Double) in
             let sum = items.reduce(0) { $0 + $1.amount }
             return (category, sum)
         }.sorted { $0.1 > $1.1 }
 
-        // Color palette mimicking your images
-        let palette: [Color] = [.red, .orange, .yellow, .green, .blue, .purple, .gray]
+        // Color palette based on type
+        let palette: [Color]
+        if selectedType == .income {
+            palette = [.blue, .cyan, .teal, .indigo, .mint, .green, .gray]
+        } else {
+            palette = [.red, .orange, .yellow, .pink, .purple, .brown, .gray]
+        }
 
         stats = sortedData.enumerated().map { index, item in
             CategoryStat(
                 category: item.0,
                 amount: item.1,
-                percentage: (item.1 / total) * 100,
+                percentage: total > 0 ? (item.1 / total) * 100 : 0,
                 color: index < palette.count ? palette[index] : .gray
             )
         }
