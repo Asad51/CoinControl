@@ -3,9 +3,9 @@
 //  CoinControlTests
 //
 
-import XCTest
-import CoreData
 @testable import CoinControl
+import CoreData
+import XCTest
 
 final class AccountsViewModelTests: XCTestCase {
     var context: NSManagedObjectContext!
