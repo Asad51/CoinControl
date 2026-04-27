@@ -16,7 +16,8 @@ class AccountsViewModel: ObservableObject {
     private let accountService: AccountServiceProtocol
 
     init(context: NSManagedObjectContext = PersistenceController.shared.viewContext,
-         accountService: AccountServiceProtocol? = nil) {
+         accountService: AccountServiceProtocol? = nil)
+    {
         self.context = context
         self.accountService = accountService ?? AccountService(context: context)
         fetchAccounts()

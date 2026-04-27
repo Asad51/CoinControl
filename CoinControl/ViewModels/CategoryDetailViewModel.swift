@@ -50,7 +50,7 @@ class CategoryDetailViewModel: ObservableObject {
         request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
             NSPredicate(format: "category == %@", category),
             NSPredicate(format: "type == %d", TransactionType.expense.rawValue),
-            NSPredicate(format: "date >= %@ AND date <= %@", startOfMonth as NSDate, endOfMonth as NSDate)
+            NSPredicate(format: "date >= %@ AND date <= %@", startOfMonth as NSDate, endOfMonth as NSDate),
         ])
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Transaction.date, ascending: false)]
 
@@ -65,7 +65,7 @@ class CategoryDetailViewModel: ObservableObject {
     private func fetchTrendData() {
         // Fetch last 8 months including current
         var points: [TrendPoint] = []
-        for i in (0..<8).reversed() {
+        for i in (0 ..< 8).reversed() {
             if let date = calendar.date(byAdding: .month, value: -i, to: currentDate) {
                 let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: date))!
                 let endOfMonth = calendar.date(byAdding: .month, value: 1, to: startOfMonth)!.addingTimeInterval(-1)
@@ -74,7 +74,7 @@ class CategoryDetailViewModel: ObservableObject {
                 request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
                     NSPredicate(format: "category == %@", category),
                     NSPredicate(format: "type == %d", TransactionType.expense.rawValue),
-                    NSPredicate(format: "date >= %@ AND date <= %@", startOfMonth as NSDate, endOfMonth as NSDate)
+                    NSPredicate(format: "date >= %@ AND date <= %@", startOfMonth as NSDate, endOfMonth as NSDate),
                 ])
 
                 do {
