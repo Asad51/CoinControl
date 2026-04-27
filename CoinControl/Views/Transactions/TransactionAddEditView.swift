@@ -107,7 +107,7 @@ struct TransactionAddEditView: View {
                             .buttonStyle(PlainButtonStyle())
                             .sheet(isPresented: $showingCategoryPicker) {
                                 // sheet is automatically wrapped in NavigationView with CategoryGridView
-                                CategoryGridView(selectedCategory: $viewModel.selectedCategory)
+                                CategoryGridView(selectedCategory: $viewModel.selectedCategory, type: viewModel.transactionType.rawValue)
                                     .environment(\.managedObjectContext, viewContext)
                             }
 
@@ -155,6 +155,27 @@ struct TransactionAddEditView: View {
                                     .frame(height: 1)
                             }
                             .padding(.vertical, 8)
+
+                            if viewModel.isEditing {
+                                Button(action: {
+                                    if viewModel.delete() {
+                                        dismiss()
+                                    }
+                                }) {
+                                    HStack {
+                                        Spacer()
+                                        Text("Delete Transaction")
+                                            .foregroundColor(.red)
+                                            .fontWeight(.medium)
+                                        Spacer()
+                                    }
+                                    .padding()
+                                    .background(Color.red.opacity(0.1))
+                                    .cornerRadius(8)
+                                }
+                                .padding(.top, 20)
+                                .padding(.bottom, 40)
+                            }
                         }
                         .padding(.horizontal)
                     }

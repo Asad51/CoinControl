@@ -49,7 +49,7 @@ class CategoryDetailViewModel: ObservableObject {
         let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
         request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
             NSPredicate(format: "category == %@", category),
-            NSPredicate(format: "type == %d", TransactionType.expense.rawValue),
+            NSPredicate(format: "type == %d", category.type),
             NSPredicate(format: "date >= %@ AND date <= %@", startOfMonth as NSDate, endOfMonth as NSDate),
         ])
         request.sortDescriptors = [NSSortDescriptor(keyPath: \Transaction.date, ascending: false)]
@@ -73,7 +73,7 @@ class CategoryDetailViewModel: ObservableObject {
                 let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
                 request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
                     NSPredicate(format: "category == %@", category),
-                    NSPredicate(format: "type == %d", TransactionType.expense.rawValue),
+                    NSPredicate(format: "type == %d", category.type),
                     NSPredicate(format: "date >= %@ AND date <= %@", startOfMonth as NSDate, endOfMonth as NSDate),
                 ])
 

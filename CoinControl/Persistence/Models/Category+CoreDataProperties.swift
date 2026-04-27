@@ -20,6 +20,7 @@ extension Category {
     @NSManaged var icon: String
     @NSManaged public var id: UUID
     @NSManaged var name: String
+    @NSManaged var type: Int16
     @NSManaged var transactions: NSSet
 }
 

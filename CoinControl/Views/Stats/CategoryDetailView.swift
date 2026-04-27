@@ -80,7 +80,7 @@ struct CategoryDetailView: View {
                                     y: .value("Amount", point.amount)
                                 )
                                 .interpolationMethod(.linear)
-                                .foregroundStyle(.red)
+                                .foregroundStyle(viewModel.category.type == TransactionType.income.rawValue ? Color.blue : Color.red)
                                 .symbol(Circle())
                                 .symbolSize(50)
 
@@ -90,7 +90,10 @@ struct CategoryDetailView: View {
                                 )
                                 .interpolationMethod(.linear)
                                 .foregroundStyle(LinearGradient(
-                                    colors: [Color.red.opacity(0.3), Color.red.opacity(0.0)],
+                                    colors: [
+                                        (viewModel.category.type == TransactionType.income.rawValue ? Color.blue : Color.red).opacity(0.3),
+                                        (viewModel.category.type == TransactionType.income.rawValue ? Color.blue : Color.red).opacity(0.0)
+                                    ],
                                     startPoint: .top,
                                     endPoint: .bottom
                                 ))
