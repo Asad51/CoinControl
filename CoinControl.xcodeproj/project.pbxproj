@@ -16,6 +16,7 @@
 		DC09B7BD2F97C0E900ED426E /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC09B7B82F97C0E900ED426E /* CategoryService.swift */; };
 		DC09B7BF2F97C96E00ED426E /* InitialDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC09B7BE2F97C96E00ED426E /* InitialDataService.swift */; };
 		DC0B62552FA256F7009D516D /* TransactionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0B62542FA256F7009D516D /* TransactionHeaderView.swift */; };
+		DC0B62572FA260B3009D516D /* TransactionCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0B62562FA260B3009D516D /* TransactionCalendarView.swift */; };
 		DC1190E42B8E63BA00AD7222 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E32B8E63BA00AD7222 /* AppCenterAnalytics */; };
 		DC1190E62B8E63BA00AD7222 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E52B8E63BA00AD7222 /* AppCenterCrashes */; };
 		DC1190E82B8E63BA00AD7222 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E72B8E63BA00AD7222 /* AppCenterDistribute */; };
@@ -100,6 +101,7 @@
 		DC09B7B92F97C0E900ED426E /* TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
 		DC09B7BE2F97C96E00ED426E /* InitialDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialDataService.swift; sourceTree = "<group>"; };
 		DC0B62542FA256F7009D516D /* TransactionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHeaderView.swift; sourceTree = "<group>"; };
+		DC0B62562FA260B3009D516D /* TransactionCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCalendarView.swift; sourceTree = "<group>"; };
 		DC1190E92B8E63CC00AD7222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		DC38B4F82F99363300879577 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 		DCE689EE2B7FDD5C0074ED6D /* Transactions */ = {
 			isa = PBXGroup;
 			children = (
+				DC0B62562FA260B3009D516D /* TransactionCalendarView.swift */,
 				DC0B62542FA256F7009D516D /* TransactionHeaderView.swift */,
 				DCF99F902F9548A40021812E /* CategoryGridView.swift */,
 				DCF99F8E2F9547C70021812E /* TransactionAddEditView.swift */,
@@ -600,6 +603,7 @@
 				DC09B7B32F97BC5500ED426E /* DailySectionViewModel.swift in Sources */,
 				DC09B7B42F97BC5500ED426E /* CategoryGridViewModel.swift in Sources */,
 				DC09B7B52F97BC5500ED426E /* TransactionsViewModel.swift in Sources */,
+				DC0B62572FA260B3009D516D /* TransactionCalendarView.swift in Sources */,
 				DC09B7B62F97BC5500ED426E /* TransactionAddEditViewModel.swift in Sources */,
 				DCEEEF892F93E2BF00E7BB6A /* Category+CoreDataClass.swift in Sources */,
 				DCC208152F9BDE3700AF45A8 /* SimplifiedTransactionRow.swift in Sources */,

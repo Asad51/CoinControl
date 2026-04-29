@@ -7,11 +7,10 @@ import SwiftUI
 
 struct TransactionHeaderView: View {
     @ObservedObject var viewModel: TransactionsViewModel
-    @State private var selectedTopTab = "Daily"
+    @Binding var selectedTopTab: String
     let topTabs = ["Daily", "Calendar", "Monthly", "Total", "Note"]
 
-    var body: some View {
-        VStack(spacing: 0) {
+    var body: some View {        VStack(spacing: 0) {
             // Month Navigation and Action Icons
             HStack {
                 Button(action: {
@@ -103,8 +102,8 @@ struct SummaryItemView: View {
 }
 
 #if DEBUG
-    #Preview {
-        TransactionHeaderView(viewModel: TransactionsViewModel())
-            .background(Color.black)
-    }
+#Preview {
+    TransactionHeaderView(viewModel: TransactionsViewModel(), selectedTopTab: .constant("Daily"))
+        .background(Color(UIColor.systemBackground))
+}
 #endif
