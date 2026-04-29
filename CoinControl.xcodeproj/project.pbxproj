@@ -17,6 +17,7 @@
 		DC09B7BF2F97C96E00ED426E /* InitialDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC09B7BE2F97C96E00ED426E /* InitialDataService.swift */; };
 		DC0B62552FA256F7009D516D /* TransactionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0B62542FA256F7009D516D /* TransactionHeaderView.swift */; };
 		DC0B62572FA260B3009D516D /* TransactionCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0B62562FA260B3009D516D /* TransactionCalendarView.swift */; };
+		DC0B62592FA27280009D516D /* TransactionMonthlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0B62582FA27280009D516D /* TransactionMonthlyView.swift */; };
 		DC1190E42B8E63BA00AD7222 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E32B8E63BA00AD7222 /* AppCenterAnalytics */; };
 		DC1190E62B8E63BA00AD7222 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E52B8E63BA00AD7222 /* AppCenterCrashes */; };
 		DC1190E82B8E63BA00AD7222 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E72B8E63BA00AD7222 /* AppCenterDistribute */; };
@@ -102,6 +103,7 @@
 		DC09B7BE2F97C96E00ED426E /* InitialDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialDataService.swift; sourceTree = "<group>"; };
 		DC0B62542FA256F7009D516D /* TransactionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHeaderView.swift; sourceTree = "<group>"; };
 		DC0B62562FA260B3009D516D /* TransactionCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCalendarView.swift; sourceTree = "<group>"; };
+		DC0B62582FA27280009D516D /* TransactionMonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionMonthlyView.swift; sourceTree = "<group>"; };
 		DC1190E92B8E63CC00AD7222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		DC38B4F82F99363300879577 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 		DCE689EE2B7FDD5C0074ED6D /* Transactions */ = {
 			isa = PBXGroup;
 			children = (
+				DC0B62582FA27280009D516D /* TransactionMonthlyView.swift */,
 				DC0B62562FA260B3009D516D /* TransactionCalendarView.swift */,
 				DC0B62542FA256F7009D516D /* TransactionHeaderView.swift */,
 				DCF99F902F9548A40021812E /* CategoryGridView.swift */,
@@ -625,6 +628,7 @@
 				DC09B7BB2F97C0E900ED426E /* TransactionService.swift in Sources */,
 				DC09B7BC2F97C0E900ED426E /* AccountService.swift in Sources */,
 				DC09B7BD2F97C0E900ED426E /* CategoryService.swift in Sources */,
+				DC0B62592FA27280009D516D /* TransactionMonthlyView.swift in Sources */,
 				DCF99F8A2F95303E0021812E /* Account+CoreDataProperties.swift in Sources */,
 				DC80FF702B62D23A002A94C7 /* CoinControlApp.swift in Sources */,
 				DCF927B12F9FBAEF008AC220 /* CategoryDetailView.swift in Sources */,

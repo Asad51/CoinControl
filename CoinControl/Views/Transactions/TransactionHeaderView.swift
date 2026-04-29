@@ -10,26 +10,34 @@ struct TransactionHeaderView: View {
     @Binding var selectedTopTab: String
     let topTabs = ["Daily", "Calendar", "Monthly", "Total", "Note"]
 
-    var body: some View {        VStack(spacing: 0) {
-            // Month Navigation and Action Icons
+    var body: some View {
+        VStack(spacing: 0) {
+            // Month/Year Navigation and Action Icons
             HStack {
                 Button(action: {
-                    viewModel.previousMonth()
+                    if selectedTopTab == "Monthly" || selectedTopTab == "Total" {
+                        viewModel.previousYear()
+                    } else {
+                        viewModel.previousMonth()
+                    }
                 }) {
                     Image(systemName: "chevron.left")
                 }
 
-                Text(viewModel.selectedMonthYear)
+                Text(selectedTopTab == "Monthly" || selectedTopTab == "Total" ? viewModel.selectedYear : viewModel.selectedMonthYear)
                     .font(.headline)
                     .frame(minWidth: 100)
                     .padding(.horizontal, 8)
 
                 Button(action: {
-                    viewModel.nextMonth()
+                    if selectedTopTab == "Monthly" || selectedTopTab == "Total" {
+                        viewModel.nextYear()
+                    } else {
+                        viewModel.nextMonth()
+                    }
                 }) {
                     Image(systemName: "chevron.right")
                 }
-
                 Spacer()
 
                 HStack(spacing: 20) {
@@ -102,8 +110,8 @@ struct SummaryItemView: View {
 }
 
 #if DEBUG
-#Preview {
-    TransactionHeaderView(viewModel: TransactionsViewModel(), selectedTopTab: .constant("Daily"))
-        .background(Color(UIColor.systemBackground))
-}
+    #Preview {
+        TransactionHeaderView(viewModel: TransactionsViewModel(), selectedTopTab: .constant("Daily"))
+            .background(Color(UIColor.systemBackground))
+    }
 #endif
