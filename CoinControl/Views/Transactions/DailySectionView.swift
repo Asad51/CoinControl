@@ -24,7 +24,7 @@ struct DailySectionView: View {
                     Text(viewModel.formattedDate(format: "dd"))
                         .font(.title2).bold()
                         .foregroundColor(.primary)
-                    
+
                     Text(viewModel.formattedDate(format: "EEE MM.yyyy"))
                         .font(.caption)
                         .foregroundColor(.secondary)
