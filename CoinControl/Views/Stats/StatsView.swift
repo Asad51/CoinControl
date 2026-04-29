@@ -60,7 +60,7 @@ struct StatsView: View {
                 // Income/Expense Summary Toggles
                 HStack(spacing: 0) {
                     // Income Toggle
-                    Button(action: { 
+                    Button(action: {
                         viewModel.selectedType = .income
                         viewModel.fetchStats()
                     }) {
@@ -76,7 +76,7 @@ struct StatsView: View {
                     .frame(maxWidth: .infinity)
 
                     // Expense Toggle
-                    Button(action: { 
+                    Button(action: {
                         viewModel.selectedType = .expense
                         viewModel.fetchStats()
                     }) {

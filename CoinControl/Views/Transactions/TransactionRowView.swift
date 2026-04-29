@@ -14,29 +14,23 @@ struct TransactionRowView: View {
         HStack(spacing: 16) {
             // Icon Stack
             HStack(spacing: 8) {
-                ZStack {
-                    Circle()
-                        .fill(Color.orange.opacity(0.2))
-                        .frame(width: 32, height: 32)
+                Text(item.category?.icon ?? "💰")
+                    .font(.title3)
+                    .frame(width: 32, height: 32)
 
-                    Text(item.category?.icon ?? ".")
-                        .foregroundColor(.orange)
-                        .font(.system(size: 14))
-                }
-
-                Text(item.category?.name ?? "")
+                Text(item.category?.name ?? "Unknown")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
-                    .frame(width: 70, alignment: .leading)
+                    .frame(width: 80, alignment: .leading)
                     .lineLimit(1)
             }
 
             // Title & Account
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 2) {
                 Text(item.title)
                     .font(.body)
                     .foregroundColor(.primary)
-                Text(item.account?.name ?? "")
+                Text(item.account?.name ?? "Cash")
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
@@ -45,11 +39,11 @@ struct TransactionRowView: View {
 
             // Amount
             Text("৳ \(String(format: "%.2f", item.amount))")
-                .foregroundColor(item.type == TransactionType.expense.rawValue ? .red : .blue)
+                .foregroundColor(item.type == TransactionType.expense.rawValue ? Color.red : .blue)
                 .font(.system(.subheadline, design: .monospaced))
         }
         .padding(.horizontal)
-        .padding(.vertical, 10)
+        .padding(.vertical, 8)
         .background(Color(UIColor.systemBackground))
     }
 }
