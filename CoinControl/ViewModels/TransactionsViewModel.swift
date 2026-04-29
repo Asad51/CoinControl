@@ -12,7 +12,7 @@ class TransactionsViewModel: NSObject, ObservableObject {
     @Published var totalIncome: Double = 0
     @Published var totalExpenses: Double = 0
     @Published var totalBalance: Double = 0
-    @Published var selectedDate: Date = Date()
+    @Published var selectedDate: Date = .init()
 
     private let fetchedResultsController: NSFetchedResultsController<Transaction>
     private let transactionService: TransactionServiceProtocol

@@ -14,6 +14,7 @@ struct TransactionsView: View {
 
     @State private var showingAddEditScreen = false
     @State private var selectedTransaction: Transaction?
+    @State private var selectedTopTab = "Daily"
 
     init() {
         _viewModel = StateObject(wrappedValue: TransactionsViewModel())
@@ -26,15 +27,19 @@ struct TransactionsView: View {
                 Color(UIColor.systemBackground).ignoresSafeArea()
 
                 VStack(spacing: 0) {
-                    TransactionHeaderView(viewModel: viewModel)
+                    TransactionHeaderView(viewModel: viewModel, selectedTopTab: $selectedTopTab)
 
-                    ScrollView {
-                        LazyVStack(spacing: 0) {
-                            ForEach(viewModel.groupedTransactions, id: \.0) { date, dailyItems in
-                                DailySectionView(date: date, items: dailyItems) { transaction in
-                                    // Handle row tap
-                                    selectedTransaction = transaction
-                                    showingAddEditScreen = true
+                    if selectedTopTab == "Calendar" {
+                        TransactionCalendarView(viewModel: viewModel)
+                    } else {
+                        ScrollView {
+                            LazyVStack(spacing: 0) {
+                                ForEach(viewModel.groupedTransactions, id: \.0) { date, dailyItems in
+                                    DailySectionView(date: date, items: dailyItems) { transaction in
+                                        // Handle row tap
+                                        selectedTransaction = transaction
+                                        showingAddEditScreen = true
+                                    }
                                 }
                             }
                         }
