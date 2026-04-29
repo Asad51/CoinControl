@@ -66,7 +66,7 @@ class StatsViewModel: ObservableObject {
 
         do {
             let allTransactions = try context.fetch(request)
-            
+
             totalIncome = allTransactions.filter { $0.type == TransactionType.income.rawValue }.reduce(0) { $0 + $1.amount }
             totalExpenses = allTransactions.filter { $0.type == TransactionType.expense.rawValue }.reduce(0) { $0 + $1.amount }
 

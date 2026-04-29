@@ -24,13 +24,10 @@ struct DailySectionView: View {
                     Text(viewModel.formattedDate(format: "dd"))
                         .font(.title2).bold()
                         .foregroundColor(.primary)
+                    
                     Text(viewModel.formattedDate(format: "EEE MM.yyyy"))
                         .font(.caption)
                         .foregroundColor(.secondary)
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
-                        .background(Color(UIColor.tertiarySystemFill))
-                        .cornerRadius(4)
                 }
 
                 Spacer()
@@ -45,7 +42,7 @@ struct DailySectionView: View {
             }
             .padding(.horizontal)
             .padding(.vertical, 12)
-            .background(Color(UIColor.secondarySystemBackground))
+            .background(Color(UIColor.systemBackground))
 
             // Items list
             ForEach(viewModel.items) { item in

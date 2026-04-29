@@ -92,7 +92,7 @@ struct CategoryDetailView: View {
                                 .foregroundStyle(LinearGradient(
                                     colors: [
                                         (viewModel.category.type == TransactionType.income.rawValue ? Color.blue : Color.red).opacity(0.3),
-                                        (viewModel.category.type == TransactionType.income.rawValue ? Color.blue : Color.red).opacity(0.0)
+                                        (viewModel.category.type == TransactionType.income.rawValue ? Color.blue : Color.red).opacity(0.0),
                                     ],
                                     startPoint: .top,
                                     endPoint: .bottom
