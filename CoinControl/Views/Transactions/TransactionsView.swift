@@ -22,12 +22,11 @@ struct TransactionsView: View {
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
-                // Standard system background color (adapts to light/dark)
+                // System background color (adapts to light/dark)
                 Color(UIColor.systemBackground).ignoresSafeArea()
 
                 VStack(spacing: 0) {
-                    // HeaderView()
-                    // SummaryView(transactions: Array(transactions))
+                    TransactionHeaderView(viewModel: viewModel)
 
                     ScrollView {
                         LazyVStack(spacing: 0) {
@@ -42,9 +41,11 @@ struct TransactionsView: View {
                     }
                 }
 
-                FloatingButton(systemImage: "plus") {
-                    selectedTransaction = nil // Nil means "Add new"
-                    showingAddEditScreen = true
+                VStack(spacing: 16) {
+                    FloatingButton(systemImage: "plus") {
+                        selectedTransaction = nil // Nil means "Add new"
+                        showingAddEditScreen = true
+                    }
                 }
                 .padding(.trailing, 20)
                 .padding(.bottom, 20)
