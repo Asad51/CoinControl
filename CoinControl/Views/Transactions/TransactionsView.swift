@@ -29,20 +29,23 @@ struct TransactionsView: View {
                 VStack(spacing: 0) {
                     TransactionHeaderView(viewModel: viewModel, selectedTopTab: $selectedTopTab)
 
-                    if selectedTopTab == "Calendar" {
-                        TransactionCalendarView(viewModel: viewModel)
-                    } else {
-                        ScrollView {
-                            LazyVStack(spacing: 0) {
-                                ForEach(viewModel.groupedTransactions, id: \.0) { date, dailyItems in
-                                    DailySectionView(date: date, items: dailyItems) { transaction in
-                                        // Handle row tap
-                                        selectedTransaction = transaction
-                                        showingAddEditScreen = true
+                    switch selectedTopTab {
+                        case "Calendar":
+                            TransactionCalendarView(viewModel: viewModel)
+                        case "Monthly":
+                            TransactionMonthlyView(viewModel: viewModel)
+                        default:
+                            ScrollView {
+                                LazyVStack(spacing: 0) {
+                                    ForEach(viewModel.groupedTransactions, id: \.0) { date, dailyItems in
+                                        DailySectionView(date: date, items: dailyItems) { transaction in
+                                            // Handle row tap
+                                            selectedTransaction = transaction
+                                            showingAddEditScreen = true
+                                        }
                                     }
                                 }
                             }
-                        }
                     }
                 }
 

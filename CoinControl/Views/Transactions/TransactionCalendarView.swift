@@ -7,11 +7,11 @@ import SwiftUI
 
 struct TransactionCalendarView: View {
     @ObservedObject var viewModel: TransactionsViewModel
-    
+
     private let calendar = Calendar.current
     private let daysInWeek = 7
     private let weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    
+
     var body: some View {
         VStack(spacing: 0) {
             // Weekday Headers
@@ -26,15 +26,14 @@ struct TransactionCalendarView: View {
                 }
             }
             .background(Color(UIColor.secondarySystemBackground).opacity(0.5))
-            
+
             GeometryReader { geometry in
                 let cellWidth = geometry.size.width / CGFloat(daysInWeek)
                 let cellHeight = geometry.size.height / 6 // Assume max 6 weeks
-                
                 let days = generateDays()
-                
+
                 LazyVGrid(columns: Array(repeating: GridItem(.fixed(cellWidth), spacing: 0), count: daysInWeek), spacing: 0) {
-                    ForEach(0..<days.count, id: \.self) { index in
+                    ForEach(0 ..< days.count, id: \.self) { index in
                         let date = days[index]
                         CalendarCellView(
                             date: date,
@@ -51,25 +50,25 @@ struct TransactionCalendarView: View {
             }
         }
     }
-    
+
     private func generateDays() -> [Date] {
         guard let monthInterval = calendar.dateInterval(of: .month, for: viewModel.selectedDate) else { return [] }
         let firstDayOfMonth = monthInterval.start
-        
+
         let firstWeekday = calendar.component(.weekday, from: firstDayOfMonth)
         let offset = firstWeekday - 1
-        
+
         guard let startDate = calendar.date(byAdding: .day, value: -offset, to: firstDayOfMonth) else { return [] }
-        
+
         var days: [Date] = []
-        for i in 0..<42 { // 6 weeks * 7 days
+        for i in 0 ..< 42 { // 6 weeks * 7 days
             if let day = calendar.date(byAdding: .day, value: i, to: startDate) {
                 days.append(day)
             }
         }
         return days
     }
-    
+
     private func dailyTotal(for date: Date, type: TransactionType) -> Double {
         let transactions = viewModel.groupedTransactions.first(where: { calendar.isDate($0.0, inSameDayAs: date) })?.1 ?? []
         return transactions
@@ -86,9 +85,9 @@ struct CalendarCellView: View {
     let expense: Double
     let width: CGFloat
     let height: CGFloat
-    
+
     private let calendar = Calendar.current
-    
+
     var body: some View {
         VStack(alignment: .trailing, spacing: 2) {
             HStack {
@@ -107,23 +106,23 @@ struct CalendarCellView: View {
                 }
                 Spacer()
             }
-            
+
             Spacer()
-            
+
             if income > 0 {
                 Text(String(format: "%.0f", income))
                     .font(.system(size: 9))
                     .foregroundColor(.blue)
                     .lineLimit(1)
             }
-            
+
             if expense > 0 {
                 Text(String(format: "%.0f", expense))
                     .font(.system(size: 9))
                     .foregroundColor(.red)
                     .lineLimit(1)
             }
-            
+
             if income > 0 || expense > 0 {
                 let total = income - expense
                 Text(String(format: "%.0f", total))
@@ -139,7 +138,7 @@ struct CalendarCellView: View {
 }
 
 #if DEBUG
-#Preview {
-    TransactionCalendarView(viewModel: TransactionsViewModel())
-}
+    #Preview {
+        TransactionCalendarView(viewModel: TransactionsViewModel())
+    }
 #endif

@@ -32,6 +32,8 @@ final class AccountsViewModelTests: XCTestCase {
         transaction1.type = TransactionType.income.rawValue
         transaction1.account = account
         transaction1.date = Date()
+        transaction1.title = ""
+        transaction1.note = ""
 
         let transaction2 = Transaction(context: context)
         transaction2.id = UUID()
@@ -39,6 +41,8 @@ final class AccountsViewModelTests: XCTestCase {
         transaction2.type = TransactionType.expense.rawValue
         transaction2.account = account
         transaction2.date = Date()
+        transaction2.title = ""
+        transaction2.note = ""
 
         try context.save()
 
