@@ -34,6 +34,8 @@ struct TransactionsView: View {
                             TransactionCalendarView(viewModel: viewModel)
                         case "Monthly":
                             TransactionMonthlyView(viewModel: viewModel)
+                        case "Total":
+                            TransactionTotalView(viewModel: viewModel)
                         default:
                             ScrollView {
                                 LazyVStack(spacing: 0) {
