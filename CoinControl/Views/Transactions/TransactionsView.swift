@@ -29,7 +29,27 @@ struct TransactionsView: View {
                 VStack(spacing: 0) {
                     TransactionHeaderView(viewModel: viewModel, selectedTopTab: $selectedTopTab)
 
-                    switch selectedTopTab {
+                    if viewModel.isSearching {
+                        ScrollView {
+                            LazyVStack(spacing: 0) {
+                                ForEach(viewModel.filteredTransactions) { transaction in
+                                    TransactionRowView(item: transaction)
+                                        .onTapGesture {
+                                            selectedTransaction = transaction
+                                            showingAddEditScreen = true
+                                        }
+                                    Divider()
+                                }
+
+                                if viewModel.filteredTransactions.isEmpty && !viewModel.searchQuery.isEmpty {
+                                    Text("No transactions found")
+                                        .foregroundColor(.secondary)
+                                        .padding(.top, 40)
+                                }
+                            }
+                        }
+                    } else {
+                        switch selectedTopTab {
                         case "Calendar":
                             TransactionCalendarView(viewModel: viewModel)
                         case "Monthly":
@@ -48,6 +68,7 @@ struct TransactionsView: View {
                                     }
                                 }
                             }
+                        }
                     }
                 }
 
