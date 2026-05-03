@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC00F84F2FA5063400AB5BBF /* TransactionTotalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC00F84E2FA5063400AB5BBF /* TransactionTotalView.swift */; };
 		DC09B7B32F97BC5500ED426E /* DailySectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC09B7B02F97BC5500ED426E /* DailySectionViewModel.swift */; };
 		DC09B7B42F97BC5500ED426E /* CategoryGridViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC09B7AF2F97BC5500ED426E /* CategoryGridViewModel.swift */; };
 		DC09B7B52F97BC5500ED426E /* TransactionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC09B7B22F97BC5500ED426E /* TransactionsViewModel.swift */; };
@@ -93,6 +94,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DC00F84E2FA5063400AB5BBF /* TransactionTotalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTotalView.swift; sourceTree = "<group>"; };
 		DC09B7AF2F97BC5500ED426E /* CategoryGridViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryGridViewModel.swift; sourceTree = "<group>"; };
 		DC09B7B02F97BC5500ED426E /* DailySectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySectionViewModel.swift; sourceTree = "<group>"; };
 		DC09B7B12F97BC5500ED426E /* TransactionAddEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionAddEditViewModel.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 		DCE689EE2B7FDD5C0074ED6D /* Transactions */ = {
 			isa = PBXGroup;
 			children = (
+				DC00F84E2FA5063400AB5BBF /* TransactionTotalView.swift */,
 				DC0B62582FA27280009D516D /* TransactionMonthlyView.swift */,
 				DC0B62562FA260B3009D516D /* TransactionCalendarView.swift */,
 				DC0B62542FA256F7009D516D /* TransactionHeaderView.swift */,
@@ -603,6 +606,7 @@
 				DCEEEF882F93E2BF00E7BB6A /* Category+CoreDataProperties.swift in Sources */,
 				DCC208132F9BD31B00AF45A8 /* CategoryPieChartView.swift in Sources */,
 				DCEE53562F9A641900241BFE /* StatsPeriod.swift in Sources */,
+				DC00F84F2FA5063400AB5BBF /* TransactionTotalView.swift in Sources */,
 				DC09B7B32F97BC5500ED426E /* DailySectionViewModel.swift in Sources */,
 				DC09B7B42F97BC5500ED426E /* CategoryGridViewModel.swift in Sources */,
 				DC09B7B52F97BC5500ED426E /* TransactionsViewModel.swift in Sources */,

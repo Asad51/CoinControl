@@ -15,6 +15,16 @@ class TransactionsViewModel: NSObject, ObservableObject {
     @Published var totalBalance: Double = 0
     @Published var selectedDate: Date = .init()
 
+    @Published var monthlyIncome: Double = 0
+    @Published var monthlyExpenses: Double = 0
+    @Published var monthlyBalance: Double = 0
+
+    @Published var monthlyExpenseCashAndBank: Double = 0
+    @Published var monthlyExpenseCard: Double = 0
+    @Published var monthlyTransfer: Double = 0
+    @Published var expenseComparisonPercentage: Double = 0
+    @Published var selectedMonthRangeString: String = ""
+
     private let fetchedResultsController: NSFetchedResultsController<Transaction>
     private let transactionService: TransactionServiceProtocol
 
@@ -77,7 +87,6 @@ class TransactionsViewModel: NSObject, ObservableObject {
         let allTransactions = fetchedResultsController.fetchedObjects ?? []
         let calendar = Calendar.current
 
-        // 1. Update Yearly Grouping
         let currentYearTransactions = allTransactions.filter {
             calendar.isDate($0.date, equalTo: selectedDate, toGranularity: .year)
         }
@@ -86,14 +95,10 @@ class TransactionsViewModel: NSObject, ObservableObject {
         }
         yearlyTransactions = yearlyGrouped.sorted { $0.key > $1.key }
 
-        // 2. Update Monthly Grouping (for Daily/Calendar)
         let monthlyTransactions = allTransactions.filter { transaction in
             calendar.isDate(transaction.date, equalTo: selectedDate, toGranularity: .month)
         }
 
-        // 3. Update Summary Totals (Defaults to selected year if we want, but Monthly view shows yearly totals in header)
-        // According to the image, the header shows yearly totals when in Monthly tab.
-        // We'll calculate totals based on the year to match the header in Monthly.jpg
         totalIncome = currentYearTransactions
             .filter { $0.type == TransactionType.income.rawValue }
             .reduce(0) { $0 + $1.amount }
@@ -103,6 +108,58 @@ class TransactionsViewModel: NSObject, ObservableObject {
             .reduce(0) { $0 + $1.amount }
 
         totalBalance = totalIncome - totalExpenses
+
+        // Calculate Monthly Totals
+        monthlyIncome = monthlyTransactions
+            .filter { $0.type == TransactionType.income.rawValue }
+            .reduce(0) { $0 + $1.amount }
+
+        monthlyExpenses = monthlyTransactions
+            .filter { $0.type == TransactionType.expense.rawValue }
+            .reduce(0) { $0 + $1.amount }
+
+        monthlyBalance = monthlyIncome - monthlyExpenses
+
+        // Calculate Monthly Summary for Total View
+        let monthlyExpensesList = monthlyTransactions.filter { $0.type == TransactionType.expense.rawValue }
+
+        monthlyExpenseCashAndBank = monthlyExpensesList
+            .filter { $0.account?.name != "Credit Card" }
+            .reduce(0) { $0 + $1.amount }
+
+        monthlyExpenseCard = monthlyExpensesList
+            .filter { $0.account?.name == "Credit Card" }
+            .reduce(0) { $0 + $1.amount }
+
+        monthlyTransfer = monthlyTransactions
+            .filter { $0.type == TransactionType.transfer.rawValue }
+            .reduce(0) { $0 + $1.amount }
+
+        // Expense Comparison
+        if let previousMonth = calendar.date(byAdding: .month, value: -1, to: selectedDate) {
+            let previousMonthExpenses = allTransactions.filter { transaction in
+                calendar.isDate(transaction.date, equalTo: previousMonth, toGranularity: .month) &&
+                    transaction.type == TransactionType.expense.rawValue
+            }.reduce(0) { $0 + $1.amount }
+
+            let currentMonthExpenses = monthlyExpensesList.reduce(0) { $0 + $1.amount }
+
+            if previousMonthExpenses > 0 {
+                expenseComparisonPercentage = (currentMonthExpenses / previousMonthExpenses) * 100
+            } else {
+                expenseComparisonPercentage = 0
+            }
+        }
+
+        // Date Range String
+        if let range = calendar.range(of: .day, in: .month, for: selectedDate),
+           let firstDay = calendar.date(from: calendar.dateComponents([.year, .month], from: selectedDate)),
+           let lastDay = calendar.date(byAdding: .day, value: range.count - 1, to: firstDay)
+        {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "M.d"
+            selectedMonthRangeString = "\(formatter.string(from: firstDay)) ~ \(formatter.string(from: lastDay))"
+        }
 
         let grouped = Dictionary(grouping: monthlyTransactions) { item in
             calendar.startOfDay(for: item.date)
