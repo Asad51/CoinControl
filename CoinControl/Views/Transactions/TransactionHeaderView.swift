@@ -15,7 +15,7 @@ struct TransactionHeaderView: View {
             // Month/Year Navigation and Action Icons
             HStack {
                 Button(action: {
-                    if selectedTopTab == "Monthly" || selectedTopTab == "Total" {
+                    if selectedTopTab == "Monthly" {
                         viewModel.previousYear()
                     } else {
                         viewModel.previousMonth()
@@ -24,13 +24,13 @@ struct TransactionHeaderView: View {
                     Image(systemName: "chevron.left")
                 }
 
-                Text(selectedTopTab == "Monthly" || selectedTopTab == "Total" ? viewModel.selectedYear : viewModel.selectedMonthYear)
+                Text(selectedTopTab == "Monthly" ? viewModel.selectedYear : viewModel.selectedMonthYear)
                     .font(.headline)
                     .frame(minWidth: 100)
                     .padding(.horizontal, 8)
 
                 Button(action: {
-                    if selectedTopTab == "Monthly" || selectedTopTab == "Total" {
+                    if selectedTopTab == "Monthly" {
                         viewModel.nextYear()
                     } else {
                         viewModel.nextMonth()
@@ -78,11 +78,23 @@ struct TransactionHeaderView: View {
 
             // Summary View
             HStack {
-                SummaryItemView(title: "Income", amount: viewModel.totalIncome, color: .blue)
+                SummaryItemView(
+                    title: "Income",
+                    amount: selectedTopTab == "Monthly" ? viewModel.totalIncome : viewModel.monthlyIncome,
+                    color: .blue
+                )
                 Spacer()
-                SummaryItemView(title: "Expenses", amount: viewModel.totalExpenses, color: .red)
+                SummaryItemView(
+                    title: "Expenses",
+                    amount: selectedTopTab == "Monthly" ? viewModel.totalExpenses : viewModel.monthlyExpenses,
+                    color: .red
+                )
                 Spacer()
-                SummaryItemView(title: "Total", amount: viewModel.totalBalance, color: .primary)
+                SummaryItemView(
+                    title: "Total",
+                    amount: selectedTopTab == "Monthly" ? viewModel.totalBalance : viewModel.monthlyBalance,
+                    color: .primary
+                )
             }
             .padding()
             .background(Color(UIColor.secondarySystemBackground))
