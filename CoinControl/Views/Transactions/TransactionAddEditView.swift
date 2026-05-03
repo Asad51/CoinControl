@@ -85,18 +85,20 @@ struct TransactionAddEditView: View {
                             }
 
                             // Account row - with Dropdown Menu selection
-                            Menu {
-                                // Dynamic options from fetched results
-                                ForEach(viewModel.accounts) { account in
-                                    Button(account.name, action: { viewModel.selectedAccount = account })
-                                }
-                            } label: {
+                            ZStack(alignment: .leading) {
                                 FormRowStyle(title: "Account",
                                              value: viewModel.selectedAccount?.name ?? "",
-                                             // Account is underlined red in your image when selected
                                              hasContent: viewModel.selectedAccount != nil)
+
+                                Menu {
+                                    ForEach(viewModel.accounts) { account in
+                                        Button(account.name, action: { viewModel.selectedAccount = account })
+                                    }
+                                } label: {
+                                    Rectangle()
+                                        .fill(Color.black.opacity(0.001))
+                                }
                             }
-                            .buttonStyle(PlainButtonStyle())
 
                             // Category row - opens CategoryGrid sheet
                             Button(action: { showingCategoryPicker = true }) {
