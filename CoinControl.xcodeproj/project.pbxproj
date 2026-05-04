@@ -19,6 +19,7 @@
 		DC0B62552FA256F7009D516D /* TransactionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0B62542FA256F7009D516D /* TransactionHeaderView.swift */; };
 		DC0B62572FA260B3009D516D /* TransactionCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0B62562FA260B3009D516D /* TransactionCalendarView.swift */; };
 		DC0B62592FA27280009D516D /* TransactionMonthlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0B62582FA27280009D516D /* TransactionMonthlyView.swift */; };
+		DC0D923F2FA912AC0099A269 /* TransactionTopTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0D923E2FA912AC0099A269 /* TransactionTopTab.swift */; };
 		DC1190E42B8E63BA00AD7222 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E32B8E63BA00AD7222 /* AppCenterAnalytics */; };
 		DC1190E62B8E63BA00AD7222 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E52B8E63BA00AD7222 /* AppCenterCrashes */; };
 		DC1190E82B8E63BA00AD7222 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E72B8E63BA00AD7222 /* AppCenterDistribute */; };
@@ -106,6 +107,7 @@
 		DC0B62542FA256F7009D516D /* TransactionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHeaderView.swift; sourceTree = "<group>"; };
 		DC0B62562FA260B3009D516D /* TransactionCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCalendarView.swift; sourceTree = "<group>"; };
 		DC0B62582FA27280009D516D /* TransactionMonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionMonthlyView.swift; sourceTree = "<group>"; };
+		DC0D923E2FA912AC0099A269 /* TransactionTopTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTopTab.swift; sourceTree = "<group>"; };
 		DC1190E92B8E63CC00AD7222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		DC38B4F82F99363300879577 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -355,6 +357,7 @@
 		DCDC4E4C2B7BD0EC002C3321 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DC0D923E2FA912AC0099A269 /* TransactionTopTab.swift */,
 				DCEE535E2F9A6A9E00241BFE /* CategoryStat.swift */,
 				DCEE53552F9A641900241BFE /* StatsPeriod.swift */,
 				DCF99F792F9526C30021812E /* TransactionType.swift */,
@@ -641,6 +644,7 @@
 				DCDB79982B6412530062E3B8 /* CCLogger.swift in Sources */,
 				DCDC4E552B7BE622002C3321 /* BottomTab.swift in Sources */,
 				DCC6CCDC2B7D116E00336C4B /* CoinControlModel.xcdatamodeld in Sources */,
+				DC0D923F2FA912AC0099A269 /* TransactionTopTab.swift in Sources */,
 				DCF99F7A2F9526C30021812E /* TransactionType.swift in Sources */,
 				DCEE535D2F9A6A4B00241BFE /* StatRow.swift in Sources */,
 				DC0B62552FA256F7009D516D /* TransactionHeaderView.swift in Sources */,
