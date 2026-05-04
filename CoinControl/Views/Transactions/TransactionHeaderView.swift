@@ -7,8 +7,9 @@ import SwiftUI
 
 struct TransactionHeaderView: View {
     @ObservedObject var viewModel: TransactionsViewModel
-    @Binding var selectedTopTab: String
-    let topTabs = ["Daily", "Calendar", "Monthly", "Total"]
+    @Binding var selectedTopTab: TransactionTopTab
+    @Namespace private var animation
+    let topTabs = TransactionTopTab.allCases
 
     var body: some View {
         VStack(spacing: 0) {
@@ -20,14 +21,14 @@ struct TransactionHeaderView: View {
                             .foregroundColor(.secondary)
                         TextField("Search by title...", text: $viewModel.searchQuery)
                             .textFieldStyle(PlainTextFieldStyle())
-                        
+
                         if !viewModel.searchQuery.isEmpty {
                             Button(action: { viewModel.searchQuery = "" }) {
                                 Image(systemName: "xmark.circle.fill")
                                     .foregroundColor(.secondary)
                             }
                         }
-                        
+
                         Button("Cancel") {
                             withAnimation {
                                 viewModel.isSearching = false
@@ -42,7 +43,7 @@ struct TransactionHeaderView: View {
                     .transition(.move(edge: .top).combined(with: .opacity))
                 } else {
                     Button(action: {
-                        if selectedTopTab == "Monthly" {
+                        if selectedTopTab == .monthly {
                             viewModel.previousYear()
                         } else {
                             viewModel.previousMonth()
@@ -51,13 +52,13 @@ struct TransactionHeaderView: View {
                         Image(systemName: "chevron.left")
                     }
 
-                    Text(selectedTopTab == "Monthly" ? viewModel.selectedYear : viewModel.selectedMonthYear)
+                    Text(selectedTopTab == .monthly ? viewModel.selectedYear : viewModel.selectedMonthYear)
                         .font(.headline)
                         .frame(minWidth: 100)
                         .padding(.horizontal, 8)
 
                     Button(action: {
-                        if selectedTopTab == "Monthly" {
+                        if selectedTopTab == .monthly {
                             viewModel.nextYear()
                         } else {
                             viewModel.nextMonth()
@@ -86,18 +87,30 @@ struct TransactionHeaderView: View {
                 HStack(spacing: 0) {
                     ForEach(topTabs, id: \.self) { tab in
                         VStack(spacing: 8) {
-                            Text(tab)
+                            Text(tab.title)
                                 .font(.subheadline)
                                 .fontWeight(selectedTopTab == tab ? .bold : .regular)
                                 .foregroundColor(selectedTopTab == tab ? .primary : .secondary)
 
-                            Rectangle()
-                                .fill(selectedTopTab == tab ? Color.red.opacity(0.8) : Color.clear)
-                                .frame(height: 3)
+                            ZStack {
+                                if selectedTopTab == tab {
+                                    Rectangle()
+                                        .fill(Color.red.opacity(0.8))
+                                        .frame(height: 3)
+                                        .matchedGeometryEffect(id: "TabIndicator", in: animation)
+                                } else {
+                                    Rectangle()
+                                        .fill(Color.clear)
+                                        .frame(height: 3)
+                                }
+                            }
                         }
+                        .contentShape(Rectangle())
                         .frame(maxWidth: .infinity)
                         .onTapGesture {
-                            selectedTopTab = tab
+                            withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                selectedTopTab = tab
+                            }
                         }
                     }
                 }
@@ -107,19 +120,19 @@ struct TransactionHeaderView: View {
                 HStack {
                     SummaryItemView(
                         title: "Income",
-                        amount: selectedTopTab == "Monthly" ? viewModel.totalIncome : viewModel.monthlyIncome,
+                        amount: selectedTopTab == .monthly ? viewModel.totalIncome : viewModel.monthlyIncome,
                         color: .blue
                     )
                     Spacer()
                     SummaryItemView(
                         title: "Expenses",
-                        amount: selectedTopTab == "Monthly" ? viewModel.totalExpenses : viewModel.monthlyExpenses,
+                        amount: selectedTopTab == .monthly ? viewModel.totalExpenses : viewModel.monthlyExpenses,
                         color: .red
                     )
                     Spacer()
                     SummaryItemView(
                         title: "Total",
-                        amount: selectedTopTab == "Monthly" ? viewModel.totalBalance : viewModel.monthlyBalance,
+                        amount: selectedTopTab == .monthly ? viewModel.totalBalance : viewModel.monthlyBalance,
                         color: .primary
                     )
                 }
@@ -151,7 +164,7 @@ struct SummaryItemView: View {
 
 #if DEBUG
     #Preview {
-        TransactionHeaderView(viewModel: TransactionsViewModel(), selectedTopTab: .constant("Daily"))
+        TransactionHeaderView(viewModel: TransactionsViewModel(), selectedTopTab: .constant(.daily))
             .background(Color(UIColor.systemBackground))
     }
 #endif
