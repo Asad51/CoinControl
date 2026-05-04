@@ -25,8 +25,13 @@ class TransactionsViewModel: NSObject, ObservableObject {
     @Published var expenseComparisonPercentage: Double = 0
     @Published var selectedMonthRangeString: String = ""
 
+    @Published var searchQuery: String = ""
+    @Published var filteredTransactions: [Transaction] = []
+    @Published var isSearching: Bool = false
+
     private let fetchedResultsController: NSFetchedResultsController<Transaction>
     private let transactionService: TransactionServiceProtocol
+    private var cancellables = Set<AnyCancellable>()
 
     init(transactionService: TransactionServiceProtocol = TransactionService()) {
         self.transactionService = transactionService
@@ -35,11 +40,33 @@ class TransactionsViewModel: NSObject, ObservableObject {
         super.init()
         fetchedResultsController.delegate = self
 
+        setupSearchSubscriber()
+
         do {
             try fetchedResultsController.performFetch()
             updateGroupedTransactions()
         } catch {
             print("Failed to fetch transactions: \(error)")
+        }
+    }
+
+    private func setupSearchSubscriber() {
+        $searchQuery
+            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
+            .sink { [weak self] query in
+                self?.performSearch(query: query)
+            }
+            .store(in: &cancellables)
+    }
+
+    private func performSearch(query: String) {
+        let allTransactions = fetchedResultsController.fetchedObjects ?? []
+        if query.isEmpty {
+            filteredTransactions = []
+        } else {
+            filteredTransactions = allTransactions.filter {
+                $0.title.localizedCaseInsensitiveContains(query)
+            }
         }
     }
 

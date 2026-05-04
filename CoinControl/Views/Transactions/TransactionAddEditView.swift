@@ -16,6 +16,7 @@ struct TransactionAddEditView: View {
 
     @State private var showingDatePicker = false
     @State private var showingCategoryPicker = false
+    @State private var tempDate = Date()
 
     private var customDateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -67,7 +68,10 @@ struct TransactionAddEditView: View {
 
                         VStack(alignment: .leading, spacing: 0) {
                             // Date row with refresh icon
-                            Button(action: { showingDatePicker = true }) {
+                            Button(action: {
+                                tempDate = viewModel.date
+                                showingDatePicker = true
+                            }) {
                                 HStack {
                                     FormRowStyle(title: "Date",
                                                  value: customDateFormatter.string(from: viewModel.date),
@@ -79,24 +83,47 @@ struct TransactionAddEditView: View {
                             }
                             .buttonStyle(PlainButtonStyle())
                             .popover(isPresented: $showingDatePicker) {
-                                DatePicker("", selection: $viewModel.date, displayedComponents: [.date, .hourAndMinute])
-                                    .datePickerStyle(.graphical)
-                                    .frame(width: 350)
+                                VStack(spacing: 0) {
+                                    DatePicker("", selection: $tempDate, displayedComponents: [.date, .hourAndMinute])
+                                        .datePickerStyle(.graphical)
+                                        .padding()
+
+                                    Divider()
+
+                                    HStack {
+                                        Button("Cancel") {
+                                            showingDatePicker = false
+                                        }
+                                        .foregroundColor(.red)
+
+                                        Spacer()
+
+                                        Button("Okay") {
+                                            viewModel.date = tempDate
+                                            showingDatePicker = false
+                                        }
+                                        .fontWeight(.bold)
+                                    }
+                                    .padding()
+                                }
+                                .frame(width: 350)
                             }
 
                             // Account row - with Dropdown Menu selection
-                            Menu {
-                                // Dynamic options from fetched results
-                                ForEach(viewModel.accounts) { account in
-                                    Button(account.name, action: { viewModel.selectedAccount = account })
-                                }
-                            } label: {
+                            ZStack(alignment: .leading) {
                                 FormRowStyle(title: "Account",
                                              value: viewModel.selectedAccount?.name ?? "",
-                                             // Account is underlined red in your image when selected
                                              hasContent: viewModel.selectedAccount != nil)
+
+                                Menu {
+                                    ForEach(viewModel.accounts) { account in
+                                        Button(account.name, action: { viewModel.selectedAccount = account })
+                                    }
+                                } label: {
+                                    Rectangle()
+                                        .fill(Color.black.opacity(0.001))
+                                }
                             }
-                            .buttonStyle(PlainButtonStyle())
 
                             // Category row - opens CategoryGrid sheet
                             Button(action: { showingCategoryPicker = true }) {

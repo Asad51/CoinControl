@@ -14,7 +14,9 @@ struct TransactionsView: View {
 
     @State private var showingAddEditScreen = false
     @State private var selectedTransaction: Transaction?
-    @State private var selectedTopTab = "Daily"
+    @State private var selectedTopTab = TransactionTopTab.daily
+    @State private var previousIndex = 0
+    private let topTabs = TransactionTopTab.allCases
 
     init() {
         _viewModel = StateObject(wrappedValue: TransactionsViewModel())
@@ -27,27 +29,59 @@ struct TransactionsView: View {
                 Color(UIColor.systemBackground).ignoresSafeArea()
 
                 VStack(spacing: 0) {
-                    TransactionHeaderView(viewModel: viewModel, selectedTopTab: $selectedTopTab)
+                    TransactionHeaderView(viewModel: viewModel, selectedTopTab: Binding(
+                        get: { selectedTopTab },
+                        set: { newValue in
+                            withAnimation(.spring) {
+                                selectedTopTab = newValue
+                            }
+                        }
+                    ))
 
-                    switch selectedTopTab {
-                        case "Calendar":
-                            TransactionCalendarView(viewModel: viewModel)
-                        case "Monthly":
-                            TransactionMonthlyView(viewModel: viewModel)
-                        case "Total":
-                            TransactionTotalView(viewModel: viewModel)
-                        default:
-                            ScrollView {
-                                LazyVStack(spacing: 0) {
-                                    ForEach(viewModel.groupedTransactions, id: \.0) { date, dailyItems in
-                                        DailySectionView(date: date, items: dailyItems) { transaction in
-                                            // Handle row tap
+                    if viewModel.isSearching {
+                        ScrollView {
+                            LazyVStack(spacing: 0) {
+                                ForEach(viewModel.filteredTransactions) { transaction in
+                                    TransactionRowView(item: transaction)
+                                        .onTapGesture {
                                             selectedTransaction = transaction
                                             showingAddEditScreen = true
                                         }
-                                    }
+                                    Divider()
+                                }
+
+                                if viewModel.filteredTransactions.isEmpty, !viewModel.searchQuery.isEmpty {
+                                    Text("No transactions found")
+                                        .foregroundColor(.secondary)
+                                        .padding(.top, 40)
                                 }
                             }
+                        }
+                    } else {
+                        ZStack {
+                            Group {
+                                switch selectedTopTab {
+                                    case .calendar:
+                                        TransactionCalendarView(viewModel: viewModel)
+                                    case .monthly:
+                                        TransactionMonthlyView(viewModel: viewModel)
+                                    case .total:
+                                        TransactionTotalView(viewModel: viewModel)
+                                    default:
+                                        ScrollView {
+                                            LazyVStack(spacing: 0) {
+                                                ForEach(viewModel.groupedTransactions, id: \.0) { date, dailyItems in
+                                                    DailySectionView(date: date, items: dailyItems) { transaction in
+                                                        // Handle row tap
+                                                        selectedTransaction = transaction
+                                                        showingAddEditScreen = true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                }
+                            }
+                        }
                     }
                 }
 
