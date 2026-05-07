@@ -20,9 +20,6 @@
 		DC0B62572FA260B3009D516D /* TransactionCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0B62562FA260B3009D516D /* TransactionCalendarView.swift */; };
 		DC0B62592FA27280009D516D /* TransactionMonthlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0B62582FA27280009D516D /* TransactionMonthlyView.swift */; };
 		DC0D923F2FA912AC0099A269 /* TransactionTopTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0D923E2FA912AC0099A269 /* TransactionTopTab.swift */; };
-		DC1190E42B8E63BA00AD7222 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E32B8E63BA00AD7222 /* AppCenterAnalytics */; };
-		DC1190E62B8E63BA00AD7222 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E52B8E63BA00AD7222 /* AppCenterCrashes */; };
-		DC1190E82B8E63BA00AD7222 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = DC1190E72B8E63BA00AD7222 /* AppCenterDistribute */; };
 		DC1190EA2B8E63CC00AD7222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1190E92B8E63CC00AD7222 /* AppDelegate.swift */; };
 		DC2AC5EC2B76AF2600B7053D /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */; };
 		DC38B4F92F99363300879577 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC38B4F82F99363300879577 /* GoogleService-Info.plist */; };
@@ -75,6 +72,7 @@
 		DCF99F8D2F95474F0021812E /* FormRowStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF99F8C2F95474F0021812E /* FormRowStyle.swift */; };
 		DCF99F8F2F9547C70021812E /* TransactionAddEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF99F8E2F9547C70021812E /* TransactionAddEditView.swift */; };
 		DCF99F912F9548A40021812E /* CategoryGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF99F902F9548A40021812E /* CategoryGridView.swift */; };
+		DCFD47952FAD098300BCB009 /* TransactionAddEditViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFD47942FAD098300BCB009 /* TransactionAddEditViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,6 +153,7 @@
 		DCF99F8C2F95474F0021812E /* FormRowStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRowStyle.swift; sourceTree = "<group>"; };
 		DCF99F8E2F9547C70021812E /* TransactionAddEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionAddEditView.swift; sourceTree = "<group>"; };
 		DCF99F902F9548A40021812E /* CategoryGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryGridView.swift; sourceTree = "<group>"; };
+		DCFD47942FAD098300BCB009 /* TransactionAddEditViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionAddEditViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,10 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC38B4FC2F99372900879577 /* FirebaseAnalytics in Frameworks */,
-				DC1190E42B8E63BA00AD7222 /* AppCenterAnalytics in Frameworks */,
 				DC38B5002F99372900879577 /* FirebaseAnalyticsIdentitySupport in Frameworks */,
-				DC1190E62B8E63BA00AD7222 /* AppCenterCrashes in Frameworks */,
-				DC1190E82B8E63BA00AD7222 /* AppCenterDistribute in Frameworks */,
 				DC38B5042F99372900879577 /* FirebaseCrashlytics in Frameworks */,
 				DCDB79902B6412050062E3B8 /* CocoaLumberjackSwift in Frameworks */,
 				DC38B5022F99372900879577 /* FirebaseCore in Frameworks */,
@@ -299,6 +295,7 @@
 		DCD054512B90CB60002A7A32 /* CoinControlTests */ = {
 			isa = PBXGroup;
 			children = (
+				DCFD47942FAD098300BCB009 /* TransactionAddEditViewModelTests.swift */,
 				DCD054AA2B90CB60002A7A32 /* AccountsViewModelTests.swift */,
 				DCD054522B90CB60002A7A32 /* CoinControlTests.swift */,
 			);
@@ -425,9 +422,6 @@
 				DCDB798D2B6412050062E3B8 /* CocoaLumberjack */,
 				DCDB798F2B6412050062E3B8 /* CocoaLumberjackSwift */,
 				DCDB79912B6412050062E3B8 /* CocoaLumberjackSwiftLogBackend */,
-				DC1190E32B8E63BA00AD7222 /* AppCenterAnalytics */,
-				DC1190E52B8E63BA00AD7222 /* AppCenterCrashes */,
-				DC1190E72B8E63BA00AD7222 /* AppCenterDistribute */,
 				DC38B4FB2F99372900879577 /* FirebaseAnalytics */,
 				DC38B4FD2F99372900879577 /* FirebaseAnalyticsCore */,
 				DC38B4FF2F99372900879577 /* FirebaseAnalyticsIdentitySupport */,
@@ -508,7 +502,6 @@
 			mainGroup = DC80FF632B62D23A002A94C7;
 			packageReferences = (
 				DCDB798C2B6412050062E3B8 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
-				DC1190E22B8E63BA00AD7222 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 				DC38B4FA2F99372900879577 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = DC80FF6D2B62D23A002A94C7 /* Products */;
@@ -657,6 +650,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCD054AB2B90CB60002A7A32 /* AccountsViewModelTests.swift in Sources */,
+				DCFD47952FAD098300BCB009 /* TransactionAddEditViewModelTests.swift in Sources */,
 				DCD054532B90CB60002A7A32 /* CoinControlTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -996,14 +990,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		DC1190E22B8E63BA00AD7222 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.4;
-			};
-		};
 		DC38B4FA2F99372900879577 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1023,21 +1009,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DC1190E32B8E63BA00AD7222 /* AppCenterAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DC1190E22B8E63BA00AD7222 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterAnalytics;
-		};
-		DC1190E52B8E63BA00AD7222 /* AppCenterCrashes */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DC1190E22B8E63BA00AD7222 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterCrashes;
-		};
-		DC1190E72B8E63BA00AD7222 /* AppCenterDistribute */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DC1190E22B8E63BA00AD7222 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterDistribute;
-		};
 		DC38B4FB2F99372900879577 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DC38B4FA2F99372900879577 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

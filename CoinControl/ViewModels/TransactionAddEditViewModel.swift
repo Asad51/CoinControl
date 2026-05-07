@@ -18,7 +18,9 @@ class TransactionAddEditViewModel: ObservableObject {
 
     @Published var categories: [Category] = []
     @Published var accounts: [Account] = []
+    @Published var suggestions: [String] = []
 
+    private var allTitles: [String] = []
     private let transactionService: TransactionServiceProtocol
     private let categoryService: CategoryServiceProtocol
     private let accountService: AccountServiceProtocol
@@ -61,6 +63,23 @@ class TransactionAddEditViewModel: ObservableObject {
                 self?.filterCategories(for: newType)
             }
             .store(in: &cancellables)
+
+        $title
+            .sink { [weak self] newTitle in
+                self?.filterSuggestions(for: newTitle)
+            }
+            .store(in: &cancellables)
+    }
+
+    private func filterSuggestions(for input: String) {
+        if input.isEmpty {
+            suggestions = []
+            return
+        }
+
+        suggestions = Array(allTitles.filter {
+            $0.localizedCaseInsensitiveContains(input) && $0.lowercased() != input.lowercased()
+        }.prefix(5))
     }
 
     private func filterCategories(for type: TransactionType) {
@@ -78,6 +97,7 @@ class TransactionAddEditViewModel: ObservableObject {
         do {
             categories = try categoryService.fetchCategories(by: transactionType.rawValue)
             accounts = try accountService.fetchAccounts()
+            allTitles = try transactionService.fetchUniqueTitles()
 
             // Set defaults if not editing
             if !isEditing {
