@@ -10,6 +10,7 @@ protocol TransactionServiceProtocol {
     func getTransactionsFRC() -> NSFetchedResultsController<Transaction>
     func saveTransaction(id: UUID?, type: Int16, amount: Double, date: Date, title: String, note: String, category: Category?, account: Account?) throws
     func deleteTransaction(_ transaction: Transaction) throws
+    func fetchUniqueTitles() throws -> [String]
 }
 
 class TransactionService: TransactionServiceProtocol {
@@ -29,6 +30,16 @@ class TransactionService: TransactionServiceProtocol {
             sectionNameKeyPath: nil,
             cacheName: nil
         )
+    }
+
+    func fetchUniqueTitles() throws -> [String] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "TransactionEntity")
+        request.resultType = .dictionaryResultType
+        request.returnsDistinctResults = true
+        request.propertiesToFetch = ["title"]
+
+        let results = try context.fetch(request) as? [[String: String]]
+        return results?.compactMap { $0["title"] }.sorted() ?? []
     }
 
     func saveTransaction(id: UUID?, type: Int16, amount: Double, date: Date, title: String, note: String, category: Category?, account: Account?) throws {
