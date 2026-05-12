@@ -168,21 +168,8 @@ struct TransactionAddEditView: View {
                                 Rectangle()
                                     .fill(Color(UIColor.label))
                                     .frame(height: 1)
-                            }
-                            .padding(.vertical, 8)
-                            .background(
-                                GeometryReader { proxy in
-                                    Color.clear
-                                        .onChange(of: proxy.frame(in: .global).minY) { newValue in
-                                            let screenHeight = UIScreen.main.bounds.height
-                                            suggestAbove = newValue > screenHeight * 0.6
-                                        }
-                                }
-                            )
-                            .overlay(alignment: suggestAbove ? .bottomLeading : .topLeading) {
-                                if !viewModel.suggestions.isEmpty {
-                                    VStack(alignment: .leading, spacing: 0) {
-                                        ScrollView {
+                                    .overlay(alignment: .topLeading) {
+                                        if !viewModel.suggestions.isEmpty {
                                             VStack(alignment: .leading, spacing: 0) {
                                                 ForEach(viewModel.suggestions, id: \.self) { suggestion in
                                                     Button(action: {
@@ -194,22 +181,32 @@ struct TransactionAddEditView: View {
                                                             .frame(maxWidth: .infinity, alignment: .leading)
                                                             .foregroundColor(.primary)
                                                     }
-                                                    Divider()
+                                                    if suggestion != viewModel.suggestions.last {
+                                                        Divider()
+                                                    }
                                                 }
                                             }
+                                            .background(Color(UIColor.systemBackground))
+                                            .cornerRadius(8)
+                                            .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 4)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 8)
+                                                    .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
+                                            )
+                                            .offset(y: suggestAbove ? -CGFloat(viewModel.suggestions.count * 40 + 50) : 5)
                                         }
-                                        .frame(maxHeight: 220) // Roughly 5 items
                                     }
-                                    .background(Color(UIColor.systemBackground))
-                                    .cornerRadius(8)
-                                    .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 4)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
-                                    )
-                                    .offset(y: suggestAbove ? -70 : 70)
-                                }
                             }
+                            .padding(.vertical, 8)
+                            .background(
+                                GeometryReader { proxy in
+                                    Color.clear
+                                        .onChange(of: proxy.frame(in: .global).minY) { newValue in
+                                            let screenHeight = UIScreen.main.bounds.height
+                                            suggestAbove = newValue > screenHeight * 0.6
+                                        }
+                                }
+                            )
                             .zIndex(1)
 
                             VStack(alignment: .leading, spacing: 10) {
