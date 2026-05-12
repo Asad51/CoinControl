@@ -77,9 +77,25 @@ class TransactionAddEditViewModel: ObservableObject {
             return
         }
 
-        suggestions = Array(allTitles.filter {
+        let filtered = allTitles.filter {
             $0.localizedCaseInsensitiveContains(input) && $0.lowercased() != input.lowercased()
-        }.prefix(5))
+        }
+
+        var uniqueSuggestions = [String]()
+        var seen = Set<String>()
+
+        for suggestion in filtered {
+            let lowercased = suggestion.lowercased()
+            if !seen.contains(lowercased) {
+                seen.insert(lowercased)
+                uniqueSuggestions.append(suggestion)
+            }
+            if uniqueSuggestions.count >= 5 {
+                break
+            }
+        }
+
+        suggestions = uniqueSuggestions
     }
 
     private func filterCategories(for type: TransactionType) {
