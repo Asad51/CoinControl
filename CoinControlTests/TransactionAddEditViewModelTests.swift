@@ -4,9 +4,9 @@
 //
 
 @testable import CoinControl
+import Combine
 import CoreData
 import XCTest
-import Combine
 
 final class TransactionAddEditViewModelTests: XCTestCase {
     var context: NSManagedObjectContext!
@@ -18,8 +18,10 @@ final class TransactionAddEditViewModelTests: XCTestCase {
         let persistence = PersistenceController(inMemory: true)
         context = persistence.viewContext
         transactionService = TransactionService(context: context)
+        let categoryService = CategoryService(context: context)
+        let accountService = AccountService(context: context)
         cancellables = []
-        
+
         // Seed some transactions with titles
         let titles = ["Coffee", "Grocery", "Gas", "Lunch"]
         for title in titles {
@@ -31,51 +33,71 @@ final class TransactionAddEditViewModelTests: XCTestCase {
             t.type = TransactionType.expense.rawValue
         }
         try context.save()
-        
-        viewModel = TransactionAddEditViewModel(transactionService: transactionService)
+
+        viewModel = TransactionAddEditViewModel(
+            transactionService: transactionService,
+            categoryService: categoryService,
+            accountService: accountService
+        )
     }
 
-    func testSuggestionsFilter() throws {
-        // Given
-        let expectation = XCTestExpectation(description: "Suggestions filtered")
-        
+    func testSuggestionsFilter() {
         // When
         viewModel.title = "Co"
-        
+
         // Then
-        viewModel.$suggestions
-            .dropFirst()
-            .sink { suggestions in
-                if suggestions.contains("Coffee") && suggestions.count == 1 {
-                    expectation.fulfill()
-                }
-            }
-            .store(in: &cancellables)
-            
-        wait(for: [expectation], timeout: 1.0)
+        XCTAssertEqual(viewModel.suggestions.count, 1)
+        XCTAssertTrue(viewModel.suggestions.contains("Coffee"))
     }
-    
-    func testSuggestionsEmptyOnNoMatch() throws {
+
+    func testSuggestionsEmptyOnNoMatch() {
         // When
         viewModel.title = "Xyz"
-        
+
         // Then
-        XCTAssertTrue(viewModel.suggestions.isEmpty)
+        XCTAssertTrue(viewModel.suggestions.isEmpty, "Suggestions should be empty for 'Xyz', but got \(viewModel.suggestions)")
     }
-    
-    func testSuggestionsEmptyOnEmptyInput() throws {
+
+    func testSuggestionsEmptyOnEmptyInput() {
         // When
         viewModel.title = ""
-        
+
         // Then
-        XCTAssertTrue(viewModel.suggestions.isEmpty)
+        XCTAssertTrue(viewModel.suggestions.isEmpty, "Suggestions should be empty for empty input, but got \(viewModel.suggestions)")
     }
-    
-    func testSuggestionsExcludesExactMatch() throws {
+
+    func testSuggestionsExcludesExactMatch() {
         // When
         viewModel.title = "Coffee"
-        
+
         // Then
-        XCTAssertFalse(viewModel.suggestions.contains("Coffee"), "Suggestions should not include the exact current title")
+        XCTAssertFalse(viewModel.suggestions.contains("Coffee"), "Suggestions should not include the exact current title 'Coffee'")
+    }
+
+    func testSuggestionsLimitToFive() throws {
+        // Given
+        // Seed 10 matching titles
+        for i in 1 ... 10 {
+            let t = Transaction(context: context)
+            t.id = UUID()
+            t.title = "Coffee \(i)"
+            t.amount = Double(i)
+            t.date = Date()
+            t.type = TransactionType.expense.rawValue
+        }
+        try context.save()
+
+        // Re-init view model to fetch new titles
+        viewModel = TransactionAddEditViewModel(
+            transactionService: transactionService,
+            categoryService: CategoryService(context: context),
+            accountService: AccountService(context: context)
+        )
+
+        // When
+        viewModel.title = "Co"
+
+        // Then
+        XCTAssertEqual(viewModel.suggestions.count, 5, "Suggestions should be limited to 5, but got \(viewModel.suggestions.count)")
     }
 }
