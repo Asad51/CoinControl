@@ -16,6 +16,7 @@ struct TransactionAddEditView: View {
 
     @State private var showingDatePicker = false
     @State private var showingCategoryPicker = false
+    @State private var showingDeleteConfirmation = false
     @State private var tempDate = Date()
     @State private var suggestAbove = false
 
@@ -247,9 +248,7 @@ struct TransactionAddEditView: View {
 
                             if viewModel.isEditing {
                                 Button(action: {
-                                    if viewModel.delete() {
-                                        dismiss()
-                                    }
+                                    showingDeleteConfirmation = true
                                 }) {
                                     HStack {
                                         Spacer()
@@ -264,6 +263,18 @@ struct TransactionAddEditView: View {
                                 }
                                 .padding(.top, 20)
                                 .padding(.bottom, 40)
+                                .confirmationDialog(
+                                    "Are you sure you want to delete this transaction?",
+                                    isPresented: $showingDeleteConfirmation,
+                                    titleVisibility: .visible
+                                ) {
+                                    Button("Delete", role: .destructive) {
+                                        if viewModel.delete() {
+                                            dismiss()
+                                        }
+                                    }
+                                    Button("Cancel", role: .cancel) {}
+                                }
                             }
                         }
                         .padding(.horizontal)
