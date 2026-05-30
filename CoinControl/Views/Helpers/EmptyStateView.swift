@@ -46,7 +46,7 @@ struct EmptyStateView: View {
             }
             .padding(.horizontal, 40)
 
-            if let buttonTitle = buttonTitle, let action = action {
+            if let buttonTitle, let action {
                 Button(action: action) {
                     Text(buttonTitle)
                         .fontWeight(.semibold)
