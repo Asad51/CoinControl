@@ -9,10 +9,18 @@ struct TransactionMonthlyView: View {
     @ObservedObject var viewModel: TransactionsViewModel
 
     var body: some View {
-        ScrollView {
-            LazyVStack(spacing: 0) {
-                ForEach(viewModel.yearlyTransactions, id: \.0) { monthDate, transactions in
-                    MonthRowView(viewModel: viewModel, monthDate: monthDate, transactions: transactions)
+        if viewModel.yearlyTransactions.isEmpty {
+            EmptyStateView(
+                systemImage: "calendar",
+                title: "No data for this year",
+                message: "You haven't recorded any transactions in \(viewModel.selectedYear)."
+            )
+        } else {
+            ScrollView {
+                LazyVStack(spacing: 0) {
+                    ForEach(viewModel.yearlyTransactions, id: \.0) { monthDate, transactions in
+                        MonthRowView(viewModel: viewModel, monthDate: monthDate, transactions: transactions)
+                    }
                 }
             }
         }

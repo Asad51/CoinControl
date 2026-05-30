@@ -28,6 +28,7 @@
 		DC38B5002F99372900879577 /* FirebaseAnalyticsIdentitySupport in Frameworks */ = {isa = PBXBuildFile; productRef = DC38B4FF2F99372900879577 /* FirebaseAnalyticsIdentitySupport */; };
 		DC38B5022F99372900879577 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = DC38B5012F99372900879577 /* FirebaseCore */; };
 		DC38B5042F99372900879577 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = DC38B5032F99372900879577 /* FirebaseCrashlytics */; };
+		DC5C58BD2FCB4E0400AB93CE /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5C58BC2FCB4E0400AB93CE /* EmptyStateView.swift */; };
 		DC80FF702B62D23A002A94C7 /* CoinControlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80FF6F2B62D23A002A94C7 /* CoinControlApp.swift */; };
 		DC80FF722B62D23A002A94C7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80FF712B62D23A002A94C7 /* ContentView.swift */; };
 		DC80FF742B62D23B002A94C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC80FF732B62D23B002A94C7 /* Assets.xcassets */; };
@@ -109,6 +110,7 @@
 		DC1190E92B8E63CC00AD7222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		DC38B4F82F99363300879577 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DC5C58BC2FCB4E0400AB93CE /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		DC80FF6C2B62D23A002A94C7 /* CoinControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC80FF6F2B62D23A002A94C7 /* CoinControlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinControlApp.swift; sourceTree = "<group>"; };
 		DC80FF712B62D23A002A94C7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 		DCF99F8B2F9547430021812E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				DC5C58BC2FCB4E0400AB93CE /* EmptyStateView.swift */,
 				DCF99F8C2F95474F0021812E /* FormRowStyle.swift */,
 			);
 			path = Helpers;
@@ -631,6 +634,7 @@
 				DC0B62592FA27280009D516D /* TransactionMonthlyView.swift in Sources */,
 				DCF99F8A2F95303E0021812E /* Account+CoreDataProperties.swift in Sources */,
 				DC80FF702B62D23A002A94C7 /* CoinControlApp.swift in Sources */,
+				DC5C58BD2FCB4E0400AB93CE /* EmptyStateView.swift in Sources */,
 				DCF927B12F9FBAEF008AC220 /* CategoryDetailView.swift in Sources */,
 				DCF99F8D2F95474F0021812E /* FormRowStyle.swift in Sources */,
 				DCF99F912F9548A40021812E /* CategoryGridView.swift in Sources */,
