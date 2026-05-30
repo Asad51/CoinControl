@@ -122,10 +122,19 @@ struct CategoryDetailView: View {
 
                     // Transaction List
                     VStack(spacing: 0) {
-                        ForEach(viewModel.groupedTransactions, id: \.0) { date, items in
-                            DailySectionView(date: date, items: items) { transaction in
-                                selectedTransaction = transaction
-                                showingAddEditScreen = true
+                        if viewModel.groupedTransactions.isEmpty {
+                            EmptyStateView(
+                                systemImage: "tray",
+                                title: "No transactions",
+                                message: "There are no \(viewModel.category.name) transactions for this period."
+                            )
+                            .padding(.top, 40)
+                        } else {
+                            ForEach(viewModel.groupedTransactions, id: \.0) { date, items in
+                                DailySectionView(date: date, items: items) { transaction in
+                                    selectedTransaction = transaction
+                                    showingAddEditScreen = true
+                                }
                             }
                         }
                     }

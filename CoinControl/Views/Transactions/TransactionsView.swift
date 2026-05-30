@@ -51,9 +51,12 @@ struct TransactionsView: View {
                                 }
 
                                 if viewModel.filteredTransactions.isEmpty, !viewModel.searchQuery.isEmpty {
-                                    Text("No transactions found")
-                                        .foregroundColor(.secondary)
-                                        .padding(.top, 40)
+                                    EmptyStateView(
+                                        systemImage: "magnifyingglass",
+                                        title: "No results found",
+                                        message: "We couldn't find any transactions matching \"\(viewModel.searchQuery)\"."
+                                    )
+                                    .padding(.top, 60)
                                 }
                             }
                         }
@@ -68,13 +71,25 @@ struct TransactionsView: View {
                                     case .total:
                                         TransactionTotalView(viewModel: viewModel)
                                     default:
-                                        ScrollView {
-                                            LazyVStack(spacing: 0) {
-                                                ForEach(viewModel.groupedTransactions, id: \.0) { date, dailyItems in
-                                                    DailySectionView(date: date, items: dailyItems) { transaction in
-                                                        // Handle row tap
-                                                        selectedTransaction = transaction
-                                                        showingAddEditScreen = true
+                                        if viewModel.groupedTransactions.isEmpty {
+                                            EmptyStateView(
+                                                systemImage: "tray",
+                                                title: "No transactions this month",
+                                                message: "Tap + to add your first expense.",
+                                                buttonTitle: "Add Transaction"
+                                            ) {
+                                                selectedTransaction = nil
+                                                showingAddEditScreen = true
+                                            }
+                                        } else {
+                                            ScrollView {
+                                                LazyVStack(spacing: 0) {
+                                                    ForEach(viewModel.groupedTransactions, id: \.0) { date, dailyItems in
+                                                        DailySectionView(date: date, items: dailyItems) { transaction in
+                                                            // Handle row tap
+                                                            selectedTransaction = transaction
+                                                            showingAddEditScreen = true
+                                                        }
                                                     }
                                                 }
                                             }

@@ -94,24 +94,33 @@ struct StatsView: View {
                 .padding(.top)
 
                 ScrollView {
-                    VStack(spacing: 30) {
-                        // --- CHART VIEW ---
+                    if viewModel.stats.isEmpty {
+                        EmptyStateView(
+                            systemImage: "chart.pie",
+                            title: "No data for this period",
+                            message: "There are no \(viewModel.selectedType.rawValue)s recorded for the selected date range."
+                        )
+                        .padding(.top, 50)
+                    } else {
                         VStack(spacing: 30) {
-                            CategoryPieChartView(stats: viewModel.stats, selectedStatValue: $selectedStatValue)
+                            // --- CHART VIEW ---
+                            VStack(spacing: 30) {
+                                CategoryPieChartView(stats: viewModel.stats, selectedStatValue: $selectedStatValue)
 
-                            // Detailed list of category statistics
-                            VStack(spacing: 0) {
-                                ForEach(viewModel.stats) { stat in
-                                    NavigationLink(destination: CategoryDetailView(category: stat.category)) {
-                                        StatRow(stat: stat)
+                                // Detailed list of category statistics
+                                VStack(spacing: 0) {
+                                    ForEach(viewModel.stats) { stat in
+                                        NavigationLink(destination: CategoryDetailView(category: stat.category)) {
+                                            StatRow(stat: stat)
+                                        }
+                                        .buttonStyle(PlainButtonStyle())
+                                        Divider()
                                     }
-                                    .buttonStyle(PlainButtonStyle())
-                                    Divider()
                                 }
                             }
                         }
+                        .padding()
                     }
-                    .padding()
                 }
             }
             .navigationBarHidden(true)
