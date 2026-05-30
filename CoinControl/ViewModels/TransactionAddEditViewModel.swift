@@ -20,6 +20,10 @@ class TransactionAddEditViewModel: ObservableObject {
     @Published var accounts: [Account] = []
     @Published var suggestions: [String] = []
 
+    @Published var titleError: String?
+    @Published var amountError: String?
+    @Published var categoryError: String?
+
     private var allTitles: [String] = []
     private let transactionService: TransactionServiceProtocol
     private let categoryService: CategoryServiceProtocol
@@ -29,6 +33,12 @@ class TransactionAddEditViewModel: ObservableObject {
 
     var isEditing: Bool {
         transactionToEdit != nil
+    }
+
+    var isValid: Bool {
+        title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false &&
+            (Double(amountText) ?? 0) > 0 &&
+            selectedCategory != nil
     }
 
     init(
@@ -130,7 +140,12 @@ class TransactionAddEditViewModel: ObservableObject {
     }
 
     func save() -> Bool {
+        guard validate() else {
+            return false
+        }
+
         guard let amount = Double(amountText) else {
+            amountError = "Enter a valid amount"
             return false
         }
 
@@ -150,6 +165,34 @@ class TransactionAddEditViewModel: ObservableObject {
             print("Failed to save transaction: \(error)")
             return false
         }
+    }
+
+    @discardableResult
+    func validate() -> Bool {
+        var isValid = true
+
+        if title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            titleError = "Title is required"
+            isValid = false
+        } else {
+            titleError = nil
+        }
+
+        if let amount = Double(amountText), amount > 0 {
+            amountError = nil
+        } else {
+            amountError = "Enter a valid amount"
+            isValid = false
+        }
+
+        if selectedCategory == nil {
+            categoryError = "Category is required"
+            isValid = false
+        } else {
+            categoryError = nil
+        }
+
+        return isValid
     }
 
     func delete() -> Bool {
