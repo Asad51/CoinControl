@@ -16,6 +16,8 @@ struct CategoryGridView: View {
     // Pass selection back to main view
     @Binding var selectedCategory: Category?
     let type: Int16
+    
+    @State private var showingEditSheet = false
 
     // 3-column grid structure matching your image
     private var gridItems: [GridItem] {
@@ -39,7 +41,10 @@ struct CategoryGridView: View {
                     Spacer()
 
                     HStack(spacing: 20) {
-                        Image(systemName: "pencil")
+                        Button(action: { showingEditSheet = true }) {
+                            Image(systemName: "pencil")
+                        }
+                        
                         Button(action: { dismiss() }) {
                             Image(systemName: "xmark")
                         }
@@ -91,6 +96,11 @@ struct CategoryGridView: View {
                 }
             }
             .navigationBarHidden(true)
+            .sheet(isPresented: $showingEditSheet, onDismiss: {
+                viewModel.fetchCategories()
+            }) {
+                CategoryListView(type: type)
+            }
         }
     }
 }
