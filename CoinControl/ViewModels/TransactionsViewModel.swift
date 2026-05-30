@@ -21,7 +21,6 @@ class TransactionsViewModel: NSObject, ObservableObject {
 
     @Published var monthlyExpenseCashAndBank: Double = 0
     @Published var monthlyExpenseCard: Double = 0
-    @Published var monthlyTransfer: Double = 0
     @Published var expenseComparisonPercentage: Double = 0
     @Published var selectedMonthRangeString: String = ""
 
@@ -156,10 +155,6 @@ class TransactionsViewModel: NSObject, ObservableObject {
 
         monthlyExpenseCard = monthlyExpensesList
             .filter { $0.account?.name == "Credit Card" }
-            .reduce(0) { $0 + $1.amount }
-
-        monthlyTransfer = monthlyTransactions
-            .filter { $0.type == TransactionType.transfer.rawValue }
             .reduce(0) { $0 + $1.amount }
 
         // Expense Comparison

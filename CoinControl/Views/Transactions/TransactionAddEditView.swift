@@ -50,6 +50,8 @@ struct TransactionAddEditView: View {
                             dismiss()
                         }
                     }
+                    .disabled(!viewModel.isValid)
+                    .opacity(viewModel.isValid ? 1.0 : 0.5)
                 }
                 .foregroundColor(.primary)
                 .padding(.horizontal)
@@ -127,12 +129,21 @@ struct TransactionAddEditView: View {
                             }
 
                             // Category row - opens CategoryGrid sheet
-                            Button(action: { showingCategoryPicker = true }) {
-                                FormRowStyle(title: "Category",
-                                             value: viewModel.selectedCategory?.name ?? "",
-                                             hasContent: viewModel.selectedCategory != nil)
+                            VStack(alignment: .leading, spacing: 4) {
+                                Button(action: { showingCategoryPicker = true }) {
+                                    FormRowStyle(title: "Category",
+                                                 value: viewModel.selectedCategory?.name ?? "",
+                                                 hasContent: viewModel.selectedCategory != nil)
+                                }
+                                .buttonStyle(PlainButtonStyle())
+
+                                if let error = viewModel.categoryError {
+                                    Text(error)
+                                        .font(.caption)
+                                        .foregroundColor(.red)
+                                        .padding(.horizontal)
+                                }
                             }
-                            .buttonStyle(PlainButtonStyle())
                             .sheet(isPresented: $showingCategoryPicker) {
                                 // sheet is automatically wrapped in NavigationView with CategoryGridView
                                 CategoryGridView(selectedCategory: $viewModel.selectedCategory, type: viewModel.transactionType.rawValue)
@@ -153,8 +164,14 @@ struct TransactionAddEditView: View {
                                 }
 
                                 Rectangle()
-                                    .fill(Color(UIColor.tertiaryLabel))
+                                    .fill(viewModel.amountError != nil ? Color.red : Color(UIColor.tertiaryLabel))
                                     .frame(height: 1)
+
+                                if let error = viewModel.amountError {
+                                    Text(error)
+                                        .font(.caption)
+                                        .foregroundColor(.red)
+                                }
                             }
                             .padding(.vertical, 8)
 
@@ -166,7 +183,7 @@ struct TransactionAddEditView: View {
                                 TextField("Title", text: $viewModel.title)
 
                                 Rectangle()
-                                    .fill(Color(UIColor.label))
+                                    .fill(viewModel.titleError != nil ? Color.red : Color(UIColor.label))
                                     .frame(height: 1)
                                     .overlay(alignment: .topLeading) {
                                         if !viewModel.suggestions.isEmpty {
@@ -196,6 +213,12 @@ struct TransactionAddEditView: View {
                                             .offset(y: suggestAbove ? -CGFloat(viewModel.suggestions.count * 40 + 50) : 5)
                                         }
                                     }
+
+                                if let error = viewModel.titleError {
+                                    Text(error)
+                                        .font(.caption)
+                                        .foregroundColor(.red)
+                                }
                             }
                             .padding(.vertical, 8)
                             .background(

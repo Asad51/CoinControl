@@ -30,8 +30,6 @@ struct TransactionTotalView: View {
                         AccountSummaryRow(title: "Expenses (Cash, Accounts)", value: "৳ \(String(format: "%.2f", viewModel.monthlyExpenseCashAndBank))")
                         Divider().padding(.horizontal)
                         AccountSummaryRow(title: "Expenses (Card)", value: "৳ \(String(format: "%.2f", viewModel.monthlyExpenseCard))")
-                        Divider().padding(.horizontal)
-                        AccountSummaryRow(title: "Transfer (Cash, Accounts -> )", value: "৳ \(String(format: "%.2f", viewModel.monthlyTransfer))")
                     }
                     .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(12)
