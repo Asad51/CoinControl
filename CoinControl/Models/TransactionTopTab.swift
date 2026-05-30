@@ -12,6 +12,6 @@ enum TransactionTopTab: String, CaseIterable {
     case total = "Total"
 
     var title: String {
-        self.rawValue
+        rawValue
     }
 }

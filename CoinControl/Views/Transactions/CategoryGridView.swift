@@ -51,34 +51,43 @@ struct CategoryGridView: View {
                 Divider()
 
                 ScrollView {
-                    // Category Grid
-                    LazyVGrid(columns: gridItems, spacing: 1) {
-                        ForEach(viewModel.categories) { category in
-                            Button {
-                                selectedCategory = category
-                                dismiss()
-                            } label: {
-                                VStack(spacing: 12) {
-                                    // Custom visual: Icon on colored circle background
-                                    Text(category.icon)
-                                        .font(.system(size: 24))
-                                        .frame(width: 44, height: 44)
-                                        .clipShape(Circle())
+                    if viewModel.categories.isEmpty {
+                        EmptyStateView(
+                            systemImage: "list.bullet.indent",
+                            title: "No categories",
+                            message: "It seems there are no categories for this transaction type."
+                        )
+                        .padding(.top, 60)
+                    } else {
+                        // Category Grid
+                        LazyVGrid(columns: gridItems, spacing: 1) {
+                            ForEach(viewModel.categories) { category in
+                                Button {
+                                    selectedCategory = category
+                                    dismiss()
+                                } label: {
+                                    VStack(spacing: 12) {
+                                        // Custom visual: Icon on colored circle background
+                                        Text(category.icon)
+                                            .font(.system(size: 24))
+                                            .frame(width: 44, height: 44)
+                                            .clipShape(Circle())
 
-                                    Text(category.name)
-                                        .font(.caption)
-                                        .foregroundColor(.primary)
-                                        .multilineTextAlignment(.center)
-                                        .lineLimit(1)
+                                        Text(category.name)
+                                            .font(.caption)
+                                            .foregroundColor(.primary)
+                                            .multilineTextAlignment(.center)
+                                            .lineLimit(1)
+                                    }
+                                    .padding()
+                                    .frame(maxWidth: .infinity)
+                                    // Add border to create grid appearance from your image
+                                    .border(Color(UIColor.separator).opacity(0.5), width: 0.5)
                                 }
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                // Add border to create grid appearance from your image
-                                .border(Color(UIColor.separator).opacity(0.5), width: 0.5)
                             }
                         }
+                        .padding(1) // Adjust for grid border
                     }
-                    .padding(1) // Adjust for grid border
                 }
             }
             .navigationBarHidden(true)
