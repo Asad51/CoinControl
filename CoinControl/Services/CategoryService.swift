@@ -39,7 +39,7 @@ class CategoryService: CategoryServiceProtocol {
         category.name = name
         category.icon = icon
         category.type = type
-        
+
         try context.save()
     }
 
