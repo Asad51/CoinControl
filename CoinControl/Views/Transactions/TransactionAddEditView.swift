@@ -40,7 +40,7 @@ struct TransactionAddEditView: View {
                         Image(systemName: "chevron.left")
                     }
 
-                    Text(viewModel.isEditing ? "Edit Expense" : "Expense")
+                    Text("\(viewModel.isEditing ? "Edit " : "")\(viewModel.transactionType.title)")
                         .font(.headline)
                         .padding(.leading, 10)
 
