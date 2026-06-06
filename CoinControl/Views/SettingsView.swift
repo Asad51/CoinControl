@@ -15,7 +15,7 @@ struct SettingsView: View {
         ("Navy", .tintNavy),
         ("Orange", .tintOrange),
         ("Pink", .tintPink),
-        ("Violet", .tintViolet)
+        ("Violet", .tintViolet),
     ]
 
     var body: some View {

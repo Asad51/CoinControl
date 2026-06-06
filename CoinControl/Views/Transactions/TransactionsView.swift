@@ -8,12 +8,16 @@
 import CoreData
 import SwiftUI
 
+struct TransactionEditContainer: Identifiable {
+    let id = UUID()
+    let transaction: Transaction?
+}
+
 struct TransactionsView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @StateObject private var viewModel: TransactionsViewModel
 
-    @State private var showingAddEditScreen = false
-    @State private var selectedTransaction: Transaction?
+    @State private var sheetContainer: TransactionEditContainer?
     @State private var selectedTopTab = TransactionTopTab.daily
     @State private var previousIndex = 0
     private let topTabs = TransactionTopTab.allCases
@@ -44,8 +48,7 @@ struct TransactionsView: View {
                                 ForEach(viewModel.filteredTransactions) { transaction in
                                     TransactionRowView(item: transaction)
                                         .onTapGesture {
-                                            selectedTransaction = transaction
-                                            showingAddEditScreen = true
+                                            sheetContainer = TransactionEditContainer(transaction: transaction)
                                         }
                                     Divider()
                                 }
@@ -78,8 +81,7 @@ struct TransactionsView: View {
                                                 message: "Tap + to add your first expense.",
                                                 buttonTitle: "Add Transaction"
                                             ) {
-                                                selectedTransaction = nil
-                                                showingAddEditScreen = true
+                                                sheetContainer = TransactionEditContainer(transaction: nil)
                                             }
                                         } else {
                                             ScrollView {
@@ -87,8 +89,7 @@ struct TransactionsView: View {
                                                     ForEach(viewModel.groupedTransactions, id: \.0) { date, dailyItems in
                                                         DailySectionView(date: date, items: dailyItems) { transaction in
                                                             // Handle row tap
-                                                            selectedTransaction = transaction
-                                                            showingAddEditScreen = true
+                                                            sheetContainer = TransactionEditContainer(transaction: transaction)
                                                         }
                                                     }
                                                 }
@@ -102,16 +103,15 @@ struct TransactionsView: View {
 
                 VStack(spacing: 16) {
                     FloatingButton(systemImage: "plus") {
-                        selectedTransaction = nil // Nil means "Add new"
-                        showingAddEditScreen = true
+                        sheetContainer = TransactionEditContainer(transaction: nil)
                     }
                 }
                 .padding(.trailing, 20)
                 .padding(.bottom, 20)
             }
             .navigationBarHidden(true)
-            .sheet(isPresented: $showingAddEditScreen) {
-                TransactionAddEditView(transactionToEdit: selectedTransaction)
+            .sheet(item: $sheetContainer) { container in
+                TransactionAddEditView(transactionToEdit: container.transaction)
                     .environment(\.managedObjectContext, viewContext)
             }
         }
