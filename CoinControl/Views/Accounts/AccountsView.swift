@@ -28,7 +28,7 @@ struct AccountsView: View {
 
                                 Spacer()
 
-                                Text("৳ \(String(format: "%.2f", viewModel.balances[account.id] ?? 0.0))")
+                                Text(CurrencyFormatter.format(viewModel.balances[account.id] ?? 0.0))
                                     .font(.system(.body, design: .monospaced))
                                     .foregroundColor((viewModel.balances[account.id] ?? 0.0) >= 0 ? .primary : .red)
                             }

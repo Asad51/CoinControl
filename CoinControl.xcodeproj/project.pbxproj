@@ -53,6 +53,7 @@
 		DCDB79922B6412050062E3B8 /* CocoaLumberjackSwiftLogBackend in Frameworks */ = {isa = PBXBuildFile; productRef = DCDB79912B6412050062E3B8 /* CocoaLumberjackSwiftLogBackend */; };
 		DCDB79982B6412530062E3B8 /* CCLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDB79972B6412530062E3B8 /* CCLogger.swift */; };
 		DCDB799C2B64130D0062E3B8 /* CCLogFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDB799B2B64130D0062E3B8 /* CCLogFormatter.swift */; };
+		DC5C58C52FCB5A1200AB93CE /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5C58C42FCB5A1200AB93CE /* CurrencyFormatter.swift */; };
 		DCDC4E4B2B7BD0DB002C3321 /* BottomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC4E4A2B7BD0DB002C3321 /* BottomTabView.swift */; };
 		DCDC4E552B7BE622002C3321 /* BottomTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC4E542B7BE622002C3321 /* BottomTab.swift */; };
 		DCDC4E592B7BECFF002C3321 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDC4E582B7BECFF002C3321 /* Settings.swift */; };
@@ -138,6 +139,7 @@
 		DCD054AA2B90CB60002A7A32 /* AccountsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModelTests.swift; sourceTree = "<group>"; };
 		DCDB79972B6412530062E3B8 /* CCLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCLogger.swift; sourceTree = "<group>"; };
 		DCDB799B2B64130D0062E3B8 /* CCLogFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCLogFormatter.swift; sourceTree = "<group>"; };
+		DC5C58C42FCB5A1200AB93CE /* CurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
 		DCDC4E4A2B7BD0DB002C3321 /* BottomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabView.swift; sourceTree = "<group>"; };
 		DCDC4E542B7BE622002C3321 /* BottomTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTab.swift; sourceTree = "<group>"; };
 		DCDC4E582B7BECFF002C3321 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				DCDB79962B6412370062E3B8 /* Logger */,
+				DC5C58C42FCB5A1200AB93CE /* CurrencyFormatter.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -637,6 +640,7 @@
 				DCF927B32F9FBB0D008AC220 /* CategoryDetailViewModel.swift in Sources */,
 				DCDC4E592B7BECFF002C3321 /* Settings.swift in Sources */,
 				DCDB799C2B64130D0062E3B8 /* CCLogFormatter.swift in Sources */,
+				DC5C58C52FCB5A1200AB93CE /* CurrencyFormatter.swift in Sources */,
 				DC2AC5EC2B76AF2600B7053D /* FloatingButton.swift in Sources */,
 				DCEE53582F9A646F00241BFE /* StatsViewModel.swift in Sources */,
 				DCF99F892F95303E0021812E /* Account+CoreDataClass.swift in Sources */,

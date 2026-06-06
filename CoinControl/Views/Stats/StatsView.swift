@@ -65,7 +65,7 @@ struct StatsView: View {
                         viewModel.fetchStats()
                     }) {
                         VStack(spacing: 8) {
-                            Text("Income ৳ \(String(format: "%.2f", viewModel.totalIncome))")
+                            Text("Income \(CurrencyFormatter.format(viewModel.totalIncome))")
                                 .fontWeight(viewModel.selectedType == .income ? .bold : .regular)
                                 .foregroundColor(viewModel.selectedType == .income ? .primary : .secondary)
                             Rectangle()
@@ -81,7 +81,7 @@ struct StatsView: View {
                         viewModel.fetchStats()
                     }) {
                         VStack(spacing: 8) {
-                            Text("Expenses ৳ \(String(format: "%.2f", viewModel.totalExpenses))")
+                            Text("Expenses \(CurrencyFormatter.format(viewModel.totalExpenses))")
                                 .fontWeight(viewModel.selectedType == .expense ? .bold : .regular)
                                 .foregroundColor(viewModel.selectedType == .expense ? .primary : .secondary)
                             Rectangle()

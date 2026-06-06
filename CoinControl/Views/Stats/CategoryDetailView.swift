@@ -64,7 +64,7 @@ struct CategoryDetailView: View {
                             .font(.caption)
                             .foregroundColor(.secondary)
 
-                        Text("৳ \(String(format: "%.2f", viewModel.totalAmount))")
+                        Text(CurrencyFormatter.format(viewModel.totalAmount))
                             .font(.title2).bold()
                             .foregroundColor(.primary)
                     }

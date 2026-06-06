@@ -28,7 +28,7 @@ struct StatRow: View {
 
             Spacer()
 
-            Text("৳ \(String(format: "%.2f", stat.amount))")
+            Text(CurrencyFormatter.format(stat.amount))
                 .font(.system(.body, design: .monospaced))
                 .foregroundColor(.primary)
         }
