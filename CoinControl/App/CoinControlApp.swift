@@ -25,6 +25,7 @@ struct CoinControlApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(settings)
+                .accentColor(settings.accentColor)
                 .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
         }
     }

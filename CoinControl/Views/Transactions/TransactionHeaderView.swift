@@ -6,10 +6,13 @@
 import SwiftUI
 
 struct TransactionHeaderView: View {
+    @EnvironmentObject private var settings: Settings
     @ObservedObject var viewModel: TransactionsViewModel
     @Binding var selectedTopTab: TransactionTopTab
     @Namespace private var animation
     let topTabs = TransactionTopTab.allCases
+
+    @State private var showingSettings = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -35,7 +38,7 @@ struct TransactionHeaderView: View {
                                 viewModel.searchQuery = ""
                             }
                         }
-                        .foregroundColor(.accentColor)
+                        .foregroundColor(settings.accentColor)
                     }
                     .padding(8)
                     .background(Color(UIColor.secondarySystemBackground))
@@ -50,6 +53,7 @@ struct TransactionHeaderView: View {
                         }
                     }) {
                         Image(systemName: "chevron.left")
+                            .foregroundColor(settings.accentColor)
                     }
 
                     Text(selectedTopTab == .monthly ? viewModel.selectedYear : viewModel.selectedMonthYear)
@@ -65,6 +69,7 @@ struct TransactionHeaderView: View {
                         }
                     }) {
                         Image(systemName: "chevron.right")
+                            .foregroundColor(settings.accentColor)
                     }
                     Spacer()
 
@@ -75,12 +80,24 @@ struct TransactionHeaderView: View {
                             }
                         }) {
                             Image(systemName: "magnifyingglass")
+                                .foregroundColor(settings.accentColor)
+                        }
+
+                        Button(action: {
+                            showingSettings = true
+                        }) {
+                            Image(systemName: "gearshape")
+                                .foregroundColor(settings.accentColor)
                         }
                     }
                 }
             }
             .padding()
             .foregroundColor(.primary)
+            .sheet(isPresented: $showingSettings) {
+                SettingsView()
+                    .environmentObject(settings)
+            }
 
             if !viewModel.isSearching {
                 // Top Tabs
@@ -95,7 +112,7 @@ struct TransactionHeaderView: View {
                             ZStack {
                                 if selectedTopTab == tab {
                                     Rectangle()
-                                        .fill(Color.red.opacity(0.8))
+                                        .fill(settings.accentColor.opacity(0.8))
                                         .frame(height: 3)
                                         .matchedGeometryEffect(id: "TabIndicator", in: animation)
                                 } else {
@@ -165,6 +182,7 @@ struct SummaryItemView: View {
 #if DEBUG
     #Preview {
         TransactionHeaderView(viewModel: TransactionsViewModel(), selectedTopTab: .constant(.daily))
+            .environmentObject(Settings())
             .background(Color(UIColor.systemBackground))
     }
 #endif
