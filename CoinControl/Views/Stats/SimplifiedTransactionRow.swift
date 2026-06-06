@@ -26,7 +26,7 @@ struct SimplifiedTransactionRow: View {
             Spacer()
 
             VStack(alignment: .trailing, spacing: 4) {
-                Text("৳ \(String(format: "%.2f", transaction.amount))")
+                Text(CurrencyFormatter.format(transaction.amount))
                     .font(.system(.subheadline, design: .monospaced))
                     .foregroundColor(.red) // All stats transactions are expenses
 

@@ -67,12 +67,12 @@ struct MonthRowView: View {
                     HStack(spacing: 12) {
                         VStack(alignment: .trailing, spacing: 2) {
                             if monthIncome > 0 {
-                                Text("৳ \(String(format: "%.2f", monthIncome))")
+                                Text(CurrencyFormatter.format(monthIncome))
                                     .foregroundColor(.blue)
                             }
 
                             if monthExpense > 0 {
-                                Text("৳ \(String(format: "%.2f", monthExpense))")
+                                Text(CurrencyFormatter.format(monthExpense))
                                     .foregroundColor(.red)
                             }
                         }
@@ -81,7 +81,7 @@ struct MonthRowView: View {
 
                     Spacer()
 
-                    Text("৳ \(String(format: "%.2f", monthIncome - monthExpense))")
+                    Text(CurrencyFormatter.format(monthIncome - monthExpense))
                         .foregroundColor(.secondary)
                 }
                 .padding()
@@ -156,12 +156,12 @@ struct WeekRowView: View {
             HStack(spacing: 12) {
                 VStack(alignment: .trailing, spacing: 2) {
                     if weekIncome > 0 {
-                        Text("৳ \(String(format: "%.2f", weekIncome))")
+                        Text(CurrencyFormatter.format(weekIncome))
                             .foregroundColor(.blue)
                     }
 
                     if weekExpense > 0 {
-                        Text("৳ \(String(format: "%.2f", weekExpense))")
+                        Text(CurrencyFormatter.format(weekExpense))
                             .foregroundColor(.red)
                     }
                 }
@@ -170,7 +170,7 @@ struct WeekRowView: View {
 
             Spacer()
 
-            Text("৳ \(String(format: "%.2f", weekIncome - weekExpense))")
+            Text(CurrencyFormatter.format(weekIncome - weekExpense))
                 .foregroundColor(.secondary)
         }
         .padding()
