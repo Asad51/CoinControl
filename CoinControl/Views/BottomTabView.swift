@@ -27,7 +27,7 @@ struct BottomTabView: View {
                 .frame(maxWidth: .infinity)
                 .overlay(alignment: .top) {
                     RoundedRectangle(cornerRadius: 2)
-                        .fill(tab == selectedTab ? Color.accentColor : .clear)
+                        .fill(tab == selectedTab ? settings.accentColor : .clear)
                         .frame(width: 50, height: 5)
                 }
                 .contentShape(Rectangle())
