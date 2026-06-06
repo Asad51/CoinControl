@@ -27,9 +27,9 @@ struct TransactionTotalView: View {
                     VStack(spacing: 0) {
                         AccountSummaryRow(title: "Compared Expenses (Last month)", value: "\(Int(viewModel.expenseComparisonPercentage))%", isPercentage: true)
                         Divider().padding(.horizontal)
-                        AccountSummaryRow(title: "Expenses (Cash, Accounts)", value: "৳ \(String(format: "%.2f", viewModel.monthlyExpenseCashAndBank))")
+                        AccountSummaryRow(title: "Expenses (Cash, Accounts)", value: CurrencyFormatter.format(viewModel.monthlyExpenseCashAndBank))
                         Divider().padding(.horizontal)
-                        AccountSummaryRow(title: "Expenses (Card)", value: "৳ \(String(format: "%.2f", viewModel.monthlyExpenseCard))")
+                        AccountSummaryRow(title: "Expenses (Card)", value: CurrencyFormatter.format(viewModel.monthlyExpenseCard))
                     }
                     .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(12)
