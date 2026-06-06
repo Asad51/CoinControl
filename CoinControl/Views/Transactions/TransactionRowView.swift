@@ -38,7 +38,7 @@ struct TransactionRowView: View {
             Spacer()
 
             // Amount
-            Text("৳ \(String(format: "%.2f", item.amount))")
+            Text(CurrencyFormatter.format(item.amount))
                 .foregroundColor(item.type == TransactionType.expense.rawValue ? Color.red : .blue)
                 .font(.system(.subheadline, design: .monospaced))
         }

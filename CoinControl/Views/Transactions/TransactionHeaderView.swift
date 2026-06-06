@@ -171,7 +171,7 @@ struct SummaryItemView: View {
             Text(title)
                 .font(.caption)
                 .foregroundColor(.secondary)
-            Text(String(format: "%.2f", amount))
+            Text(CurrencyFormatter.format(amount))
                 .font(.subheadline)
                 .fontWeight(.semibold)
                 .foregroundColor(color)
