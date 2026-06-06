@@ -6,7 +6,11 @@
 import SwiftUI
 
 struct TransactionCalendarView: View {
+    @Environment(\.managedObjectContext) private var viewContext
     @ObservedObject var viewModel: TransactionsViewModel
+
+    @State private var selectedDateForSheet: IdentifiableDate?
+    @State private var selectedTransactionToEdit: Transaction?
 
     private let calendar = Calendar.current
     private let daysInWeek = 7
@@ -45,7 +49,46 @@ struct TransactionCalendarView: View {
                             height: cellHeight
                         )
                         .border(Color.secondary.opacity(0.1), width: 0.5)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            selectedDateForSheet = IdentifiableDate(date: date)
+                        }
                     }
+                }
+            }
+        }
+        .sheet(item: $selectedDateForSheet) { identifiableDate in
+            let date = identifiableDate.date
+            let transactions = transactions(for: date)
+
+            NavigationView {
+                VStack {
+                    if transactions.isEmpty {
+                        EmptyStateView(
+                            systemImage: "tray",
+                            title: "No transactions",
+                            message: "No transactions recorded for this day."
+                        )
+                    } else {
+                        ScrollView {
+                            DailySectionView(date: date, items: transactions) { transaction in
+                                selectedTransactionToEdit = transaction
+                            }
+                        }
+                    }
+                }
+                .navigationTitle(formatDate(date))
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Close") {
+                            selectedDateForSheet = nil
+                        }
+                    }
+                }
+                .sheet(item: $selectedTransactionToEdit) { transaction in
+                    TransactionAddEditView(transactionToEdit: transaction)
+                        .environment(\.managedObjectContext, viewContext)
                 }
             }
         }
@@ -70,11 +113,26 @@ struct TransactionCalendarView: View {
     }
 
     private func dailyTotal(for date: Date, type: TransactionType) -> Double {
-        let transactions = viewModel.groupedTransactions.first(where: { calendar.isDate($0.0, inSameDayAs: date) })?.1 ?? []
+        let transactions = transactions(for: date)
         return transactions
             .filter { $0.type == type.rawValue }
             .reduce(0) { $0 + $1.amount }
     }
+
+    private func transactions(for date: Date) -> [Transaction] {
+        viewModel.groupedTransactions.first(where: { calendar.isDate($0.0, inSameDayAs: date) })?.1 ?? []
+    }
+
+    private func formatDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter.string(from: date)
+    }
+}
+
+struct IdentifiableDate: Identifiable {
+    let id = UUID()
+    let date: Date
 }
 
 struct CalendarCellView: View {
