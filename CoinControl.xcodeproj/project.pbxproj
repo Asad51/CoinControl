@@ -28,6 +28,10 @@
 		DC38B5002F99372900879577 /* FirebaseAnalyticsIdentitySupport in Frameworks */ = {isa = PBXBuildFile; productRef = DC38B4FF2F99372900879577 /* FirebaseAnalyticsIdentitySupport */; };
 		DC38B5022F99372900879577 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = DC38B5012F99372900879577 /* FirebaseCore */; };
 		DC38B5042F99372900879577 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = DC38B5032F99372900879577 /* FirebaseCrashlytics */; };
+		DC5C58BD2FCB4E0400AB93CE /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5C58BC2FCB4E0400AB93CE /* EmptyStateView.swift */; };
+		DC5C58BF2FCB581500AB93CE /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5C58BE2FCB581500AB93CE /* CategoryListView.swift */; };
+		DC5C58C12FCB586900AB93CE /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5C58C02FCB586900AB93CE /* CategoryListViewModel.swift */; };
+		DC5C58C32FCB586900AB93CE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5C58C22FCB586900AB93CE /* SettingsView.swift */; };
 		DC80FF702B62D23A002A94C7 /* CoinControlApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80FF6F2B62D23A002A94C7 /* CoinControlApp.swift */; };
 		DC80FF722B62D23A002A94C7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC80FF712B62D23A002A94C7 /* ContentView.swift */; };
 		DC80FF742B62D23B002A94C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC80FF732B62D23B002A94C7 /* Assets.xcassets */; };
@@ -73,9 +77,6 @@
 		DCF99F8F2F9547C70021812E /* TransactionAddEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF99F8E2F9547C70021812E /* TransactionAddEditView.swift */; };
 		DCF99F912F9548A40021812E /* CategoryGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF99F902F9548A40021812E /* CategoryGridView.swift */; };
 		DCFD47952FAD098300BCB009 /* TransactionAddEditViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFD47942FAD098300BCB009 /* TransactionAddEditViewModelTests.swift */; };
-		DC5C58BD2FCB4E0400AB93CE /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5C58BC2FCB4E0400AB93CE /* EmptyStateView.swift */; };
-		DC5C58BF2FCB581500AB93CE /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5C58BE2FCB581500AB93CE /* CategoryListView.swift */; };
-		DC5C58C12FCB586900AB93CE /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5C58C02FCB586900AB93CE /* CategoryListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,10 @@
 		DC1190E92B8E63CC00AD7222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		DC38B4F82F99363300879577 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DC5C58BC2FCB4E0400AB93CE /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		DC5C58BE2FCB581500AB93CE /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
+		DC5C58C02FCB586900AB93CE /* CategoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
+		DC5C58C22FCB586900AB93CE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		DC80FF6C2B62D23A002A94C7 /* CoinControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC80FF6F2B62D23A002A94C7 /* CoinControlApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinControlApp.swift; sourceTree = "<group>"; };
 		DC80FF712B62D23A002A94C7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -157,9 +162,6 @@
 		DCF99F8E2F9547C70021812E /* TransactionAddEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionAddEditView.swift; sourceTree = "<group>"; };
 		DCF99F902F9548A40021812E /* CategoryGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryGridView.swift; sourceTree = "<group>"; };
 		DCFD47942FAD098300BCB009 /* TransactionAddEditViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionAddEditViewModelTests.swift; sourceTree = "<group>"; };
-		DC5C58BC2FCB4E0400AB93CE /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
-		DC5C58BE2FCB581500AB93CE /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
-		DC5C58C02FCB586900AB93CE /* CategoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -343,6 +345,7 @@
 				DCF99F8B2F9547430021812E /* Helpers */,
 				DCE689EE2B7FDD5C0074ED6D /* Transactions */,
 				DC80FF712B62D23A002A94C7 /* ContentView.swift */,
+				DC5C58C22FCB586900AB93CE /* SettingsView.swift */,
 				DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */,
 				DCDC4E4A2B7BD0DB002C3321 /* BottomTabView.swift */,
 			);
@@ -630,6 +633,7 @@
 				DCC6CCF92B7D33FC00336C4B /* CoreDataPreview.swift in Sources */,
 				DCDC4E4B2B7BD0DB002C3321 /* BottomTabView.swift in Sources */,
 				DC80FF722B62D23A002A94C7 /* ContentView.swift in Sources */,
+				DC5C58C32FCB586900AB93CE /* SettingsView.swift in Sources */,
 				DCF927B32F9FBB0D008AC220 /* CategoryDetailViewModel.swift in Sources */,
 				DCDC4E592B7BECFF002C3321 /* Settings.swift in Sources */,
 				DCDB799C2B64130D0062E3B8 /* CCLogFormatter.swift in Sources */,
