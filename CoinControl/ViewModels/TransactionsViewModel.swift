@@ -19,9 +19,19 @@ class TransactionsViewModel: NSObject, ObservableObject {
     @Published var monthlyExpenses: Double = 0
     @Published var monthlyBalance: Double = 0
 
-    @Published var monthlyExpenseCashAndBank: Double = 0
-    @Published var monthlyExpenseCard: Double = 0
-    @Published var expenseComparisonPercentage: Double = 0
+    @Published var monthlyExpenseCashAndBank: Double = 0.0
+    @Published var monthlyExpenseCard: Double = 0.0
+    @Published var expenseComparisonPercentage: Double = 0.0
+
+    var expenseTrend: String {
+        if expenseComparisonPercentage > 100 {
+            return "increase"
+        } else if expenseComparisonPercentage < 100 && expenseComparisonPercentage > 0 {
+            return "decrease"
+        } else {
+            return "stable"
+        }
+    }
     @Published var selectedMonthRangeString: String = ""
 
     @Published var searchQuery: String = ""

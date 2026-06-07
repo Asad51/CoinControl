@@ -25,7 +25,11 @@ struct TransactionTotalView: View {
                     .padding(.horizontal)
 
                     VStack(spacing: 0) {
-                        AccountSummaryRow(title: "Compared Expenses (Last month)", value: "\(Int(viewModel.expenseComparisonPercentage))%", isPercentage: true)
+                        AccountSummaryRow(
+                            title: "Compared to last month",
+                            value: "\(Int(viewModel.expenseComparisonPercentage))% of last month",
+                            trend: viewModel.expenseTrend
+                        )
                         Divider().padding(.horizontal)
                         AccountSummaryRow(title: "Expenses (Cash, Accounts)", value: CurrencyFormatter.format(viewModel.monthlyExpenseCashAndBank))
                         Divider().padding(.horizontal)
@@ -60,7 +64,23 @@ struct TransactionTotalView: View {
 struct AccountSummaryRow: View {
     let title: String
     let value: String
-    var isPercentage: Bool = false
+    var trend: String? = nil
+
+    private var trendIcon: String? {
+        switch trend {
+            case "increase": return "arrow.up.right"
+            case "decrease": return "arrow.down.right"
+            default: return nil
+        }
+    }
+
+    private var trendColor: Color {
+        switch trend {
+            case "increase": return .red
+            case "decrease": return .green
+            default: return .secondary
+        }
+    }
 
     var body: some View {
         HStack {
@@ -68,9 +88,14 @@ struct AccountSummaryRow: View {
                 .font(.subheadline)
                 .foregroundColor(.secondary)
             Spacer()
+            if let icon = trendIcon {
+                Image(systemName: icon)
+                    .font(.caption)
+                    .foregroundColor(trendColor)
+            }
             Text(value)
                 .font(.subheadline)
-                .fontWeight(isPercentage ? .regular : .semibold)
+                .fontWeight(trend == nil ? .semibold : .regular)
         }
         .padding()
     }
