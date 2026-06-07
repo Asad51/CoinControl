@@ -72,6 +72,7 @@
 		DCF927B12F9FBAEF008AC220 /* CategoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF927B02F9FBAEF008AC220 /* CategoryDetailView.swift */; };
 		DCF927B32F9FBB0D008AC220 /* CategoryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF927B22F9FBB0D008AC220 /* CategoryDetailViewModel.swift */; };
 		DCF99F7A2F9526C30021812E /* TransactionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF99F792F9526C30021812E /* TransactionType.swift */; };
+		DCF99F7B2F9526C30021812E /* AccountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF99F7C2F9526C30021812E /* AccountType.swift */; };
 		DCF99F892F95303E0021812E /* Account+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF99F872F95303E0021812E /* Account+CoreDataClass.swift */; };
 		DCF99F8A2F95303E0021812E /* Account+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF99F882F95303E0021812E /* Account+CoreDataProperties.swift */; };
 		DCF99F8D2F95474F0021812E /* FormRowStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF99F8C2F95474F0021812E /* FormRowStyle.swift */; };
@@ -158,6 +159,7 @@
 		DCF927B02F9FBAEF008AC220 /* CategoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailView.swift; sourceTree = "<group>"; };
 		DCF927B22F9FBB0D008AC220 /* CategoryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailViewModel.swift; sourceTree = "<group>"; };
 		DCF99F792F9526C30021812E /* TransactionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
+		DCF99F7C2F9526C30021812E /* AccountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountType.swift; sourceTree = "<group>"; };
 		DCF99F872F95303E0021812E /* Account+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Account+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DCF99F882F95303E0021812E /* Account+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Account+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DCF99F8C2F95474F0021812E /* FormRowStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRowStyle.swift; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 				DCEE535E2F9A6A9E00241BFE /* CategoryStat.swift */,
 				DCEE53552F9A641900241BFE /* StatsPeriod.swift */,
 				DCF99F792F9526C30021812E /* TransactionType.swift */,
+				DCF99F7C2F9526C30021812E /* AccountType.swift */,
 				DCDC4E542B7BE622002C3321 /* BottomTab.swift */,
 				DCDC4E582B7BECFF002C3321 /* Settings.swift */,
 			);
@@ -659,6 +662,7 @@
 				DCC6CCDC2B7D116E00336C4B /* CoinControlModel.xcdatamodeld in Sources */,
 				DC0D923F2FA912AC0099A269 /* TransactionTopTab.swift in Sources */,
 				DCF99F7A2F9526C30021812E /* TransactionType.swift in Sources */,
+				DCF99F7B2F9526C30021812E /* AccountType.swift in Sources */,
 				DCEE535D2F9A6A4B00241BFE /* StatRow.swift in Sources */,
 				DC0B62552FA256F7009D516D /* TransactionHeaderView.swift in Sources */,
 				DCEEEF8D2F93ECD700E7BB6A /* TransactionsView.swift in Sources */,
