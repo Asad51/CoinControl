@@ -28,6 +28,7 @@ struct TransactionMonthlyView: View {
 }
 
 struct MonthRowView: View {
+    @EnvironmentObject private var settings: Settings
     @ObservedObject var viewModel: TransactionsViewModel
     let monthDate: Date
     let transactions: [Transaction]
@@ -67,12 +68,12 @@ struct MonthRowView: View {
                     HStack(spacing: 12) {
                         VStack(alignment: .trailing, spacing: 2) {
                             if monthIncome > 0 {
-                                Text(CurrencyFormatter.format(monthIncome))
+                                Text(CurrencyFormatter.format(monthIncome, currencySymbol: settings.currencySymbol))
                                     .foregroundColor(.blue)
                             }
 
                             if monthExpense > 0 {
-                                Text(CurrencyFormatter.format(monthExpense))
+                                Text(CurrencyFormatter.format(monthExpense, currencySymbol: settings.currencySymbol))
                                     .foregroundColor(.red)
                             }
                         }
@@ -81,7 +82,7 @@ struct MonthRowView: View {
 
                     Spacer()
 
-                    Text(CurrencyFormatter.format(monthIncome - monthExpense))
+                    Text(CurrencyFormatter.format(monthIncome - monthExpense, currencySymbol: settings.currencySymbol))
                         .foregroundColor(.secondary)
                 }
                 .padding()
@@ -139,6 +140,7 @@ struct MonthRowView: View {
 }
 
 struct WeekRowView: View {
+    @EnvironmentObject private var settings: Settings
     let weekDate: Date
     let transactions: [Transaction]
     private let calendar = Calendar.current
@@ -156,12 +158,12 @@ struct WeekRowView: View {
             HStack(spacing: 12) {
                 VStack(alignment: .trailing, spacing: 2) {
                     if weekIncome > 0 {
-                        Text(CurrencyFormatter.format(weekIncome))
+                        Text(CurrencyFormatter.format(weekIncome, currencySymbol: settings.currencySymbol))
                             .foregroundColor(.blue)
                     }
 
                     if weekExpense > 0 {
-                        Text(CurrencyFormatter.format(weekExpense))
+                        Text(CurrencyFormatter.format(weekExpense, currencySymbol: settings.currencySymbol))
                             .foregroundColor(.red)
                     }
                 }
@@ -170,7 +172,7 @@ struct WeekRowView: View {
 
             Spacer()
 
-            Text(CurrencyFormatter.format(weekIncome - weekExpense))
+            Text(CurrencyFormatter.format(weekIncome - weekExpense, currencySymbol: settings.currencySymbol))
                 .foregroundColor(.secondary)
         }
         .padding()

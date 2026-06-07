@@ -10,6 +10,7 @@ import SwiftUI
 /// A simplified version of the transaction row, focused on date and amount,
 /// used in the statistics detail view.
 struct SimplifiedTransactionRow: View {
+    @EnvironmentObject private var settings: Settings
     @ObservedObject var transaction: Transaction
 
     var body: some View {
@@ -26,7 +27,7 @@ struct SimplifiedTransactionRow: View {
             Spacer()
 
             VStack(alignment: .trailing, spacing: 4) {
-                Text(CurrencyFormatter.format(transaction.amount))
+                Text(CurrencyFormatter.format(transaction.amount, currencySymbol: settings.currencySymbol))
                     .font(.system(.subheadline, design: .monospaced))
                     .foregroundColor(.red) // All stats transactions are expenses
 

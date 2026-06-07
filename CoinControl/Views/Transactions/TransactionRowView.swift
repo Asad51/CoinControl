@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TransactionRowView: View {
+    @EnvironmentObject private var settings: Settings
     @ObservedObject var item: Transaction
 
     var body: some View {
@@ -38,7 +39,7 @@ struct TransactionRowView: View {
             Spacer()
 
             // Amount
-            Text(CurrencyFormatter.format(item.amount))
+            Text(CurrencyFormatter.format(item.amount, currencySymbol: settings.currencySymbol))
                 .foregroundColor(item.type == TransactionType.expense.rawValue ? Color.red : .blue)
                 .font(.system(.subheadline, design: .monospaced))
         }

@@ -11,6 +11,7 @@ import SwiftUI
 struct CategoryDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject private var settings: Settings
     @StateObject private var viewModel: CategoryDetailViewModel
 
     @State private var showingAddEditScreen = false
@@ -64,7 +65,7 @@ struct CategoryDetailView: View {
                             .font(.caption)
                             .foregroundColor(.secondary)
 
-                        Text(CurrencyFormatter.format(viewModel.totalAmount))
+                        Text(CurrencyFormatter.format(viewModel.totalAmount, currencySymbol: settings.currencySymbol))
                             .font(.title2).bold()
                             .foregroundColor(.primary)
                     }
