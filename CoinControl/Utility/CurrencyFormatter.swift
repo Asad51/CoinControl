@@ -9,7 +9,6 @@ enum CurrencyFormatter {
     private static let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.currencySymbol = "৳"
         formatter.maximumFractionDigits = 2
         formatter.minimumFractionDigits = 2
         formatter.groupingSeparator = ","
@@ -17,7 +16,8 @@ enum CurrencyFormatter {
         return formatter
     }()
 
-    static func format(_ amount: Double) -> String {
-        formatter.string(from: NSNumber(value: amount)) ?? "৳\(String(format: "%.2f", amount))"
+    static func format(_ amount: Double, currencySymbol: String = "৳") -> String {
+        formatter.currencySymbol = currencySymbol
+        return formatter.string(from: NSNumber(value: amount)) ?? "\(currencySymbol)\(String(format: "%.2f", amount))"
     }
 }

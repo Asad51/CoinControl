@@ -23,10 +23,16 @@ struct CoinControlApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(settings)
-                .accentColor(settings.accentColor)
-                .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
+            if settings.hasCompletedOnboarding {
+                ContentView()
+                    .environmentObject(settings)
+                    .accentColor(settings.accentColor)
+                    .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
+            } else {
+                OnboardingView()
+                    .environmentObject(settings)
+                    .accentColor(settings.accentColor)
+            }
         }
     }
 }
