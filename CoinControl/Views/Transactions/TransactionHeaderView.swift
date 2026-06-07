@@ -162,6 +162,7 @@ struct TransactionHeaderView: View {
 }
 
 struct SummaryItemView: View {
+    @EnvironmentObject private var settings: Settings
     let title: String
     let amount: Double
     let color: Color
@@ -171,7 +172,7 @@ struct SummaryItemView: View {
             Text(title)
                 .font(.caption)
                 .foregroundColor(.secondary)
-            Text(CurrencyFormatter.format(amount))
+            Text(CurrencyFormatter.format(amount, currencySymbol: settings.currencySymbol))
                 .font(.subheadline)
                 .fontWeight(.semibold)
                 .foregroundColor(color)

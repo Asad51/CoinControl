@@ -73,6 +73,7 @@
 		DCF927B32F9FBB0D008AC220 /* CategoryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF927B22F9FBB0D008AC220 /* CategoryDetailViewModel.swift */; };
 		DCF99F7A2F9526C30021812E /* TransactionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF99F792F9526C30021812E /* TransactionType.swift */; };
 		DCF99F7B2F9526C30021812E /* AccountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF99F7C2F9526C30021812E /* AccountType.swift */; };
+		DCF99F7E2F9526C30021812F /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF99F7D2F9526C30021812F /* OnboardingView.swift */; };
 		DCF99F892F95303E0021812E /* Account+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF99F872F95303E0021812E /* Account+CoreDataClass.swift */; };
 		DCF99F8A2F95303E0021812E /* Account+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF99F882F95303E0021812E /* Account+CoreDataProperties.swift */; };
 		DCF99F8D2F95474F0021812E /* FormRowStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF99F8C2F95474F0021812E /* FormRowStyle.swift */; };
@@ -160,6 +161,7 @@
 		DCF927B22F9FBB0D008AC220 /* CategoryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailViewModel.swift; sourceTree = "<group>"; };
 		DCF99F792F9526C30021812E /* TransactionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
 		DCF99F7C2F9526C30021812E /* AccountType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountType.swift; sourceTree = "<group>"; };
+		DCF99F7D2F9526C30021812F /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		DCF99F872F95303E0021812E /* Account+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Account+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DCF99F882F95303E0021812E /* Account+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Account+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		DCF99F8C2F95474F0021812E /* FormRowStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRowStyle.swift; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 				DCF99F8B2F9547430021812E /* Helpers */,
 				DCE689EE2B7FDD5C0074ED6D /* Transactions */,
 				DC80FF712B62D23A002A94C7 /* ContentView.swift */,
+				DCF99F7D2F9526C30021812F /* OnboardingView.swift */,
 				DC5C58C22FCB586900AB93CE /* SettingsView.swift */,
 				DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */,
 				DCDC4E4A2B7BD0DB002C3321 /* BottomTabView.swift */,
@@ -663,6 +666,7 @@
 				DC0D923F2FA912AC0099A269 /* TransactionTopTab.swift in Sources */,
 				DCF99F7A2F9526C30021812E /* TransactionType.swift in Sources */,
 				DCF99F7B2F9526C30021812E /* AccountType.swift in Sources */,
+				DCF99F7E2F9526C30021812F /* OnboardingView.swift in Sources */,
 				DCEE535D2F9A6A4B00241BFE /* StatRow.swift in Sources */,
 				DC0B62552FA256F7009D516D /* TransactionHeaderView.swift in Sources */,
 				DCEEEF8D2F93ECD700E7BB6A /* TransactionsView.swift in Sources */,

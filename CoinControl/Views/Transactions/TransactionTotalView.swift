@@ -6,6 +6,7 @@
 import SwiftUI
 
 struct TransactionTotalView: View {
+    @EnvironmentObject private var settings: Settings
     @ObservedObject var viewModel: TransactionsViewModel
 
     var body: some View {
@@ -31,9 +32,9 @@ struct TransactionTotalView: View {
                             trend: viewModel.expenseTrend
                         )
                         Divider().padding(.horizontal)
-                        AccountSummaryRow(title: "Expenses (Cash, Accounts)", value: CurrencyFormatter.format(viewModel.monthlyExpenseCashAndBank))
+                        AccountSummaryRow(title: "Expenses (Cash, Accounts)", value: CurrencyFormatter.format(viewModel.monthlyExpenseCashAndBank, currencySymbol: settings.currencySymbol))
                         Divider().padding(.horizontal)
-                        AccountSummaryRow(title: "Expenses (Card)", value: CurrencyFormatter.format(viewModel.monthlyExpenseCard))
+                        AccountSummaryRow(title: "Expenses (Card)", value: CurrencyFormatter.format(viewModel.monthlyExpenseCard, currencySymbol: settings.currencySymbol))
                     }
                     .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(12)

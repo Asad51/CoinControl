@@ -10,6 +10,7 @@ import SwiftUI
 
 /// The main statistics view that provides an overview of expenses by category.
 struct StatsView: View {
+    @EnvironmentObject private var settings: Settings
     @StateObject private var viewModel = StatsViewModel()
 
     /// Holds the raw value of the selected angle in the pie chart.
@@ -65,7 +66,7 @@ struct StatsView: View {
                         viewModel.fetchStats()
                     }) {
                         VStack(spacing: 8) {
-                            Text("Income \(CurrencyFormatter.format(viewModel.totalIncome))")
+                            Text("Income \(CurrencyFormatter.format(viewModel.totalIncome, currencySymbol: settings.currencySymbol))")
                                 .fontWeight(viewModel.selectedType == .income ? .bold : .regular)
                                 .foregroundColor(viewModel.selectedType == .income ? .primary : .secondary)
                             Rectangle()
@@ -81,7 +82,7 @@ struct StatsView: View {
                         viewModel.fetchStats()
                     }) {
                         VStack(spacing: 8) {
-                            Text("Expenses \(CurrencyFormatter.format(viewModel.totalExpenses))")
+                            Text("Expenses \(CurrencyFormatter.format(viewModel.totalExpenses, currencySymbol: settings.currencySymbol))")
                                 .fontWeight(viewModel.selectedType == .expense ? .bold : .regular)
                                 .foregroundColor(viewModel.selectedType == .expense ? .primary : .secondary)
                             Rectangle()
