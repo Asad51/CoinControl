@@ -79,7 +79,7 @@ class InitialDataService {
         let accounts = [
             ("Cash", AccountType.cash),
             ("Bank", AccountType.bank),
-            ("Credit Card", AccountType.card)
+            ("Credit Card", AccountType.card),
         ]
 
         for (name, type) in accounts {
