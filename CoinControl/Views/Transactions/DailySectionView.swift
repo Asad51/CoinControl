@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DailySectionView: View {
+    @EnvironmentObject private var settings: Settings
     private let viewModel: DailySectionViewModel
     let onRowTapped: (Transaction) -> Void
 
@@ -33,9 +34,9 @@ struct DailySectionView: View {
                 Spacer()
 
                 HStack(spacing: 16) {
-                    Text(CurrencyFormatter.format(viewModel.dailyIncome))
+                    Text(CurrencyFormatter.format(viewModel.dailyIncome, currencySymbol: settings.currencySymbol))
                         .foregroundColor(.blue)
-                    Text(CurrencyFormatter.format(viewModel.dailyExpense))
+                    Text(CurrencyFormatter.format(viewModel.dailyExpense, currencySymbol: settings.currencySymbol))
                         .foregroundColor(.red)
                 }
                 .font(.system(.subheadline, design: .monospaced))

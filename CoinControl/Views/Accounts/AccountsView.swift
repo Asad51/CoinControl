@@ -6,6 +6,7 @@
 import SwiftUI
 
 struct AccountsView: View {
+    @EnvironmentObject private var settings: Settings
     @StateObject private var viewModel = AccountsViewModel()
 
     var body: some View {
@@ -28,7 +29,7 @@ struct AccountsView: View {
 
                                 Spacer()
 
-                                Text(CurrencyFormatter.format(viewModel.balances[account.id] ?? 0.0))
+                                Text(CurrencyFormatter.format(viewModel.balances[account.id] ?? 0.0, currencySymbol: settings.currencySymbol))
                                     .font(.system(.body, design: .monospaced))
                                     .foregroundColor((viewModel.balances[account.id] ?? 0.0) >= 0 ? .primary : .red)
                             }

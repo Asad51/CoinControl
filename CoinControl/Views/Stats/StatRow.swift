@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct StatRow: View {
+    @EnvironmentObject private var settings: Settings
     let stat: CategoryStat
 
     var body: some View {
@@ -28,7 +29,7 @@ struct StatRow: View {
 
             Spacer()
 
-            Text(CurrencyFormatter.format(stat.amount))
+            Text(CurrencyFormatter.format(stat.amount, currencySymbol: settings.currencySymbol))
                 .font(.system(.body, design: .monospaced))
                 .foregroundColor(.primary)
         }

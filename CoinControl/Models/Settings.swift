@@ -2,14 +2,15 @@
 //  Settings.swift
 //  CoinControl
 //
-//  Created by Md. Asadul Islam on 14/2/24.
-//
 
 import Foundation
 import SwiftUI
 
-/// This class contains the settings of the application
 class Settings: ObservableObject {
-    /// Tint color selected by the user
+    @AppStorage("hasCompletedOnboarding") var hasCompletedOnboarding: Bool = false
+    @AppStorage("currencySymbol") var currencySymbol: String = "৳"
+    
+    // We'll keep accentColor as @Published for now as in the original, 
+    // but the task is to add onboarding and currency.
     @Published var accentColor: Color = .tintBlue
 }
