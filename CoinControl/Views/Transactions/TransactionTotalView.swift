@@ -64,7 +64,7 @@ struct TransactionTotalView: View {
 struct AccountSummaryRow: View {
     let title: String
     let value: String
-    var trend: String? = nil
+    var trend: String?
 
     private var trendIcon: String? {
         switch trend {
