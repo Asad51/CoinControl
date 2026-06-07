@@ -115,8 +115,9 @@ struct PreviewData {
         let accountsData: [(String, AccountType)] = [
             ("Cash", .cash),
             ("Card", .card),
-            ("Bank", .bank)
+            ("Bank", .bank),
         ]
+
         var accounts: [Account] = []
         for (name, type) in accountsData {
             let acct = Account(context: context)
