@@ -20,6 +20,7 @@ struct PreviewData {
             let account = Account(context: context)
             account.id = UUID()
             account.name = "Cash"
+            account.accountType = AccountType.cash.rawValue
 
             let transaction = Transaction(context: context)
             transaction.id = UUID()
@@ -63,12 +64,17 @@ struct PreviewData {
         }
 
         // Create Mock Accounts
-        let accountNames = ["Cash", "Card", "Bank"]
+        let accountsData: [(String, AccountType)] = [
+            ("Cash", .cash),
+            ("Card", .card),
+            ("Bank", .bank)
+        ]
         var accounts: [Account] = []
-        for name in accountNames {
+        for (name, type) in accountsData {
             let acct = Account(context: context)
             acct.id = UUID()
             acct.name = name
+            acct.accountType = type.rawValue
             accounts.append(acct)
         }
 
@@ -106,12 +112,17 @@ struct PreviewData {
     }}
 
     var accounts: (NSManagedObjectContext) -> [Account] {{ context in
-        let accountNames = ["Cash", "Card", "Bank"]
+        let accountsData: [(String, AccountType)] = [
+            ("Cash", .cash),
+            ("Card", .card),
+            ("Bank", .bank)
+        ]
         var accounts: [Account] = []
-        for name in accountNames {
+        for (name, type) in accountsData {
             let acct = Account(context: context)
             acct.id = UUID()
             acct.name = name
+            acct.accountType = type.rawValue
             accounts.append(acct)
         }
         return accounts
