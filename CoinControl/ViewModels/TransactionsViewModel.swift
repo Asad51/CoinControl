@@ -26,12 +26,13 @@ class TransactionsViewModel: NSObject, ObservableObject {
     var expenseTrend: String {
         if expenseComparisonPercentage > 100 {
             return "increase"
-        } else if expenseComparisonPercentage < 100 && expenseComparisonPercentage > 0 {
+        } else if expenseComparisonPercentage < 100, expenseComparisonPercentage > 0 {
             return "decrease"
         } else {
             return "stable"
         }
     }
+
     @Published var selectedMonthRangeString: String = ""
 
     @Published var searchQuery: String = ""
