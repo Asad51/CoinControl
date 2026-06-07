@@ -150,11 +150,11 @@ class TransactionsViewModel: NSObject, ObservableObject {
         let monthlyExpensesList = monthlyTransactions.filter { $0.type == TransactionType.expense.rawValue }
 
         monthlyExpenseCashAndBank = monthlyExpensesList
-            .filter { $0.account?.name != "Credit Card" }
+            .filter { $0.account?.accountType != AccountType.card.rawValue }
             .reduce(0) { $0 + $1.amount }
 
         monthlyExpenseCard = monthlyExpensesList
-            .filter { $0.account?.name == "Credit Card" }
+            .filter { $0.account?.accountType == AccountType.card.rawValue }
             .reduce(0) { $0 + $1.amount }
 
         // Expense Comparison

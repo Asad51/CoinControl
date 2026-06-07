@@ -18,6 +18,6 @@ enum CurrencyFormatter {
     }()
 
     static func format(_ amount: Double) -> String {
-        return formatter.string(from: NSNumber(value: amount)) ?? "৳\(String(format: "%.2f", amount))"
+        formatter.string(from: NSNumber(value: amount)) ?? "৳\(String(format: "%.2f", amount))"
     }
 }

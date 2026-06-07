@@ -18,6 +18,7 @@ extension Account {
 
     @NSManaged public var id: UUID
     @NSManaged var name: String
+    @NSManaged var accountType: Int16
 }
 
 extension Account: Identifiable {}

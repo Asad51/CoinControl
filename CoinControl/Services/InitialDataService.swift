@@ -76,12 +76,17 @@ class InitialDataService {
     }
 
     private func insertAccounts() {
-        let accounts = ["Cash", "Bank", "Credit Card"]
+        let accounts = [
+            ("Cash", AccountType.cash),
+            ("Bank", AccountType.bank),
+            ("Credit Card", AccountType.card)
+        ]
 
-        for name in accounts {
+        for (name, type) in accounts {
             let account = Account(context: context)
             account.id = UUID()
             account.name = name
+            account.accountType = type.rawValue
         }
     }
 }
