@@ -11,6 +11,7 @@ import SwiftUI
 struct TransactionAddEditView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var settings: Settings
 
     @StateObject private var viewModel: TransactionAddEditViewModel
 
@@ -158,7 +159,7 @@ struct TransactionAddEditView: View {
                                     .foregroundColor(.secondary)
 
                                 HStack {
-                                    Text("৳") // Taka currency symbol
+                                    Text(settings.currencySymbol)
                                     TextField("0.00", text: $viewModel.amountText)
                                         .keyboardType(.decimalPad)
                                         .font(.system(.body, design: .monospaced))

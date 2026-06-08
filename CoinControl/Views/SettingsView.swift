@@ -18,9 +18,29 @@ struct SettingsView: View {
         ("Violet", .tintViolet),
     ]
 
+    private let currencies = ["৳", "$", "€", "£", "¥", "₹"]
+
     var body: some View {
         NavigationView {
             List {
+                Section(header: Text("Currency")) {
+                    Picker("Currency Symbol", selection: $settings.currencySymbol) {
+                        ForEach(currencies, id: \.self) { symbol in
+                            Text(symbol).tag(symbol)
+                        }
+                    }
+                }
+
+                Section(header: Text("Data Management")) {
+                    NavigationLink(destination: CategoryListView(type: TransactionType.income.rawValue)) {
+                        Label("Income Categories", systemImage: "arrow.down.circle")
+                    }
+
+                    NavigationLink(destination: CategoryListView(type: TransactionType.expense.rawValue)) {
+                        Label("Expense Categories", systemImage: "arrow.up.circle")
+                    }
+                }
+
                 Section(header: Text("Appearance")) {
                     Text("Select Accent Color")
                         .font(.headline)
@@ -34,11 +54,11 @@ struct SettingsView: View {
                                     .frame(width: 44, height: 44)
                                     .overlay(
                                         Circle()
-                                            .stroke(Color.primary, lineWidth: settings.accentColor == color ? 3 : 0)
+                                            .stroke(Color.primary, lineWidth: settings.isSelected(colorName: name) ? 3 : 0)
                                     )
                                     .onTapGesture {
                                         withAnimation {
-                                            settings.accentColor = color
+                                            settings.setAccentColor(name: name)
                                         }
                                     }
 
@@ -68,3 +88,4 @@ struct SettingsView: View {
             .environmentObject(Settings())
     }
 #endif
+
