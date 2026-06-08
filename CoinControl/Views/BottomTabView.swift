@@ -50,7 +50,7 @@ struct BottomTabView: View {
 
 #Preview {
     ZStack {
-        Color.l22Df7
+        Color(UIColor.systemBackground)
             .ignoresSafeArea()
 
         VStack(spacing: 0) {

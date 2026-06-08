@@ -37,7 +37,7 @@ struct OnboardingView: View {
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.blue)
+                    .background(settings.accentColor)
                     .cornerRadius(12)
             }
             .padding(.horizontal, 40)
@@ -51,7 +51,7 @@ struct OnboardingView: View {
         VStack(spacing: 20) {
             Image(systemName: "banknote.fill")
                 .font(.system(size: 80))
-                .foregroundColor(.blue)
+                .foregroundColor(settings.accentColor)
 
             Text("Welcome to CoinControl")
                 .font(.title)
@@ -81,7 +81,7 @@ struct OnboardingView: View {
                 .font(.title)
                 .fontWeight(.bold)
 
-            Text("We've set up some default categories and accounts for you. You can customize them later in settings.")
+            Text("We've set up some default categories and accounts for you. You can customize categories later in settings.")
                 .multilineTextAlignment(.center)
                 .foregroundColor(.secondary)
 
