@@ -33,6 +33,7 @@ class AccountsViewModel: ObservableObject {
     }
 
     private func calculateBalances() {
+
         let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
         do {
             let transactions = try context.fetch(request)
