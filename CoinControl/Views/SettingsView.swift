@@ -88,4 +88,3 @@ struct SettingsView: View {
             .environmentObject(Settings())
     }
 #endif
-

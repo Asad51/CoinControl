@@ -24,9 +24,9 @@ class Settings: ObservableObject {
             }
         }
         set {
-            /// This is a bit hacky since we can't easily map back from Color to Name
-            /// without a mapping. For now, we'll let the view set the name directly
-            /// or we could add a method.
+            // This is a bit hacky since we can't easily map back from Color to Name
+            // without a mapping. For now, we'll let the view set the name directly
+            // or we could add a method.
         }
     }
 
