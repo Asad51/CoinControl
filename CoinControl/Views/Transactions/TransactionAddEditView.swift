@@ -48,12 +48,11 @@ struct TransactionAddEditView: View {
                     Spacer()
 
                     Button(viewModel.isEditing ? "Update" : "Save") {
+                        viewModel.showErrors = true
                         if viewModel.save() {
                             dismiss()
                         }
                     }
-                    .disabled(!viewModel.isValid)
-                    .opacity(viewModel.isValid ? 1.0 : 0.5)
                 }
                 .foregroundColor(.primary)
                 .padding(.horizontal)
@@ -139,7 +138,7 @@ struct TransactionAddEditView: View {
                                 }
                                 .buttonStyle(PlainButtonStyle())
 
-                                if let error = viewModel.categoryError {
+                                if let error = viewModel.categoryError, viewModel.showErrors {
                                     Text(error)
                                         .font(.caption)
                                         .foregroundColor(.red)
@@ -166,10 +165,10 @@ struct TransactionAddEditView: View {
                                 }
 
                                 Rectangle()
-                                    .fill(viewModel.amountError != nil ? Color.red : Color(UIColor.tertiaryLabel))
+                                    .fill((viewModel.amountError != nil && viewModel.showErrors) ? Color.red : Color(UIColor.tertiaryLabel))
                                     .frame(height: 1)
 
-                                if let error = viewModel.amountError {
+                                if let error = viewModel.amountError, viewModel.showErrors {
                                     Text(error)
                                         .font(.caption)
                                         .foregroundColor(.red)
@@ -185,7 +184,7 @@ struct TransactionAddEditView: View {
                                 TextField("Title", text: $viewModel.title)
 
                                 Rectangle()
-                                    .fill(viewModel.titleError != nil ? Color.red : Color(UIColor.label))
+                                    .fill((viewModel.titleError != nil && viewModel.showErrors) ? Color.red : Color(UIColor.label))
                                     .frame(height: 1)
                                     .overlay(alignment: .topLeading) {
                                         if !viewModel.suggestions.isEmpty {
@@ -216,7 +215,7 @@ struct TransactionAddEditView: View {
                                         }
                                     }
 
-                                if let error = viewModel.titleError {
+                                if let error = viewModel.titleError, viewModel.showErrors {
                                     Text(error)
                                         .font(.caption)
                                         .foregroundColor(.red)
