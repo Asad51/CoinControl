@@ -23,6 +23,7 @@ class TransactionAddEditViewModel: ObservableObject {
     @Published var titleError: String?
     @Published var amountError: String?
     @Published var categoryError: String?
+    @Published var showErrors: Bool = false
 
     private var allTitles: [String] = []
     private let transactionService: TransactionServiceProtocol
@@ -77,6 +78,19 @@ class TransactionAddEditViewModel: ObservableObject {
         $title
             .sink { [weak self] newTitle in
                 self?.filterSuggestions(for: newTitle)
+                self?.validate()
+            }
+            .store(in: &cancellables)
+
+        $amountText
+            .sink { [weak self] _ in
+                self?.validate()
+            }
+            .store(in: &cancellables)
+
+        $selectedCategory
+            .sink { [weak self] _ in
+                self?.validate()
             }
             .store(in: &cancellables)
     }
@@ -140,6 +154,7 @@ class TransactionAddEditViewModel: ObservableObject {
     }
 
     func save() -> Bool {
+        showErrors = true
         guard validate() else {
             return false
         }
