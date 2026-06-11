@@ -42,7 +42,9 @@ struct TransactionTotalView: View {
                 }
 
                 // --- Export Button ---
-                Button(action: {}) {
+                Button(action: {
+                    viewModel.showExportOptions = true
+                }) {
                     HStack {
                         Image(systemName: "tablecells")
                             .foregroundColor(.green)
@@ -104,7 +106,7 @@ struct AccountSummaryRow: View {
 
 #if DEBUG
     #Preview {
-        TransactionTotalView(viewModel: TransactionsViewModel())
+        TransactionTotalView(viewModel: TransactionsViewModel(settings: Settings()))
             .preferredColorScheme(.dark)
     }
 #endif

@@ -1,8 +1,9 @@
 # format options
 --indent 4
 --extensionacl on-declarations
+--xcodeindentation enabled
 --indentcase true
---xcodeindentation true
+--lineaftermarks true
 
 # file options
 --exclude Pods,Generated

@@ -182,7 +182,7 @@ struct SummaryItemView: View {
 
 #if DEBUG
     #Preview {
-        TransactionHeaderView(viewModel: TransactionsViewModel(), selectedTopTab: .constant(.daily))
+        TransactionHeaderView(viewModel: TransactionsViewModel(settings: Settings()), selectedTopTab: .constant(.daily))
             .environmentObject(Settings())
             .background(Color(UIColor.systemBackground))
     }

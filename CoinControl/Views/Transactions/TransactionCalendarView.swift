@@ -197,6 +197,6 @@ struct CalendarCellView: View {
 
 #if DEBUG
     #Preview {
-        TransactionCalendarView(viewModel: TransactionsViewModel())
+        TransactionCalendarView(viewModel: TransactionsViewModel(settings: Settings()))
     }
 #endif
