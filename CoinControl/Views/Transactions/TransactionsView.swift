@@ -15,6 +15,7 @@ struct TransactionEditContainer: Identifiable {
 
 struct TransactionsView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject private var settings: Settings
     @StateObject private var viewModel: TransactionsViewModel
 
     @State private var sheetContainer: TransactionEditContainer?
@@ -22,8 +23,8 @@ struct TransactionsView: View {
     @State private var previousIndex = 0
     private let topTabs = TransactionTopTab.allCases
 
-    init() {
-        _viewModel = StateObject(wrappedValue: TransactionsViewModel())
+    init(settings: Settings = Settings()) {
+        _viewModel = StateObject(wrappedValue: TransactionsViewModel(settings: settings))
     }
 
     var body: some View {
@@ -100,6 +101,8 @@ struct TransactionsView: View {
                         }
                     }
                 }
+                .blur(radius: viewModel.showExportOptions ? 3 : 0)
+                .disabled(viewModel.showExportOptions)
 
                 VStack(spacing: 16) {
                     FloatingButton(systemImage: "plus") {
@@ -108,11 +111,26 @@ struct TransactionsView: View {
                 }
                 .padding(.trailing, 20)
                 .padding(.bottom, 20)
+                .blur(radius: viewModel.showExportOptions ? 3 : 0)
+                .disabled(viewModel.showExportOptions)
+
+                if viewModel.showExportOptions {
+                    ExportOptionsView(isPresented: $viewModel.showExportOptions) { period in
+                        viewModel.exportData(for: period)
+                    }
+                    .transition(.opacity.combined(with: .scale))
+                }
             }
+            .animation(.spring(), value: viewModel.showExportOptions)
             .navigationBarHidden(true)
             .sheet(item: $sheetContainer) { container in
                 TransactionAddEditView(transactionToEdit: container.transaction)
                     .environment(\.managedObjectContext, viewContext)
+            }
+            .sheet(item: $viewModel.exportedFileURL, onDismiss: {
+                viewModel.exportedFileURL = nil
+            }) { url in
+                ShareSheet(activityItems: [url])
             }
         }
     }

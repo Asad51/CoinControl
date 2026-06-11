@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject private var settings: Settings
     @State private var selectedTab = BottomTab.transactions
 
     var body: some View {
@@ -18,7 +19,7 @@ struct ContentView: View {
             VStack {
                 ZStack(alignment: .bottomTrailing) {
                     TabView(selection: $selectedTab) {
-                        TransactionsView()
+                        TransactionsView(settings: settings)
                             .tag(BottomTab.transactions)
 
                         StatsView()
