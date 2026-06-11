@@ -15,6 +15,7 @@ struct StatsView: View {
 
     /// Holds the raw value of the selected angle in the pie chart.
     @State private var selectedStatValue: Double? = nil
+    @State private var showingDatePicker = false
 
     var body: some View {
         NavigationView {
@@ -24,14 +25,23 @@ struct StatsView: View {
                     Button(action: { viewModel.navigate(direction: -1) }) {
                         Image(systemName: "chevron.left")
                     }
+                    .disabled(viewModel.selectedPeriod == .period)
+                    .opacity(viewModel.selectedPeriod == .period ? 0.3 : 1.0)
 
                     Text(viewModel.dateRangeString)
                         .font(.headline)
                         .frame(minWidth: 120)
+                        .onTapGesture {
+                            if viewModel.selectedPeriod == .period {
+                                showingDatePicker = true
+                            }
+                        }
 
                     Button(action: { viewModel.navigate(direction: 1) }) {
                         Image(systemName: "chevron.right")
                     }
+                    .disabled(viewModel.selectedPeriod == .period)
+                    .opacity(viewModel.selectedPeriod == .period ? 0.3 : 1.0)
 
                     Spacer()
 
@@ -52,11 +62,20 @@ struct StatsView: View {
                         .background(Color(UIColor.secondarySystemBackground))
                         .cornerRadius(8)
                     }
-                    .onChange(of: viewModel.selectedPeriod) { _ in
+                    .onChange(of: viewModel.selectedPeriod) { period in
+                        if period == .period {
+                            showingDatePicker = true
+                        }
                         viewModel.updateDateRange()
                     }
                 }
                 .padding()
+                .sheet(isPresented: $showingDatePicker) {
+                    StatsDateRangePickerView(startDate: $viewModel.customStartDate, endDate: $viewModel.customEndDate)
+                        .onDisappear {
+                            viewModel.updateDateRange()
+                        }
+                }
 
                 // Income/Expense Summary Toggles
                 HStack(spacing: 0) {
@@ -99,7 +118,7 @@ struct StatsView: View {
                         EmptyStateView(
                             systemImage: "chart.pie",
                             title: "No data for this period",
-                            message: "There are no \(viewModel.selectedType.rawValue)s recorded for the selected date range."
+                            message: "There are no \(viewModel.selectedType.title.lowercased())s recorded for the selected date range."
                         )
                         .padding(.top, 50)
                     } else {

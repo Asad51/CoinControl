@@ -39,12 +39,23 @@ class TransactionsViewModel: NSObject, ObservableObject {
     @Published var filteredTransactions: [Transaction] = []
     @Published var isSearching: Bool = false
 
+    @Published var showExportOptions = false
+    @Published var exportedFileURL: URL?
+
     private let fetchedResultsController: NSFetchedResultsController<Transaction>
     private let transactionService: TransactionServiceProtocol
+    private let exportService: ExportServiceProtocol
+    private let settings: Settings
     private var cancellables = Set<AnyCancellable>()
 
-    init(transactionService: TransactionServiceProtocol = TransactionService()) {
+    init(
+        transactionService: TransactionServiceProtocol = TransactionService(),
+        exportService: ExportServiceProtocol = ExportService(),
+        settings: Settings = Settings()
+    ) {
         self.transactionService = transactionService
+        self.exportService = exportService
+        self.settings = settings
         fetchedResultsController = transactionService.getTransactionsFRC()
 
         super.init()
@@ -198,6 +209,47 @@ class TransactionsViewModel: NSObject, ObservableObject {
             calendar.startOfDay(for: item.date)
         }
         groupedTransactions = grouped.sorted { $0.key > $1.key }
+    }
+
+    func exportData(for period: ExportPeriod) {
+        Task {
+            let allTransactions = fetchedResultsController.fetchedObjects ?? []
+            let transactionsToExport: [Transaction]
+
+            if let range = period.dateRange() {
+                transactionsToExport = allTransactions.filter {
+                    $0.date >= range.start && $0.date <= range.end
+                }
+            } else {
+                transactionsToExport = allTransactions
+            }
+
+            let exportItems = transactionsToExport.map { transaction in
+                let categoryDisplay = [transaction.category?.icon, transaction.category?.name]
+                    .compactMap { $0 }
+                    .joined(separator: " ")
+
+                return TransactionExportItem(
+                    date: transaction.date,
+                    title: transaction.title,
+                    type: TransactionType(rawValue: transaction.type)?.title ?? "Unknown",
+                    category: categoryDisplay.isEmpty ? "No Category" : categoryDisplay,
+                    account: transaction.account?.name ?? "No Account",
+                    currency: settings.currencySymbol,
+                    amount: transaction.amount,
+                    note: transaction.note
+                )
+            }
+
+            do {
+                let url = try await exportService.exportTransactions(exportItems)
+                await MainActor.run {
+                    exportedFileURL = url
+                }
+            } catch {
+                print("Export failed: \(error)")
+            }
+        }
     }
 }
 

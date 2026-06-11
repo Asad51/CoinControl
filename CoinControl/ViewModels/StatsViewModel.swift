@@ -16,6 +16,8 @@ class StatsViewModel: ObservableObject {
     @Published var currentDate = Date()
     @Published var startDate = Date()
     @Published var endDate = Date()
+    @Published var customStartDate = Date()
+    @Published var customEndDate = Date()
 
     @Published var stats: [CategoryStat] = []
     @Published var totalExpenses: Double = 0.0
@@ -26,6 +28,12 @@ class StatsViewModel: ObservableObject {
 
     init(context: NSManagedObjectContext = PersistenceController.shared.container.viewContext) {
         self.context = context
+
+        // Initialize custom dates to current month
+        let now = Date()
+        customStartDate = calendar.date(from: calendar.dateComponents([.year, .month], from: now))!
+        customEndDate = calendar.date(byAdding: .month, value: 1, to: customStartDate)!.addingTimeInterval(-1)
+
         updateDateRange()
     }
 
@@ -41,19 +49,21 @@ class StatsViewModel: ObservableObject {
                 startDate = calendar.date(from: calendar.dateComponents([.year], from: currentDate))!
                 endDate = calendar.date(byAdding: .year, value: 1, to: startDate)!.addingTimeInterval(-1)
             case .period:
-                // For custom period, default to current month or a specific range
-                break
+                startDate = calendar.startOfDay(for: customStartDate)
+                endDate = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: customEndDate) ?? customEndDate
         }
         fetchStats()
     }
 
     func navigate(direction: Int) {
+        if selectedPeriod == .period { return }
+
         let component: Calendar.Component
         switch selectedPeriod {
             case .weekly: component = .weekOfYear
             case .monthly: component = .month
             case .annually: component = .year
-            case .period: component = .month
+            case .period: return // Should not happen due to guard
         }
         currentDate = calendar.date(byAdding: component, value: direction, to: currentDate) ?? currentDate
         updateDateRange()
@@ -108,9 +118,11 @@ class StatsViewModel: ObservableObject {
     var dateRangeString: String {
         let formatter = DateFormatter()
         switch selectedPeriod {
-            case .weekly,
-                 .period:
+            case .weekly:
                 formatter.dateFormat = "MM.dd"
+                return "\(formatter.string(from: startDate)) ~ \(formatter.string(from: endDate))"
+            case .period:
+                formatter.dateFormat = "yyyy.MM.dd"
                 return "\(formatter.string(from: startDate)) ~ \(formatter.string(from: endDate))"
             case .monthly:
                 formatter.dateFormat = "MMM yyyy"
