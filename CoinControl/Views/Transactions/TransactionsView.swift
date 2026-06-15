@@ -16,15 +16,15 @@ struct TransactionEditContainer: Identifiable {
 struct TransactionsView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject private var settings: Settings
-    @StateObject private var viewModel: TransactionsViewModel
+    @ObservedObject private var viewModel: TransactionsViewModel
 
     @State private var sheetContainer: TransactionEditContainer?
     @State private var selectedTopTab = TransactionTopTab.daily
     @State private var previousIndex = 0
     private let topTabs = TransactionTopTab.allCases
 
-    init(settings: Settings = Settings()) {
-        _viewModel = StateObject(wrappedValue: TransactionsViewModel(settings: settings))
+    init(viewModel: TransactionsViewModel) {
+        self.viewModel = viewModel
     }
 
     var body: some View {
@@ -139,7 +139,7 @@ struct TransactionsView: View {
 #if DEBUG
     #Preview {
         CoreDataPreview(items: \.transactions) { _ in
-            TransactionsView()
+            TransactionsView(viewModel: TransactionsViewModel())
         }
     }
 #endif
