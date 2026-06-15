@@ -1,5 +1,5 @@
 //
-//  Extensions.swift
+//  URL+Extensions.swift
 //  CoinControl
 //
 
