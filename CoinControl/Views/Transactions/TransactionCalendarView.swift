@@ -48,6 +48,7 @@ struct TransactionCalendarView: View {
                             width: cellWidth,
                             height: cellHeight
                         )
+                        .environmentObject(viewModel.settings)
                         .border(Color.secondary.opacity(0.1), width: 0.5)
                         .contentShape(Rectangle())
                         .onTapGesture {
@@ -136,6 +137,7 @@ struct IdentifiableDate: Identifiable {
 }
 
 struct CalendarCellView: View {
+    @EnvironmentObject private var settings: Settings
     let date: Date
     let isCurrentMonth: Bool
     let isToday: Bool
@@ -168,14 +170,14 @@ struct CalendarCellView: View {
             Spacer()
 
             if income > 0 {
-                Text(String(format: "%.0f", income))
+                Text(CurrencyFormatter.format(income, currencySymbol: settings.currencySymbol))
                     .font(.system(size: 9))
                     .foregroundColor(.blue)
                     .lineLimit(1)
             }
 
             if expense > 0 {
-                Text(String(format: "%.0f", expense))
+                Text(CurrencyFormatter.format(expense, currencySymbol: settings.currencySymbol))
                     .font(.system(size: 9))
                     .foregroundColor(.red)
                     .lineLimit(1)
@@ -183,7 +185,7 @@ struct CalendarCellView: View {
 
             if income > 0 || expense > 0 {
                 let total = income - expense
-                Text(String(format: "%.0f", total))
+                Text(CurrencyFormatter.format(total, currencySymbol: settings.currencySymbol))
                     .font(.system(size: 9, weight: .semibold))
                     .foregroundColor(.primary)
                     .lineLimit(1)
