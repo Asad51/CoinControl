@@ -45,7 +45,7 @@ class TransactionsViewModel: NSObject, ObservableObject {
     private let fetchedResultsController: NSFetchedResultsController<Transaction>
     private let transactionService: TransactionServiceProtocol
     private let exportService: ExportServiceProtocol
-    private let settings: Settings
+    let settings: Settings
     private var cancellables = Set<AnyCancellable>()
 
     init(
