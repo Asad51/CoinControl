@@ -22,7 +22,7 @@ struct TransactionHeaderView: View {
                     HStack {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.secondary)
-                        TextField("Search by title...", text: $viewModel.searchQuery)
+                        TextField("Search transactions...", text: $viewModel.searchQuery)
                             .textFieldStyle(PlainTextFieldStyle())
 
                         if !viewModel.searchQuery.isEmpty {
