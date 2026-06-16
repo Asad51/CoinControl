@@ -85,8 +85,16 @@ class TransactionsViewModel: NSObject, ObservableObject {
         if query.isEmpty {
             filteredTransactions = []
         } else {
-            filteredTransactions = allTransactions.filter {
-                $0.title.localizedCaseInsensitiveContains(query)
+            filteredTransactions = allTransactions.filter { transaction in
+                let titleMatch = transaction.title.localizedCaseInsensitiveContains(query)
+                let noteMatch = transaction.note.localizedCaseInsensitiveContains(query)
+                let categoryMatch = transaction.category?.name.localizedCaseInsensitiveContains(query) == true ||
+                    transaction.category?.icon.localizedCaseInsensitiveContains(query) == true
+                let accountMatch = transaction.account?.name.localizedCaseInsensitiveContains(query) == true
+                let amountMatch = String(format: "%.2f", transaction.amount).contains(query) ||
+                    CurrencyFormatter.format(transaction.amount, currencySymbol: settings.currencySymbol).localizedCaseInsensitiveContains(query)
+
+                return titleMatch || noteMatch || categoryMatch || accountMatch || amountMatch
             }
         }
     }

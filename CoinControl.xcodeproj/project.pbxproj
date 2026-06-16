@@ -22,6 +22,7 @@
 		DC0D923F2FA912AC0099A269 /* TransactionTopTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0D923E2FA912AC0099A269 /* TransactionTopTab.swift */; };
 		DC1190EA2B8E63CC00AD7222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1190E92B8E63CC00AD7222 /* AppDelegate.swift */; };
 		DC144DBB2FDC545800C89B4D /* StatsDateRangePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC144DBA2FDC545800C89B4D /* StatsDateRangePickerView.swift */; };
+		DC1451EC2FE1BC5800A44EA8 /* TransactionsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1451EB2FE1BC5800A44EA8 /* TransactionsViewModelTests.swift */; };
 		DC2A7B0C2FE04AB400234070 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2A7B0B2FE04AB400234070 /* URL+Extensions.swift */; };
 		DC2AC5EC2B76AF2600B7053D /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */; };
 		DC38B4F92F99363300879577 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC38B4F82F99363300879577 /* GoogleService-Info.plist */; };
@@ -124,6 +125,7 @@
 		DC0D923E2FA912AC0099A269 /* TransactionTopTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTopTab.swift; sourceTree = "<group>"; };
 		DC1190E92B8E63CC00AD7222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC144DBA2FDC545800C89B4D /* StatsDateRangePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsDateRangePickerView.swift; sourceTree = "<group>"; };
+		DC1451EB2FE1BC5800A44EA8 /* TransactionsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewModelTests.swift; sourceTree = "<group>"; };
 		DC2A7B0B2FE04AB400234070 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		DC2AC5EB2B76AF2600B7053D /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		DC38B4F82F99363300879577 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 		DCD054512B90CB60002A7A32 /* CoinControlTests */ = {
 			isa = PBXGroup;
 			children = (
+				DC1451EB2FE1BC5800A44EA8 /* TransactionsViewModelTests.swift */,
 				DCF6CF3F2FD9D84F0091AAB7 /* CurrencyFormatterTests.swift */,
 				DCFD47942FAD098300BCB009 /* TransactionAddEditViewModelTests.swift */,
 				DCD054AA2B90CB60002A7A32 /* AccountsViewModelTests.swift */,
@@ -712,6 +715,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC1451EC2FE1BC5800A44EA8 /* TransactionsViewModelTests.swift in Sources */,
 				DCD054AB2B90CB60002A7A32 /* AccountsViewModelTests.swift in Sources */,
 				DCF6CF402FD9D84F0091AAB7 /* CurrencyFormatterTests.swift in Sources */,
 				DCFD47952FAD098300BCB009 /* TransactionAddEditViewModelTests.swift in Sources */,
