@@ -79,8 +79,8 @@ struct AccountSummaryRow: View {
 
     private var trendColor: Color {
         switch trend {
-            case "increase": return .red
-            case "decrease": return .green
+            case "increase": return .appExpense
+            case "decrease": return .appIncome
             default: return .secondary
         }
     }

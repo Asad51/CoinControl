@@ -31,7 +31,7 @@ struct AccountsView: View {
 
                                 Text(CurrencyFormatter.format(viewModel.balances[account.id] ?? 0.0, currencySymbol: settings.currencySymbol))
                                     .font(.system(.body, design: .monospaced))
-                                    .foregroundColor((viewModel.balances[account.id] ?? 0.0) >= 0 ? .primary : .red)
+                                    .foregroundColor((viewModel.balances[account.id] ?? 0.0) >= 0 ? .appTotal : .appExpense)
                             }
                             .padding(.vertical, 4)
                         }

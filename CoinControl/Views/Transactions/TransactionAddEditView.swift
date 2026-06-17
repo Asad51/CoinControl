@@ -66,7 +66,7 @@ struct TransactionAddEditView: View {
                             }
                         }
                         .pickerStyle(SegmentedPickerStyle())
-                        .accentColor(viewModel.transactionType == .expense ? .red : .accentColor)
+                        .accentColor(viewModel.transactionType == .expense ? .appExpense : .accentColor)
                         .padding(.horizontal)
                         .padding(.top, 20)
 
@@ -98,7 +98,7 @@ struct TransactionAddEditView: View {
                                         Button("Cancel") {
                                             showingDatePicker = false
                                         }
-                                        .foregroundColor(.red)
+                                        .foregroundColor(.appExpense)
 
                                         Spacer()
 
@@ -141,7 +141,7 @@ struct TransactionAddEditView: View {
                                 if let error = viewModel.categoryError, viewModel.showErrors {
                                     Text(error)
                                         .font(.caption)
-                                        .foregroundColor(.red)
+                                        .foregroundColor(.appExpense)
                                         .padding(.horizontal)
                                 }
                             }
@@ -165,13 +165,13 @@ struct TransactionAddEditView: View {
                                 }
 
                                 Rectangle()
-                                    .fill((viewModel.amountError != nil && viewModel.showErrors) ? Color.red : Color(UIColor.tertiaryLabel))
+                                    .fill((viewModel.amountError != nil && viewModel.showErrors) ? Color.appExpense : Color(UIColor.tertiaryLabel))
                                     .frame(height: 1)
 
                                 if let error = viewModel.amountError, viewModel.showErrors {
                                     Text(error)
                                         .font(.caption)
-                                        .foregroundColor(.red)
+                                        .foregroundColor(.appExpense)
                                 }
                             }
                             .padding(.vertical, 8)
@@ -184,7 +184,7 @@ struct TransactionAddEditView: View {
                                 TextField("Title", text: $viewModel.title)
 
                                 Rectangle()
-                                    .fill((viewModel.titleError != nil && viewModel.showErrors) ? Color.red : Color(UIColor.label))
+                                    .fill((viewModel.titleError != nil && viewModel.showErrors) ? Color.appExpense : Color(UIColor.label))
                                     .frame(height: 1)
                                     .overlay(alignment: .topLeading) {
                                         if !viewModel.suggestions.isEmpty {
@@ -218,7 +218,7 @@ struct TransactionAddEditView: View {
                                 if let error = viewModel.titleError, viewModel.showErrors {
                                     Text(error)
                                         .font(.caption)
-                                        .foregroundColor(.red)
+                                        .foregroundColor(.appExpense)
                                 }
                             }
                             .padding(.vertical, 8)
@@ -253,12 +253,12 @@ struct TransactionAddEditView: View {
                                     HStack {
                                         Spacer()
                                         Text("Delete Transaction")
-                                            .foregroundColor(.red)
+                                            .foregroundColor(.appExpense)
                                             .fontWeight(.medium)
                                         Spacer()
                                     }
                                     .padding()
-                                    .background(Color.red.opacity(0.1))
+                                    .background(Color.appExpense.opacity(0.1))
                                     .cornerRadius(8)
                                 }
                                 .padding(.top, 20)

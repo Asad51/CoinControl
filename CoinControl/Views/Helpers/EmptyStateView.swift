@@ -6,24 +6,19 @@
 import SwiftUI
 
 struct EmptyStateView: View {
+    @EnvironmentObject private var settings: Settings
     let systemImage: String
     let title: String
     let message: String
-    let buttonTitle: String?
-    let action: (() -> Void)?
 
     init(
         systemImage: String,
         title: String,
-        message: String,
-        buttonTitle: String? = nil,
-        action: (() -> Void)? = nil
+        message: String
     ) {
         self.systemImage = systemImage
         self.title = title
         self.message = message
-        self.buttonTitle = buttonTitle
-        self.action = action
     }
 
     var body: some View {
@@ -45,21 +40,6 @@ struct EmptyStateView: View {
                     .multilineTextAlignment(.center)
             }
             .padding(.horizontal, 40)
-
-            if let buttonTitle, let action {
-                Button(action: action) {
-                    Text(buttonTitle)
-                        .fontWeight(.semibold)
-                        .font(.headline)
-                        .padding(.horizontal, 32)
-                        .padding(.vertical, 14)
-                        .background(Color.accentColor)
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
-                        .shadow(color: Color.accentColor.opacity(0.3), radius: 8, x: 0, y: 4)
-                }
-                .padding(.top, 10)
-            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.bottom, 50) // Adjust for potential tab bar or floating buttons
@@ -70,8 +50,6 @@ struct EmptyStateView: View {
     EmptyStateView(
         systemImage: "tray.fill",
         title: "No Transactions",
-        message: "No transactions this month — tap + to add your first expense.",
-        buttonTitle: "Add Transaction",
-        action: {}
+        message: "No transactions this month — tap + to add your first expense."
     )
 }

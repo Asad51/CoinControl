@@ -79,11 +79,8 @@ struct TransactionsView: View {
                                             EmptyStateView(
                                                 systemImage: "tray",
                                                 title: "No transactions this month",
-                                                message: "Tap + to add your first expense.",
-                                                buttonTitle: "Add Transaction"
-                                            ) {
-                                                sheetContainer = TransactionEditContainer(transaction: nil)
-                                            }
+                                                message: "Tap + to add your first expense."
+                                            )
                                         } else {
                                             ScrollView {
                                                 LazyVStack(spacing: 0) {
@@ -115,7 +112,11 @@ struct TransactionsView: View {
                 .disabled(viewModel.showExportOptions)
 
                 if viewModel.showExportOptions {
-                    ExportOptionsView(isPresented: $viewModel.showExportOptions) { period in
+                    ExportOptionsView(
+                        isPresented: $viewModel.showExportOptions,
+                        isExporting: viewModel.isExporting,
+                        error: $viewModel.exportError
+                    ) { period in
                         viewModel.exportData(for: period)
                     }
                     .transition(.opacity.combined(with: .scale))

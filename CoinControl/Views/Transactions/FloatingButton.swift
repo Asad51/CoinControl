@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FloatingButton: View {
+    @EnvironmentObject private var settings: Settings
     private let systemImage: String
     private let action: () -> Void
 
@@ -23,7 +24,7 @@ struct FloatingButton: View {
                 .foregroundStyle(.white)
         })
         .frame(width: 60, height: 60)
-        .background(Color.accentColor)
+        .background(settings.accentColor)
         .clipShape(Circle())
         .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 3)
     }

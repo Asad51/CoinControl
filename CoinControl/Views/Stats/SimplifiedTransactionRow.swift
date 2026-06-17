@@ -29,7 +29,7 @@ struct SimplifiedTransactionRow: View {
             VStack(alignment: .trailing, spacing: 4) {
                 Text(CurrencyFormatter.format(transaction.amount, currencySymbol: settings.currencySymbol))
                     .font(.system(.subheadline, design: .monospaced))
-                    .foregroundColor(.red) // All stats transactions are expenses
+                    .foregroundColor(transaction.type == TransactionType.income.rawValue ? .appIncome : .appExpense)
 
                 Text(transaction.account?.name ?? "")
                     .font(.caption)

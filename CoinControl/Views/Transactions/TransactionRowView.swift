@@ -40,7 +40,7 @@ struct TransactionRowView: View {
 
             // Amount
             Text(CurrencyFormatter.format(item.amount, currencySymbol: settings.currencySymbol))
-                .foregroundColor(item.type == TransactionType.expense.rawValue ? Color.red : .blue)
+                .foregroundColor(item.type == TransactionType.expense.rawValue ? .appExpense : .appIncome)
                 .font(.system(.subheadline, design: .monospaced))
         }
         .padding(.horizontal)

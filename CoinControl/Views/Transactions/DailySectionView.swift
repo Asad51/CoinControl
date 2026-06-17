@@ -35,9 +35,9 @@ struct DailySectionView: View {
 
                 HStack(spacing: 16) {
                     Text(CurrencyFormatter.format(viewModel.dailyIncome, currencySymbol: settings.currencySymbol))
-                        .foregroundColor(.blue)
+                        .foregroundColor(.appIncome)
                     Text(CurrencyFormatter.format(viewModel.dailyExpense, currencySymbol: settings.currencySymbol))
-                        .foregroundColor(.red)
+                        .foregroundColor(.appExpense)
                 }
                 .font(.system(.subheadline, design: .monospaced))
             }
