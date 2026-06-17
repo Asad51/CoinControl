@@ -69,12 +69,12 @@ struct MonthRowView: View {
                         VStack(alignment: .trailing, spacing: 2) {
                             if monthIncome > 0 {
                                 Text(CurrencyFormatter.format(monthIncome, currencySymbol: settings.currencySymbol))
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(.appIncome)
                             }
 
                             if monthExpense > 0 {
                                 Text(CurrencyFormatter.format(monthExpense, currencySymbol: settings.currencySymbol))
-                                    .foregroundColor(.red)
+                                    .foregroundColor(.appExpense)
                             }
                         }
                     }
@@ -159,12 +159,12 @@ struct WeekRowView: View {
                 VStack(alignment: .trailing, spacing: 2) {
                     if weekIncome > 0 {
                         Text(CurrencyFormatter.format(weekIncome, currencySymbol: settings.currencySymbol))
-                            .foregroundColor(.blue)
+                            .foregroundColor(.appIncome)
                     }
 
                     if weekExpense > 0 {
                         Text(CurrencyFormatter.format(weekExpense, currencySymbol: settings.currencySymbol))
-                            .foregroundColor(.red)
+                            .foregroundColor(.appExpense)
                     }
                 }
             }
@@ -176,7 +176,7 @@ struct WeekRowView: View {
                 .foregroundColor(.secondary)
         }
         .padding()
-        .background(isCurrentWeek ? Color.red.opacity(0.1) : Color(UIColor.secondarySystemBackground).opacity(0.3))
+        .background(isCurrentWeek ? settings.accentColor.opacity(0.1) : Color(UIColor.secondarySystemBackground).opacity(0.3))
 
         Divider()
     }

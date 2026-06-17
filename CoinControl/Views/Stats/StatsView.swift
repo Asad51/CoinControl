@@ -89,7 +89,7 @@ struct StatsView: View {
                                 .fontWeight(viewModel.selectedType == .income ? .bold : .regular)
                                 .foregroundColor(viewModel.selectedType == .income ? .primary : .secondary)
                             Rectangle()
-                                .fill(viewModel.selectedType == .income ? Color.blue : Color.clear)
+                                .fill(viewModel.selectedType == .income ? Color.appIncome : Color.clear)
                                 .frame(height: 3)
                         }
                     }
@@ -105,7 +105,7 @@ struct StatsView: View {
                                 .fontWeight(viewModel.selectedType == .expense ? .bold : .regular)
                                 .foregroundColor(viewModel.selectedType == .expense ? .primary : .secondary)
                             Rectangle()
-                                .fill(viewModel.selectedType == .expense ? Color.red : Color.clear)
+                                .fill(viewModel.selectedType == .expense ? Color.appExpense : Color.clear)
                                 .frame(height: 3)
                         }
                     }

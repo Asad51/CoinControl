@@ -138,19 +138,19 @@ struct TransactionHeaderView: View {
                     SummaryItemView(
                         title: "Income",
                         amount: selectedTopTab == .monthly ? viewModel.totalIncome : viewModel.monthlyIncome,
-                        color: .blue
+                        color: .appIncome
                     )
                     Spacer()
                     SummaryItemView(
                         title: "Expenses",
                         amount: selectedTopTab == .monthly ? viewModel.totalExpenses : viewModel.monthlyExpenses,
-                        color: .red
+                        color: .appExpense
                     )
                     Spacer()
                     SummaryItemView(
                         title: "Total",
                         amount: selectedTopTab == .monthly ? viewModel.totalBalance : viewModel.monthlyBalance,
-                        color: .primary
+                        color: .appTotal
                     )
                 }
                 .padding()

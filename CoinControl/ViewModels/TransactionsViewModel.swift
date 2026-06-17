@@ -41,6 +41,8 @@ class TransactionsViewModel: NSObject, ObservableObject {
 
     @Published var showExportOptions = false
     @Published var exportedFileURL: URL?
+    @Published var isExporting = false
+    @Published var exportError: String?
 
     private let fetchedResultsController: NSFetchedResultsController<Transaction>
     private let transactionService: TransactionServiceProtocol
@@ -220,6 +222,9 @@ class TransactionsViewModel: NSObject, ObservableObject {
     }
 
     func exportData(for period: ExportPeriod) {
+        isExporting = true
+        exportError = nil
+        
         Task {
             let allTransactions = fetchedResultsController.fetchedObjects ?? []
             let transactionsToExport: [Transaction]
@@ -253,9 +258,15 @@ class TransactionsViewModel: NSObject, ObservableObject {
                 let url = try await exportService.exportTransactions(exportItems)
                 await MainActor.run {
                     exportedFileURL = url
+                    isExporting = false
+                    showExportOptions = false
                 }
             } catch {
-                print("Export failed: \(error)")
+                await MainActor.run {
+                    print("Export failed: \(error)")
+                    exportError = error.localizedDescription
+                    isExporting = false
+                }
             }
         }
     }

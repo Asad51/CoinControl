@@ -9,10 +9,11 @@ import SwiftUI
 
 /// A reusable style component for form rows, creating the text visual and a custom underline.
 struct FormRowStyle: View {
+    @EnvironmentObject private var settings: Settings
     let title: String
     let value: String // The currently selected value or placeholder
     var color: Color = .primary // For value text
-    var hasContent: Bool // To determine line color (like the red underline on the Account in your image)
+    var hasContent: Bool // To determine line color
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -27,7 +28,7 @@ struct FormRowStyle: View {
 
             // Custom line separator: colored if has content, otherwise gray.
             Rectangle()
-                .fill(hasContent ? Color.red : Color(UIColor.tertiaryLabel))
+                .fill(hasContent ? settings.accentColor : Color(UIColor.tertiaryLabel))
                 .frame(height: hasContent ? 2 : 1)
         }
         .padding(.vertical, 8)

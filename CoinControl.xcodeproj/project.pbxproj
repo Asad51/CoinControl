@@ -88,6 +88,7 @@
 		DCF99F8D2F95474F0021812E /* FormRowStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF99F8C2F95474F0021812E /* FormRowStyle.swift */; };
 		DCF99F8F2F9547C70021812E /* TransactionAddEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF99F8E2F9547C70021812E /* TransactionAddEditView.swift */; };
 		DCF99F912F9548A40021812E /* CategoryGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF99F902F9548A40021812E /* CategoryGridView.swift */; };
+		DCFB51702FE3358B008B7DCB /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFB516F2FE3358B008B7DCB /* AppColors.swift */; };
 		DCFD47952FAD098300BCB009 /* TransactionAddEditViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFD47942FAD098300BCB009 /* TransactionAddEditViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -184,6 +185,7 @@
 		DCF99F8C2F95474F0021812E /* FormRowStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRowStyle.swift; sourceTree = "<group>"; };
 		DCF99F8E2F9547C70021812E /* TransactionAddEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionAddEditView.swift; sourceTree = "<group>"; };
 		DCF99F902F9548A40021812E /* CategoryGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryGridView.swift; sourceTree = "<group>"; };
+		DCFB516F2FE3358B008B7DCB /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		DCFD47942FAD098300BCB009 /* TransactionAddEditViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionAddEditViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -359,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				DCDB79962B6412370062E3B8 /* Logger */,
+				DCFB516F2FE3358B008B7DCB /* AppColors.swift */,
 				DC1452092FE1C00500A44EA8 /* CurrencyFormatter.swift */,
 				DC14520A2FE1C00500A44EA8 /* URL+Extensions.swift */,
 			);
@@ -644,6 +647,7 @@
 				DCAAAAAAAA0002 /* AccountsViewModel.swift in Sources */,
 				DCAAAAAAAA0004 /* AccountsView.swift in Sources */,
 				DCCA7D7A2B7D3BB000199111 /* PreviewData.swift in Sources */,
+				DCFB51702FE3358B008B7DCB /* AppColors.swift in Sources */,
 				DCEEEF8F2F93EEE500E7BB6A /* DailySectionView.swift in Sources */,
 				DC1190EA2B8E63CC00AD7222 /* AppDelegate.swift in Sources */,
 				DCC6CCF52B7D2BC600336C4B /* PersistenceController.swift in Sources */,

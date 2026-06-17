@@ -100,9 +100,9 @@ class StatsViewModel: ObservableObject {
         // Color palette based on type
         let palette: [Color]
         if selectedType == .income {
-            palette = [.blue, .cyan, .teal, .indigo, .mint, .green, .gray]
+            palette = [.appIncome, .cyan, .teal, .indigo, .mint, .blue, .gray]
         } else {
-            palette = [.red, .orange, .yellow, .pink, .purple, .brown, .gray]
+            palette = [.appExpense, .orange, .yellow, .pink, .purple, .brown, .gray]
         }
 
         stats = sortedData.enumerated().map { index, item in

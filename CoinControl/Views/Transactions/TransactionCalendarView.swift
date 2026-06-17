@@ -172,14 +172,14 @@ struct CalendarCellView: View {
             if income > 0 {
                 Text(CurrencyFormatter.format(income, currencySymbol: settings.currencySymbol))
                     .font(.system(size: 9))
-                    .foregroundColor(.blue)
+                    .foregroundColor(.appIncome)
                     .lineLimit(1)
             }
 
             if expense > 0 {
                 Text(CurrencyFormatter.format(expense, currencySymbol: settings.currencySymbol))
                     .font(.system(size: 9))
-                    .foregroundColor(.red)
+                    .foregroundColor(.appExpense)
                     .lineLimit(1)
             }
 
