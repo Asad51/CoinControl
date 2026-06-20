@@ -93,9 +93,9 @@ struct ExportOptionsView: View {
             get: { error != nil },
             set: { if !$0 { error = nil } }
         )) {
-            Button("OK", role: .cancel) { }
+            Button("OK", role: .cancel) {}
         } message: {
-            if let error = error {
+            if let error {
                 Text(error)
             }
         }
@@ -105,4 +105,3 @@ struct ExportOptionsView: View {
 #Preview {
     ExportOptionsView(isPresented: .constant(true), isExporting: false, error: .constant(nil)) { _ in }
 }
-

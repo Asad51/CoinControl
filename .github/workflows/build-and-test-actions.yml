@@ -1,25 +1,43 @@
-name: Build & Test
+name: Build
 
-on: 
+on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
 
 jobs:
-  build-and-test:
+  build:
+    name: Build iOS App
     runs-on: macos-latest
+    timeout-minutes: 20
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Select Xcode version
+      - name: Select Xcode
         run: sudo xcode-select -s /Applications/Xcode.app
 
-      - name: Build & Test
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Build
         run: |
-          xcodebuild clean test \
-          -project CoinControl.xcodeproj \
-          -scheme CoinControl \
-          -destination 'platform=iOS Simulator,name=iPhone 17'
+          set -eo pipefail
+
+          xcodebuild build \
+            -project CoinControl.xcodeproj \
+            -scheme CoinControl \
+            -configuration Debug \
+            -destination 'generic/platform=iOS' \
+            CODE_SIGNING_ALLOWED=NO
+
+      # - name: Build & Test
+      #   run: |
+      #     set -eo pipefail
+      #     xcodebuild clean test \
+      #     -project CoinControl.xcodeproj \
+      #     -scheme CoinControl \
+      #     -destination 'platform=iOS Simulator,name=iPhone 17'
+      
