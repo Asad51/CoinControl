@@ -224,7 +224,7 @@ class TransactionsViewModel: NSObject, ObservableObject {
     func exportData(for period: ExportPeriod) {
         isExporting = true
         exportError = nil
-        
+
         Task {
             let allTransactions = fetchedResultsController.fetchedObjects ?? []
             let transactionsToExport: [Transaction]
