@@ -33,18 +33,33 @@ class AccountsViewModel: ObservableObject {
     }
 
     private func calculateBalances() {
-        let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TransactionEntity")
+        fetchRequest.resultType = .dictionaryResultType
+
+        let sumExpressionDesc = NSExpressionDescription()
+        sumExpressionDesc.name = "sumAmount"
+        sumExpressionDesc.expression = NSExpression(forFunction: "sum:", arguments: [NSExpression(forKeyPath: "amount")])
+        sumExpressionDesc.expressionResultType = .doubleAttributeType
+
+        fetchRequest.propertiesToFetch = ["account", "type", sumExpressionDesc]
+        fetchRequest.propertiesToGroupBy = ["account", "type"]
+
         do {
-            let transactions = try context.fetch(request)
+            guard let results = try context.fetch(fetchRequest) as? [[String: Any]] else { return }
             var newBalances: [UUID: Double] = [:]
-            for transaction in transactions {
-                guard let account = transaction.account else { continue }
-                let amount = transaction.type == TransactionType.expense.rawValue ? -transaction.amount : transaction.amount
-                newBalances[account.id, default: 0.0] += amount
+            for dict in results {
+                guard let accountID = dict["account"] as? NSManagedObjectID,
+                      let type = dict["type"] as? Int16,
+                      let sumAmount = dict["sumAmount"] as? Double else { continue }
+
+                if let account = try? context.existingObject(with: accountID) as? Account {
+                    let amount = type == TransactionType.expense.rawValue ? -sumAmount : sumAmount
+                    newBalances[account.id, default: 0.0] += amount
+                }
             }
             balances = newBalances
         } catch {
-            print("Failed to fetch transactions for balances: \(error)")
+            print("Failed to calculate balances: \(error)")
         }
     }
 }
