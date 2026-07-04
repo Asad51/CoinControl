@@ -63,30 +63,42 @@ class CategoryDetailViewModel: ObservableObject {
     }
 
     private func fetchTrendData() {
-        // Fetch last 8 months including current
-        var points: [TrendPoint] = []
-        for i in (0 ..< 8).reversed() {
-            if let date = calendar.date(byAdding: .month, value: -i, to: currentDate) {
-                let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: date))!
-                let endOfMonth = calendar.date(byAdding: .month, value: 1, to: startOfMonth)!.addingTimeInterval(-1)
+        // Fetch last 8 months including current in a single batch query
+        guard let oldestDate = calendar.date(byAdding: .month, value: -7, to: currentDate),
+              let startOfTrendPeriod = calendar.date(from: calendar.dateComponents([.year, .month], from: oldestDate)) else {
+            return
+        }
 
-                let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
-                request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
-                    NSPredicate(format: "category == %@", category),
-                    NSPredicate(format: "type == %d", category.type),
-                    NSPredicate(format: "date >= %@ AND date <= %@", startOfMonth as NSDate, endOfMonth as NSDate),
-                ])
+        let startOfCurrentMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: currentDate))!
+        let endOfTrendPeriod = calendar.date(byAdding: .month, value: 1, to: startOfCurrentMonth)!.addingTimeInterval(-1)
 
-                do {
-                    let results = try context.fetch(request)
-                    let sum = results.reduce(0) { $0 + $1.amount }
+        let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
+            NSPredicate(format: "category == %@", category),
+            NSPredicate(format: "type == %d", category.type),
+            NSPredicate(format: "date >= %@ AND date <= %@", startOfTrendPeriod as NSDate, endOfTrendPeriod as NSDate)
+        ])
+
+        do {
+            let allTransactions = try context.fetch(request)
+            var points: [TrendPoint] = []
+            
+            for i in (0 ..< 8).reversed() {
+                if let date = calendar.date(byAdding: .month, value: -i, to: currentDate) {
+                    let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: date))!
+                    let endOfMonth = calendar.date(byAdding: .month, value: 1, to: startOfMonth)!.addingTimeInterval(-1)
+                    
+                    let sum = allTransactions.filter {
+                        $0.date >= startOfMonth && $0.date <= endOfMonth
+                    }.reduce(0) { $0 + $1.amount }
+                    
                     points.append(TrendPoint(date: startOfMonth, amount: sum))
-                } catch {
-                    print("Fetch trend data failed: \(error)")
                 }
             }
+            trendData = points
+        } catch {
+            print("Fetch trend data failed: \(error)")
         }
-        trendData = points
     }
 
     var dateString: String {
