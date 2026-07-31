@@ -14,7 +14,7 @@ struct CategoryGridView: View {
     @StateObject private var viewModel: CategoryGridViewModel
 
     // Pass selection back to main view
-    @Binding var selectedCategory: Category?
+    @Binding var selectedCategory: CategoryModel?
     let type: Int16
 
     @State private var showingEditSheet = false
@@ -24,7 +24,7 @@ struct CategoryGridView: View {
         [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     }
 
-    init(selectedCategory: Binding<Category?>, type: Int16) {
+    init(selectedCategory: Binding<CategoryModel?>, type: Int16) {
         _selectedCategory = selectedCategory
         self.type = type
         _viewModel = StateObject(wrappedValue: CategoryGridViewModel(type: type))

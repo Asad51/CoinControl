@@ -9,13 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject private var settings: Settings
-    @StateObject private var transactionsViewModel: TransactionsViewModel
+    @StateObject private var transactionsViewModel = TransactionsViewModel()
     @State private var selectedTab = BottomTab.transactions
-
-    init() {
-        // Initialize with default settings; it will be updated if needed or we can rely on @EnvironmentObject in the view
-        _transactionsViewModel = StateObject(wrappedValue: TransactionsViewModel())
-    }
 
     var body: some View {
         ZStack {

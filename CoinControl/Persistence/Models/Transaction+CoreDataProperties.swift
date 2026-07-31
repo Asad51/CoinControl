@@ -24,6 +24,19 @@ extension Transaction {
     @NSManaged var title: String
     @NSManaged var category: Category?
     @NSManaged var account: Account?
+    
+    var toModel: TransactionModel {
+        TransactionModel(
+            id: id,
+            amount: amount,
+            date: date,
+            type: TransactionType(rawValue: type) ?? .expense,
+            note: note,
+            title: title,
+            category: category?.toModel,
+            account: account?.toModel
+        )
+    }
 }
 
 extension Transaction: Identifiable {}
