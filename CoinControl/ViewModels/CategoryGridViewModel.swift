@@ -8,7 +8,7 @@ import CoreData
 import Foundation
 
 class CategoryGridViewModel: ObservableObject {
-    @Published var categories: [Category] = []
+    @Published var categories: [CategoryModel] = []
 
     private let categoryService: CategoryServiceProtocol
     private let type: Int16

@@ -13,11 +13,11 @@ class TransactionAddEditViewModel: ObservableObject {
     @Published var amountText: String = ""
     @Published var title: String = ""
     @Published var note: String = ""
-    @Published var selectedCategory: Category?
-    @Published var selectedAccount: Account?
+    @Published var selectedCategory: CategoryModel?
+    @Published var selectedAccount: AccountModel?
 
-    @Published var categories: [Category] = []
-    @Published var accounts: [Account] = []
+    @Published var categories: [CategoryModel] = []
+    @Published var accounts: [AccountModel] = []
     @Published var suggestions: [String] = []
 
     @Published var titleError: String?
@@ -59,8 +59,8 @@ class TransactionAddEditViewModel: ObservableObject {
             amountText = String(format: "%.2f", transaction.amount)
             title = transaction.title
             note = transaction.note
-            selectedCategory = transaction.category
-            selectedAccount = transaction.account
+            selectedCategory = transaction.category?.toModel
+            selectedAccount = transaction.account?.toModel
         }
 
         setupSubscribers()
@@ -125,7 +125,7 @@ class TransactionAddEditViewModel: ObservableObject {
     private func filterCategories(for type: TransactionType) {
         do {
             categories = try categoryService.fetchCategories(by: type.rawValue)
-            if !isEditing || selectedCategory?.type != type.rawValue {
+            if !isEditing || selectedCategory?.type != type {
                 selectedCategory = categories.first
             }
         } catch {

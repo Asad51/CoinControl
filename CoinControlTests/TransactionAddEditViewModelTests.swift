@@ -31,6 +31,7 @@ final class TransactionAddEditViewModelTests: XCTestCase {
             t.amount = 10.0
             t.date = Date()
             t.type = TransactionType.expense.rawValue
+            t.note = ""
         }
         try context.save()
 
@@ -84,6 +85,7 @@ final class TransactionAddEditViewModelTests: XCTestCase {
             t.amount = Double(i)
             t.date = Date()
             t.type = TransactionType.expense.rawValue
+            t.note = ""
         }
         try context.save()
 

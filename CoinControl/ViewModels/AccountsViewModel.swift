@@ -9,57 +9,49 @@ import Foundation
 
 @MainActor
 class AccountsViewModel: ObservableObject {
-    @Published var accounts: [Account] = []
+    @Published var accounts: [AccountModel] = []
     @Published var balances: [UUID: Double] = [:]
 
-    private let context: NSManagedObjectContext
     private let accountService: AccountServiceProtocol
 
-    init(context: NSManagedObjectContext = PersistenceController.shared.viewContext,
-         accountService: AccountServiceProtocol? = nil)
-    {
-        self.context = context
-        self.accountService = accountService ?? AccountService(context: context)
+    init(accountService: AccountServiceProtocol = AccountService()) {
+        self.accountService = accountService
         fetchAccounts()
     }
 
     func fetchAccounts() {
         do {
             accounts = try accountService.fetchAccounts()
-            calculateBalances()
+            balances = try accountService.getBalances()
         } catch {
-            print("Failed to fetch accounts: \(error)")
+            print("Failed to fetch accounts or balances: \(error)")
         }
     }
 
-    private func calculateBalances() {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TransactionEntity")
-        fetchRequest.resultType = .dictionaryResultType
-
-        let sumExpressionDesc = NSExpressionDescription()
-        sumExpressionDesc.name = "sumAmount"
-        sumExpressionDesc.expression = NSExpression(forFunction: "sum:", arguments: [NSExpression(forKeyPath: "amount")])
-        sumExpressionDesc.expressionResultType = .doubleAttributeType
-
-        fetchRequest.propertiesToFetch = ["account", "type", sumExpressionDesc]
-        fetchRequest.propertiesToGroupBy = ["account", "type"]
-
+    func addAccount(name: String, type: AccountType) {
         do {
-            guard let results = try context.fetch(fetchRequest) as? [[String: Any]] else { return }
-            var newBalances: [UUID: Double] = [:]
-            for dict in results {
-                guard let accountID = dict["account"] as? NSManagedObjectID,
-                      let type = dict["type"] as? Int16,
-                      let sumAmount = dict["sumAmount"] as? Double else { continue }
-
-                if let account = try? context.existingObject(with: accountID) as? Account {
-                    let amount = type == TransactionType.expense.rawValue ? -sumAmount : sumAmount
-                    newBalances[account.id, default: 0.0] += amount
-                }
-            }
-            balances = newBalances
+            try accountService.addAccount(name: name, type: type)
+            fetchAccounts()
         } catch {
-            print("Failed to calculate balances: \(error)")
+            print("Failed to add account: \(error)")
+        }
+    }
+
+    func updateAccount(id: UUID, name: String, type: AccountType) {
+        do {
+            try accountService.updateAccount(id: id, name: name, type: type)
+            fetchAccounts()
+        } catch {
+            print("Failed to update account: \(error)")
+        }
+    }
+
+    func deleteAccount(_ account: AccountModel) {
+        do {
+            try accountService.deleteAccount(account)
+            fetchAccounts()
+        } catch {
+            print("Failed to delete account: \(error)")
         }
     }
 }

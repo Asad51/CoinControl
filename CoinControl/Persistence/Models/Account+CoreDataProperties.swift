@@ -19,6 +19,10 @@ extension Account {
     @NSManaged public var id: UUID
     @NSManaged var name: String
     @NSManaged var accountType: Int16
+    
+    var toModel: AccountModel {
+        AccountModel(id: id, name: name, type: AccountType(rawValue: accountType) ?? .cash)
+    }
 }
 
 extension Account: Identifiable {}
