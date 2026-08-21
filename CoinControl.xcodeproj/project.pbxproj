@@ -55,6 +55,10 @@
 		DCAAAAAAAA0002 /* AccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAAAAAAAA0001 /* AccountsViewModel.swift */; };
 		DCAAAAAAAA0004 /* AccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAAAAAAAA0003 /* AccountsView.swift */; };
 		DCAAAAAAAA0007 /* AccountAddEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAAAAAAAA0006 /* AccountAddEditView.swift */; };
+		DCAAAAAAAA0009 /* ImportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAAAAAAAA0008 /* ImportService.swift */; };
+		DCAAAAAAAA000B /* ImportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAAAAAAAA000A /* ImportViewModel.swift */; };
+		DCAAAAAAAA000D /* ImportPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAAAAAAAA000C /* ImportPreviewView.swift */; };
+		DCAAAAAAAA000F /* ImportServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAAAAAAAA000E /* ImportServiceTests.swift */; };
 		DCC208132F9BD31B00AF45A8 /* CategoryPieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC208122F9BD31B00AF45A8 /* CategoryPieChartView.swift */; };
 		DCC208152F9BDE3700AF45A8 /* SimplifiedTransactionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC208142F9BDE3700AF45A8 /* SimplifiedTransactionRow.swift */; };
 		DCC6CCF52B7D2BC600336C4B /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6CCF42B7D2BC600336C4B /* PersistenceController.swift */; };
@@ -157,6 +161,10 @@
 		DCAAAAAAAA0001 /* AccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModel.swift; sourceTree = "<group>"; };
 		DCAAAAAAAA0003 /* AccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsView.swift; sourceTree = "<group>"; };
 		DCAAAAAAAA0006 /* AccountAddEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAddEditView.swift; sourceTree = "<group>"; };
+		DCAAAAAAAA0008 /* ImportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportService.swift; sourceTree = "<group>"; };
+		DCAAAAAAAA000A /* ImportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportViewModel.swift; sourceTree = "<group>"; };
+		DCAAAAAAAA000C /* ImportPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportPreviewView.swift; sourceTree = "<group>"; };
+		DCAAAAAAAA000E /* ImportServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportServiceTests.swift; sourceTree = "<group>"; };
 		DCC208122F9BD31B00AF45A8 /* CategoryPieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPieChartView.swift; sourceTree = "<group>"; };
 		DCC208142F9BDE3700AF45A8 /* SimplifiedTransactionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplifiedTransactionRow.swift; sourceTree = "<group>"; };
 		DCC6CCF42B7D2BC600336C4B /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
@@ -237,6 +245,7 @@
 				DC1451EF2FE1BF2400A44EA8 /* CategoryListViewModel.swift */,
 				DCF927B22F9FBB0D008AC220 /* CategoryDetailViewModel.swift */,
 				DCAAAAAAAA0001 /* AccountsViewModel.swift */,
+				DCAAAAAAAA000A /* ImportViewModel.swift */,
 				DCEE53572F9A646F00241BFE /* StatsViewModel.swift */,
 				DC09B7AF2F97BC5500ED426E /* CategoryGridViewModel.swift */,
 				DC09B7B02F97BC5500ED426E /* DailySectionViewModel.swift */,
@@ -250,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				DC1451ED2FE1BEFC00A44EA8 /* ExportService.swift */,
+				DCAAAAAAAA0008 /* ImportService.swift */,
 				DC09B7BE2F97C96E00ED426E /* InitialDataService.swift */,
 				DC09B7B72F97C0E900ED426E /* AccountService.swift */,
 				DC09B7B82F97C0E900ED426E /* CategoryService.swift */,
@@ -310,6 +320,7 @@
 			children = (
 				DCAAAAAAAA0003 /* AccountsView.swift */,
 				DCAAAAAAAA0006 /* AccountAddEditView.swift */,
+				DCAAAAAAAA000C /* ImportPreviewView.swift */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -343,6 +354,7 @@
 				DC14520D2FE1C02300A44EA8 /* CurrencyFormatterTests.swift */,
 				DCFD47942FAD098300BCB009 /* TransactionAddEditViewModelTests.swift */,
 				DCD054AA2B90CB60002A7A32 /* AccountsViewModelTests.swift */,
+				DCAAAAAAAA000E /* ImportServiceTests.swift */,
 				DCD054522B90CB60002A7A32 /* CoinControlTests.swift */,
 			);
 			path = CoinControlTests;
@@ -657,8 +669,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCAAAAAAAA0002 /* AccountsViewModel.swift in Sources */,
+				DCAAAAAAAA000B /* ImportViewModel.swift in Sources */,
 				DCAAAAAAAA0004 /* AccountsView.swift in Sources */,
 				DCAAAAAAAA0007 /* AccountAddEditView.swift in Sources */,
+				DCAAAAAAAA000D /* ImportPreviewView.swift in Sources */,
+				DCAAAAAAAA0009 /* ImportService.swift in Sources */,
 				DCCA7D7A2B7D3BB000199111 /* PreviewData.swift in Sources */,
 				DCFB51702FE3358B008B7DCB /* AppColors.swift in Sources */,
 				DCEEEF8F2F93EEE500E7BB6A /* DailySectionView.swift in Sources */,
@@ -735,6 +750,7 @@
 				DCD054AB2B90CB60002A7A32 /* AccountsViewModelTests.swift in Sources */,
 				DC14520E2FE1C02300A44EA8 /* CurrencyFormatterTests.swift in Sources */,
 				DCFD47952FAD098300BCB009 /* TransactionAddEditViewModelTests.swift in Sources */,
+				DCAAAAAAAA000F /* ImportServiceTests.swift in Sources */,
 				DCD054532B90CB60002A7A32 /* CoinControlTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
