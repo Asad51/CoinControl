@@ -67,7 +67,8 @@ enum CCLogger {
         asynchronous async: Bool = false,
         ddlog: DDLog = .sharedInstance
     ) {
-        DDLogError(message, level: level, context: context, file: file, function: function, line: line, tag: tag, asynchronous: async, ddlog: ddlog)
+        let log = Logger(label: "com.coincontrol.error")
+        log.error("\(message)")
     }
 
     /// Logging method for warning messages.
@@ -98,7 +99,8 @@ enum CCLogger {
         asynchronous async: Bool = asyncLoggingEnabled,
         ddlog: DDLog = .sharedInstance
     ) {
-        DDLogWarn(message, level: level, context: context, file: file, function: function, line: line, tag: tag, asynchronous: async, ddlog: ddlog)
+        let log = Logger(label: "com.coincontrol.warning")
+        log.warning("\(message)")
     }
 
     /// Logging method for info messages.
@@ -130,7 +132,8 @@ enum CCLogger {
         asynchronous async: Bool = asyncLoggingEnabled,
         ddlog: DDLog = .sharedInstance
     ) {
-        DDLogInfo(message, level: level, context: context, file: file, function: function, line: line, tag: tag, asynchronous: async, ddlog: ddlog)
+        let log = Logger(label: "com.coincontrol.info")
+        log.info("\(message)")
     }
 
     /// Logging method for debug messages.
@@ -163,7 +166,8 @@ enum CCLogger {
         asynchronous async: Bool = asyncLoggingEnabled,
         ddlog: DDLog = .sharedInstance
     ) {
-        DDLogDebug(message, level: level, context: context, file: file, function: function, line: line, tag: tag, asynchronous: async, ddlog: ddlog)
+        let log = Logger(label: "com.coincontrol.debug")
+        log.debug("\(message)")
     }
 
     /// Logging method for verbose messages.
@@ -195,6 +199,7 @@ enum CCLogger {
         asynchronous async: Bool = asyncLoggingEnabled,
         ddlog: DDLog = .sharedInstance
     ) {
-        DDLogVerbose(message, level: level, context: context, file: file, function: function, line: line, tag: tag, asynchronous: async, ddlog: ddlog)
+        let log = Logger(label: "com.coincontrol.verbose")
+        log.trace("\(message)")
     }
 }

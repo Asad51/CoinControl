@@ -4,10 +4,15 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var settings: Settings
+
+    @State private var showingFileImporter = false
+    @State private var selectedFileURL: URL? = nil
+    @State private var showingPreview = false
 
     private let availableColors: [(String, Color)] = [
         ("Blue", .tintBlue),
@@ -38,6 +43,12 @@ struct SettingsView: View {
 
                     NavigationLink(destination: CategoryListView(type: TransactionType.expense.rawValue)) {
                         Label("Expense Categories", systemImage: "arrow.up.circle")
+                    }
+
+                    Button(action: {
+                        showingFileImporter = true
+                    }) {
+                        Label("Import Data", systemImage: "square.and.arrow.down")
                     }
                 }
 
@@ -76,6 +87,28 @@ struct SettingsView: View {
                     Button("Done") {
                         dismiss()
                     }
+                }
+            }
+            .fileImporter(
+                isPresented: $showingFileImporter,
+                allowedContentTypes: [.commaSeparatedText, .text],
+                allowsMultipleSelection: false
+            ) { result in
+                switch result {
+                    case .success(let urls):
+                        if let url = urls.first {
+                            selectedFileURL = url
+                            showingPreview = true
+                        }
+                    case .failure(let error):
+                        print("Failed to select file: \(error.localizedDescription)")
+                }
+            }
+            .sheet(isPresented: $showingPreview, onDismiss: {
+                selectedFileURL = nil
+            }) {
+                if let url = selectedFileURL {
+                    ImportPreviewView(fileURL: url)
                 }
             }
         }
