@@ -88,7 +88,7 @@ class TransactionsViewModel: NSObject, ObservableObject {
             filteredTransactions = []
         } else {
             filteredTransactions = allTransactions.filter { transaction in
-                let titleMatch = transaction.title.localizedCaseInsensitiveContains(query)
+                let titleMatch = transaction.title?.localizedCaseInsensitiveContains(query) ?? false
                 let noteMatch = transaction.note.localizedCaseInsensitiveContains(query)
                 let categoryMatch = transaction.category?.name.localizedCaseInsensitiveContains(query) == true ||
                     transaction.category?.icon.localizedCaseInsensitiveContains(query) == true
@@ -221,39 +221,41 @@ class TransactionsViewModel: NSObject, ObservableObject {
         groupedTransactions = grouped.sorted { $0.key > $1.key }
     }
 
+    @MainActor
     func exportData(for period: ExportPeriod) {
         isExporting = true
         exportError = nil
 
+        // Read all Core Data objects on the main actor before doing any async work.
+        let allTransactions = fetchedResultsController.fetchedObjects ?? []
+        let transactionsToExport: [Transaction]
+
+        if let range = period.dateRange() {
+            transactionsToExport = allTransactions.filter {
+                $0.date >= range.start && $0.date <= range.end
+            }
+        } else {
+            transactionsToExport = allTransactions
+        }
+
+        let exportItems = transactionsToExport.map { transaction in
+            let categoryDisplay = [transaction.category?.icon, transaction.category?.name]
+                .compactMap { $0 }
+                .joined(separator: " ")
+
+            return TransactionExportItem(
+                date: transaction.date,
+                title: transaction.title ?? "",
+                type: TransactionType(rawValue: transaction.type)?.title ?? "Unknown",
+                category: categoryDisplay.isEmpty ? "No Category" : categoryDisplay,
+                account: transaction.account?.name ?? "No Account",
+                currency: settings.currencySymbol,
+                amount: transaction.amount,
+                note: transaction.note
+            )
+        }
+
         Task {
-            let allTransactions = fetchedResultsController.fetchedObjects ?? []
-            let transactionsToExport: [Transaction]
-
-            if let range = period.dateRange() {
-                transactionsToExport = allTransactions.filter {
-                    $0.date >= range.start && $0.date <= range.end
-                }
-            } else {
-                transactionsToExport = allTransactions
-            }
-
-            let exportItems = transactionsToExport.map { transaction in
-                let categoryDisplay = [transaction.category?.icon, transaction.category?.name]
-                    .compactMap { $0 }
-                    .joined(separator: " ")
-
-                return TransactionExportItem(
-                    date: transaction.date,
-                    title: transaction.title,
-                    type: TransactionType(rawValue: transaction.type)?.title ?? "Unknown",
-                    category: categoryDisplay.isEmpty ? "No Category" : categoryDisplay,
-                    account: transaction.account?.name ?? "No Account",
-                    currency: settings.currencySymbol,
-                    amount: transaction.amount,
-                    note: transaction.note
-                )
-            }
-
             do {
                 let url = try await exportService.exportTransactions(exportItems)
                 await MainActor.run {

@@ -28,7 +28,7 @@ struct TransactionRowView: View {
 
             // Title & Account
             VStack(alignment: .leading, spacing: 2) {
-                Text(item.title)
+                Text(item.title ?? "")
                     .font(.body)
                     .foregroundColor(.primary)
                 Text(item.account?.name ?? "Cash")

@@ -21,7 +21,7 @@ extension Transaction {
     @NSManaged public var id: UUID
     @NSManaged var type: Int16
     @NSManaged var note: String
-    @NSManaged var title: String
+    @NSManaged var title: String?
     @NSManaged var category: Category?
     @NSManaged var account: Account?
     
@@ -32,7 +32,7 @@ extension Transaction {
             date: date,
             type: TransactionType(rawValue: type) ?? .expense,
             note: note,
-            title: title,
+            title: title ?? "",
             category: category?.toModel,
             account: account?.toModel
         )
