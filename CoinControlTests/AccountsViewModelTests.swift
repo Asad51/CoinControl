@@ -99,4 +99,33 @@ final class AccountsViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(viewModel.accounts.count, 0)
     }
+
+    @MainActor
+    func testDeleteAccountWithTransactionsIsBlocked() throws {
+        // Given
+        viewModel.addAccount(name: "In Use", type: .cash)
+        let addedAccount = viewModel.accounts[0]
+
+        let accountRequest = Account.fetchRequest()
+        accountRequest.predicate = NSPredicate(format: "id == %@", addedAccount.id as CVarArg)
+        let managedAccount = try XCTUnwrap(context.fetch(accountRequest).first)
+
+        let transaction = Transaction(context: context)
+        transaction.id = UUID()
+        transaction.amount = 10.0
+        transaction.type = TransactionType.expense.rawValue
+        transaction.date = Date()
+        transaction.title = ""
+        transaction.note = ""
+        transaction.account = managedAccount
+        try context.save()
+
+        // When
+        let deleted = viewModel.deleteAccount(addedAccount)
+
+        // Then
+        XCTAssertFalse(deleted, "Deletion should be refused while transactions reference the account")
+        XCTAssertNotNil(viewModel.errorMessage)
+        XCTAssertEqual(viewModel.accounts.count, 1, "Account should still exist")
+    }
 }

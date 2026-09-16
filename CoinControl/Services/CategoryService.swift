@@ -48,9 +48,22 @@ class CategoryService: CategoryServiceProtocol {
     func deleteCategory(_ categoryModel: CategoryModel) throws {
         let request = Category.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", categoryModel.id as CVarArg)
-        if let category = try context.fetch(request).first {
-            context.delete(category)
-            try context.save()
+        guard let category = try context.fetch(request).first else { return }
+
+        // Deleting the category would orphan its transactions, so block it while referenced.
+        let countRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TransactionEntity")
+        countRequest.predicate = NSPredicate(format: "category == %@", category)
+        let transactionCount = try context.count(for: countRequest)
+        guard transactionCount == 0 else {
+            let noun = transactionCount == 1 ? "transaction" : "transactions"
+            throw NSError(
+                domain: "CategoryService",
+                code: 409,
+                userInfo: [NSLocalizedDescriptionKey: "“\(categoryModel.name)” can’t be deleted because \(transactionCount) \(noun) still use it. Delete or reassign those transactions first."]
+            )
         }
+
+        context.delete(category)
+        try context.save()
     }
 }

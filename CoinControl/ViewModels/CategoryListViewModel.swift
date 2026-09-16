@@ -9,6 +9,7 @@ import Foundation
 
 class CategoryListViewModel: ObservableObject {
     @Published var categories: [CategoryModel] = []
+    @Published var errorMessage: String? = nil
 
     private let categoryService: CategoryServiceProtocol
     let type: Int16
@@ -34,7 +35,8 @@ class CategoryListViewModel: ObservableObject {
                 try categoryService.deleteCategory(category)
                 fetchCategories()
             } catch {
-                print("Failed to delete category: \(error)")
+                errorMessage = error.localizedDescription
+                return
             }
         }
     }

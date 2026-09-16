@@ -54,8 +54,7 @@ struct AccountAddEditView: View {
                             titleVisibility: .visible
                         ) {
                             Button("Delete", role: .destructive) {
-                                if let account = accountToEdit {
-                                    viewModel.deleteAccount(account)
+                                if let account = accountToEdit, viewModel.deleteAccount(account) {
                                     dismiss()
                                 }
                             }
@@ -89,6 +88,14 @@ struct AccountAddEditView: View {
                     name = account.name
                     type = account.type
                 }
+            }
+            .alert("Can’t Delete Account", isPresented: Binding(
+                get: { viewModel.errorMessage != nil },
+                set: { if !$0 { viewModel.errorMessage = nil } }
+            )) {
+                Button("OK", role: .cancel) { viewModel.errorMessage = nil }
+            } message: {
+                Text(viewModel.errorMessage ?? "")
             }
         }
     }
