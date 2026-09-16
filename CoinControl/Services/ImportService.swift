@@ -118,7 +118,7 @@ class ImportService: ImportServiceProtocol {
                 let calendar = Calendar.current
                 let sameDay = calendar.isDate(existingTx.date, inSameDayAs: date)
                 let sameAmount = abs(existingTx.amount - amount) < 0.01
-                let sameTitle = existingTx.title.localizedCaseInsensitiveCompare(title) == .orderedSame
+                let sameTitle = (existingTx.title ?? "").localizedCaseInsensitiveCompare(title) == .orderedSame
                 
                 return sameDay && sameAmount && sameTitle
             }
