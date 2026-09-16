@@ -24,7 +24,7 @@ class CategoryListViewModel: ObservableObject {
         do {
             categories = try categoryService.fetchCategories(by: type)
         } catch {
-            print("Failed to fetch categories: \(error)")
+            CCLogger.error("Failed to fetch categories: \(error)")
         }
     }
 
@@ -46,7 +46,7 @@ class CategoryListViewModel: ObservableObject {
             try categoryService.addCategory(name: name, icon: icon, type: type)
             fetchCategories()
         } catch {
-            print("Failed to add category: \(error)")
+            CCLogger.error("Failed to add category: \(error)")
         }
     }
 }

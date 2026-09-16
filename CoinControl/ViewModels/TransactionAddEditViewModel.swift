@@ -129,7 +129,7 @@ class TransactionAddEditViewModel: ObservableObject {
                 selectedCategory = categories.first
             }
         } catch {
-            print("Failed to filter categories: \(error)")
+            CCLogger.error("Failed to filter categories: \(error)")
         }
     }
 
@@ -149,7 +149,7 @@ class TransactionAddEditViewModel: ObservableObject {
                 }
             }
         } catch {
-            print("Failed to fetch dependencies: \(error)")
+            CCLogger.error("Failed to fetch dependencies: \(error)")
         }
     }
 
@@ -177,7 +177,7 @@ class TransactionAddEditViewModel: ObservableObject {
             )
             return true
         } catch {
-            print("Failed to save transaction: \(error)")
+            CCLogger.error("Failed to save transaction: \(error)")
             return false
         }
     }
@@ -216,7 +216,7 @@ class TransactionAddEditViewModel: ObservableObject {
             try transactionService.deleteTransaction(transaction)
             return true
         } catch {
-            print("Failed to delete transaction: \(error)")
+            CCLogger.error("Failed to delete transaction: \(error)")
             return false
         }
     }

@@ -31,7 +31,5 @@ struct FloatingButton: View {
 }
 
 #Preview {
-    FloatingButton(systemImage: "plus") {
-        print("pressed")
-    }
+    FloatingButton(systemImage: "plus") {}
 }

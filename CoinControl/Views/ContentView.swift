@@ -10,10 +10,14 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject private var settings: Settings
     @StateObject private var transactionsViewModel: TransactionsViewModel
+    @StateObject private var statsViewModel: StatsViewModel
+    @StateObject private var accountsViewModel: AccountsViewModel
     @State private var selectedTab = BottomTab.transactions
 
     init(settings: Settings = Settings()) {
         _transactionsViewModel = StateObject(wrappedValue: TransactionsViewModel(settings: settings))
+        _statsViewModel = StateObject(wrappedValue: StatsViewModel())
+        _accountsViewModel = StateObject(wrappedValue: AccountsViewModel())
     }
 
     var body: some View {
@@ -27,9 +31,9 @@ struct ContentView: View {
                         case .transactions:
                             TransactionsView(viewModel: transactionsViewModel)
                         case .stats:
-                            StatsView()
+                            StatsView(viewModel: statsViewModel)
                         case .accounts:
-                            AccountsView()
+                            AccountsView(viewModel: accountsViewModel)
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

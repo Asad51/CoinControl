@@ -83,7 +83,7 @@ class StatsViewModel: ObservableObject {
             let filteredTransactions = allTransactions.filter { $0.type == selectedType.rawValue }
             calculateStats(from: filteredTransactions)
         } catch {
-            print("Fetch failed: \(error)")
+            CCLogger.error("Fetch failed: \(error)")
         }
     }
 
