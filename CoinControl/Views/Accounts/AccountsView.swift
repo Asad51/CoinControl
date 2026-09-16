@@ -12,8 +12,16 @@ struct AccountEditContainer: Identifiable {
 
 struct AccountsView: View {
     @EnvironmentObject private var settings: Settings
-    @StateObject private var viewModel = AccountsViewModel()
+    @StateObject private var viewModel: AccountsViewModel
     @State private var sheetContainer: AccountEditContainer?
+
+    init() {
+        _viewModel = StateObject(wrappedValue: AccountsViewModel())
+    }
+
+    init(viewModel: AccountsViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
 
     var body: some View {
         NavigationView {

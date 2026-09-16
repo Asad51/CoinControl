@@ -25,7 +25,7 @@ class AccountsViewModel: ObservableObject {
             accounts = try accountService.fetchAccounts()
             balances = try accountService.getBalances()
         } catch {
-            print("Failed to fetch accounts or balances: \(error)")
+            CCLogger.error("Failed to fetch accounts or balances: \(error)")
         }
     }
 
@@ -34,7 +34,7 @@ class AccountsViewModel: ObservableObject {
             try accountService.addAccount(name: name, type: type)
             fetchAccounts()
         } catch {
-            print("Failed to add account: \(error)")
+            CCLogger.error("Failed to add account: \(error)")
         }
     }
 
@@ -43,7 +43,7 @@ class AccountsViewModel: ObservableObject {
             try accountService.updateAccount(id: id, name: name, type: type)
             fetchAccounts()
         } catch {
-            print("Failed to update account: \(error)")
+            CCLogger.error("Failed to update account: \(error)")
         }
     }
 

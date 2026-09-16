@@ -58,7 +58,7 @@ class CategoryDetailViewModel: ObservableObject {
             transactions = try context.fetch(request)
             totalAmount = transactions.reduce(0) { $0 + $1.amount }
         } catch {
-            print("Fetch current month transactions failed: \(error)")
+            CCLogger.error("Fetch current month transactions failed: \(error)")
         }
     }
 
@@ -97,7 +97,7 @@ class CategoryDetailViewModel: ObservableObject {
             }
             trendData = points
         } catch {
-            print("Fetch trend data failed: \(error)")
+            CCLogger.error("Fetch trend data failed: \(error)")
         }
     }
 

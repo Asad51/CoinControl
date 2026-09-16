@@ -11,11 +11,19 @@ import SwiftUI
 /// The main statistics view that provides an overview of expenses by category.
 struct StatsView: View {
     @EnvironmentObject private var settings: Settings
-    @StateObject private var viewModel = StatsViewModel()
+    @StateObject private var viewModel: StatsViewModel
 
     /// Holds the raw value of the selected angle in the pie chart.
     @State private var selectedStatValue: Double? = nil
     @State private var showingDatePicker = false
+
+    init() {
+        _viewModel = StateObject(wrappedValue: StatsViewModel())
+    }
+
+    init(viewModel: StatsViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
 
     var body: some View {
         NavigationView {
@@ -47,7 +55,16 @@ struct StatsView: View {
 
                     // Period Picker (Weekly, Monthly, Annually, etc.)
                     Menu {
-                        Picker("Period", selection: $viewModel.selectedPeriod) {
+                        Picker("Period", selection: Binding(
+                            get: { viewModel.selectedPeriod },
+                            set: { period in
+                                viewModel.selectedPeriod = period
+                                if period == .period {
+                                    showingDatePicker = true
+                                }
+                                viewModel.updateDateRange()
+                            }
+                        )) {
                             ForEach(StatsPeriod.allCases) { period in
                                 Text(period.rawValue).tag(period)
                             }
@@ -61,12 +78,6 @@ struct StatsView: View {
                         .padding(.vertical, 6)
                         .background(Color(UIColor.secondarySystemBackground))
                         .cornerRadius(8)
-                    }
-                    .onChange(of: viewModel.selectedPeriod) { period in
-                        if period == .period {
-                            showingDatePicker = true
-                        }
-                        viewModel.updateDateRange()
                     }
                 }
                 .padding()

@@ -28,7 +28,7 @@ struct TransactionTotalView: View {
                     VStack(spacing: 0) {
                         AccountSummaryRow(
                             title: "Compared to last month",
-                            value: "\(Int(viewModel.expenseComparisonPercentage))% of last month",
+                            value: viewModel.expenseComparisonText,
                             trend: viewModel.expenseTrend
                         )
                         Divider().padding(.horizontal)

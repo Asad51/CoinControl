@@ -22,15 +22,27 @@ class TransactionsViewModel: NSObject, ObservableObject {
     @Published var monthlyExpenseCashAndBank: Double = 0.0
     @Published var monthlyExpenseCard: Double = 0.0
     @Published var expenseComparisonPercentage: Double = 0.0
+    @Published var hasPreviousMonthExpenses: Bool = false
 
     var expenseTrend: String {
+        guard hasPreviousMonthExpenses else {
+            return monthlyExpenses > 0 ? "increase" : "stable"
+        }
         if expenseComparisonPercentage > 100 {
             return "increase"
-        } else if expenseComparisonPercentage < 100, expenseComparisonPercentage > 0 {
+        } else if expenseComparisonPercentage < 100 {
             return "decrease"
         } else {
             return "stable"
         }
+    }
+
+    /// Text describing this month's expenses relative to the previous month.
+    var expenseComparisonText: String {
+        guard hasPreviousMonthExpenses else {
+            return monthlyExpenses > 0 ? "No expenses last month" : "No expenses"
+        }
+        return "\(Int(expenseComparisonPercentage.rounded()))% of last month"
     }
 
     @Published var selectedMonthRangeString: String = ""
@@ -69,7 +81,7 @@ class TransactionsViewModel: NSObject, ObservableObject {
             try fetchedResultsController.performFetch()
             updateGroupedTransactions()
         } catch {
-            print("Failed to fetch transactions: \(error)")
+            CCLogger.error("Failed to fetch transactions: \(error)")
         }
     }
 
@@ -190,6 +202,7 @@ class TransactionsViewModel: NSObject, ObservableObject {
             .reduce(0) { $0 + $1.amount }
 
         // Expense Comparison
+        hasPreviousMonthExpenses = false
         if let previousMonth = calendar.date(byAdding: .month, value: -1, to: selectedDate) {
             let previousMonthExpenses = allTransactions.filter { transaction in
                 calendar.isDate(transaction.date, equalTo: previousMonth, toGranularity: .month) &&
@@ -200,6 +213,7 @@ class TransactionsViewModel: NSObject, ObservableObject {
 
             if previousMonthExpenses > 0 {
                 expenseComparisonPercentage = (currentMonthExpenses / previousMonthExpenses) * 100
+                hasPreviousMonthExpenses = true
             } else {
                 expenseComparisonPercentage = 0
             }
@@ -265,7 +279,7 @@ class TransactionsViewModel: NSObject, ObservableObject {
                 }
             } catch {
                 await MainActor.run {
-                    print("Export failed: \(error)")
+                    CCLogger.error("Export failed: \(error)")
                     exportError = error.localizedDescription
                     isExporting = false
                 }

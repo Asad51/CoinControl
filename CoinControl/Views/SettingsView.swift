@@ -92,7 +92,7 @@ struct SettingsView: View {
                             showingPreview = true
                         }
                     case .failure(let error):
-                        print("Failed to select file: \(error.localizedDescription)")
+                        CCLogger.error("Failed to select file: \(error.localizedDescription)")
                 }
             }
             .sheet(isPresented: $showingPreview, onDismiss: {

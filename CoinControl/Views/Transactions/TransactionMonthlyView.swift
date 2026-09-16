@@ -3,6 +3,7 @@
 //  CoinControl
 //
 
+import Combine
 import SwiftUI
 
 struct TransactionMonthlyView: View {
@@ -99,7 +100,7 @@ struct MonthRowView: View {
                 }
             }
         }
-        .onChange(of: viewModel.selectedDate) { newDate in
+        .onReceive(viewModel.$selectedDate.dropFirst()) { newDate in
             // Auto-expand/collapse based on external month selection
             isExpanded = calendar.isDate(monthDate, equalTo: newDate, toGranularity: .month)
         }

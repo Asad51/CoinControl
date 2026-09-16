@@ -111,7 +111,7 @@ struct CategoryDetailView: View {
                             AxisMarks(position: .leading) { value in
                                 AxisValueLabel {
                                     if let amount = value.as(Double.self) {
-                                        Text("\(Int(amount / 1000))k")
+                                        Text(axisLabel(for: amount))
                                     }
                                 }
                                 .foregroundStyle(.secondary)
@@ -150,5 +150,25 @@ struct CategoryDetailView: View {
             TransactionAddEditView(transactionToEdit: selectedTransaction)
                 .environment(\.managedObjectContext, viewContext)
         }
+    }
+
+    /// Formats a chart axis value without collapsing small amounts to `0k`.
+    private func axisLabel(for amount: Double) -> String {
+        let magnitude = abs(amount)
+        if magnitude >= 1_000_000 {
+            return abbreviated(amount / 1_000_000, suffix: "M")
+        } else if magnitude >= 1000 {
+            return abbreviated(amount / 1000, suffix: "k")
+        } else {
+            return String(format: "%.0f", amount)
+        }
+    }
+
+    private func abbreviated(_ value: Double, suffix: String) -> String {
+        var text = String(format: "%.1f", value)
+        if text.hasSuffix(".0") {
+            text = String(text.dropLast(2))
+        }
+        return text + suffix
     }
 }
