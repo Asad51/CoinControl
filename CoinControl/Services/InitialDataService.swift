@@ -7,31 +7,50 @@ import CoreData
 import Foundation
 
 class InitialDataService {
-    private let context: NSManagedObjectContext
+    private let container: NSPersistentContainer
     private let userDefaults: UserDefaults
     private let key = "hasInsertedInitialData"
 
-    init(context: NSManagedObjectContext = PersistenceController.shared.viewContext, userDefaults: UserDefaults = .standard) {
-        self.context = context
+    init(container: NSPersistentContainer = PersistenceController.shared.container, userDefaults: UserDefaults = .standard) {
+        self.container = container
         self.userDefaults = userDefaults
     }
 
-    func checkAndInsertInitialData() {
-        guard !userDefaults.bool(forKey: key) else { return }
+    /// Seeds the default categories and accounts on first launch.
+    ///
+    /// Runs synchronously so the data exists before the UI can be used; the insert is
+    /// small and only happens once. Returns `true` when the data is present.
+    @discardableResult
+    func checkAndInsertInitialData() -> Bool {
+        guard !userDefaults.bool(forKey: key) else { return true }
 
-        insertCategories()
-        insertAccounts()
+        let context = container.viewContext
+        var succeeded = false
 
-        do {
-            try context.save()
-            userDefaults.set(true, forKey: key)
-            print("Initial data inserted successfully.")
-        } catch {
-            print("Failed to save initial data: \(error)")
+        context.performAndWait {
+            context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+
+            insertCategories(in: context)
+            insertAccounts(in: context)
+
+            do {
+                try context.save()
+                succeeded = true
+            } catch {
+                CCLogger.error("Failed to save initial data: \(error)")
+                context.rollback()
+            }
         }
+
+        if succeeded {
+            userDefaults.set(true, forKey: key)
+            CCLogger.info("Initial data inserted successfully.")
+        }
+
+        return succeeded
     }
 
-    private func insertCategories() {
+    private func insertCategories(in context: NSManagedObjectContext) {
         let expenseCategories = [
             ("Food", "🍜"),
             ("Social Life", "👥"),
@@ -75,7 +94,7 @@ class InitialDataService {
         }
     }
 
-    private func insertAccounts() {
+    private func insertAccounts(in context: NSManagedObjectContext) {
         let accounts = [
             ("Cash", AccountType.cash),
             ("Bank", AccountType.bank),

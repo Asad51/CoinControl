@@ -100,6 +100,11 @@ struct TransactionsView: View {
                 }
                 .blur(radius: viewModel.showExportOptions ? 3 : 0)
                 .disabled(viewModel.showExportOptions)
+                .sheet(item: $viewModel.exportedFileURL, onDismiss: {
+                    viewModel.exportedFileURL = nil
+                }) { url in
+                    ShareSheet(activityItems: [url])
+                }
 
                 VStack(spacing: 16) {
                     FloatingButton(systemImage: "plus") {
@@ -127,11 +132,6 @@ struct TransactionsView: View {
             .sheet(item: $sheetContainer) { container in
                 TransactionAddEditView(transactionToEdit: container.transaction)
                     .environment(\.managedObjectContext, viewContext)
-            }
-            .sheet(item: $viewModel.exportedFileURL, onDismiss: {
-                viewModel.exportedFileURL = nil
-            }) { url in
-                ShareSheet(activityItems: [url])
             }
         }
     }

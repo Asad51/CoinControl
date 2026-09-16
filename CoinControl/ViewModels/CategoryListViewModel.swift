@@ -8,7 +8,8 @@ import CoreData
 import Foundation
 
 class CategoryListViewModel: ObservableObject {
-    @Published var categories: [Category] = []
+    @Published var categories: [CategoryModel] = []
+    @Published var errorMessage: String? = nil
 
     private let categoryService: CategoryServiceProtocol
     let type: Int16
@@ -23,7 +24,7 @@ class CategoryListViewModel: ObservableObject {
         do {
             categories = try categoryService.fetchCategories(by: type)
         } catch {
-            print("Failed to fetch categories: \(error)")
+            CCLogger.error("Failed to fetch categories: \(error)")
         }
     }
 
@@ -34,7 +35,8 @@ class CategoryListViewModel: ObservableObject {
                 try categoryService.deleteCategory(category)
                 fetchCategories()
             } catch {
-                print("Failed to delete category: \(error)")
+                errorMessage = error.localizedDescription
+                return
             }
         }
     }
@@ -44,7 +46,7 @@ class CategoryListViewModel: ObservableObject {
             try categoryService.addCategory(name: name, icon: icon, type: type)
             fetchCategories()
         } catch {
-            print("Failed to add category: \(error)")
+            CCLogger.error("Failed to add category: \(error)")
         }
     }
 }

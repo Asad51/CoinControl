@@ -5,9 +5,23 @@
 
 import SwiftUI
 
+struct AccountEditContainer: Identifiable {
+    let id = UUID()
+    let account: AccountModel?
+}
+
 struct AccountsView: View {
     @EnvironmentObject private var settings: Settings
-    @StateObject private var viewModel = AccountsViewModel()
+    @StateObject private var viewModel: AccountsViewModel
+    @State private var sheetContainer: AccountEditContainer?
+
+    init() {
+        _viewModel = StateObject(wrappedValue: AccountsViewModel())
+    }
+
+    init(viewModel: AccountsViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
 
     var body: some View {
         NavigationView {
@@ -21,24 +35,45 @@ struct AccountsView: View {
                 } else {
                     List {
                         ForEach(viewModel.accounts) { account in
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(account.name)
-                                        .font(.headline)
+                            Button(action: {
+                                sheetContainer = AccountEditContainer(account: account)
+                            }) {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(account.name)
+                                            .font(.headline)
+                                            .foregroundColor(.primary)
+                                        Text(account.type.title)
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                    }
+
+                                    Spacer()
+
+                                    Text(CurrencyFormatter.format(viewModel.balances[account.id] ?? 0.0, currencySymbol: settings.currencySymbol))
+                                        .font(.system(.body, design: .monospaced))
+                                        .foregroundColor((viewModel.balances[account.id] ?? 0.0) >= 0 ? .appTotal : .appExpense)
                                 }
-
-                                Spacer()
-
-                                Text(CurrencyFormatter.format(viewModel.balances[account.id] ?? 0.0, currencySymbol: settings.currencySymbol))
-                                    .font(.system(.body, design: .monospaced))
-                                    .foregroundColor((viewModel.balances[account.id] ?? 0.0) >= 0 ? .appTotal : .appExpense)
+                                .padding(.vertical, 4)
                             }
-                            .padding(.vertical, 4)
+                            .buttonStyle(PlainButtonStyle())
                         }
                     }
                 }
             }
             .navigationTitle("Accounts")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        sheetContainer = AccountEditContainer(account: nil)
+                    }) {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+            .sheet(item: $sheetContainer) { container in
+                AccountAddEditView(viewModel: viewModel, accountToEdit: container.account)
+            }
         }
     }
 }

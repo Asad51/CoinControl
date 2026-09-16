@@ -22,15 +22,27 @@ class TransactionsViewModel: NSObject, ObservableObject {
     @Published var monthlyExpenseCashAndBank: Double = 0.0
     @Published var monthlyExpenseCard: Double = 0.0
     @Published var expenseComparisonPercentage: Double = 0.0
+    @Published var hasPreviousMonthExpenses: Bool = false
 
     var expenseTrend: String {
+        guard hasPreviousMonthExpenses else {
+            return monthlyExpenses > 0 ? "increase" : "stable"
+        }
         if expenseComparisonPercentage > 100 {
             return "increase"
-        } else if expenseComparisonPercentage < 100, expenseComparisonPercentage > 0 {
+        } else if expenseComparisonPercentage < 100 {
             return "decrease"
         } else {
             return "stable"
         }
+    }
+
+    /// Text describing this month's expenses relative to the previous month.
+    var expenseComparisonText: String {
+        guard hasPreviousMonthExpenses else {
+            return monthlyExpenses > 0 ? "No expenses last month" : "No expenses"
+        }
+        return "\(Int(expenseComparisonPercentage.rounded()))% of last month"
     }
 
     @Published var selectedMonthRangeString: String = ""
@@ -69,7 +81,7 @@ class TransactionsViewModel: NSObject, ObservableObject {
             try fetchedResultsController.performFetch()
             updateGroupedTransactions()
         } catch {
-            print("Failed to fetch transactions: \(error)")
+            CCLogger.error("Failed to fetch transactions: \(error)")
         }
     }
 
@@ -88,7 +100,7 @@ class TransactionsViewModel: NSObject, ObservableObject {
             filteredTransactions = []
         } else {
             filteredTransactions = allTransactions.filter { transaction in
-                let titleMatch = transaction.title.localizedCaseInsensitiveContains(query)
+                let titleMatch = transaction.title?.localizedCaseInsensitiveContains(query) ?? false
                 let noteMatch = transaction.note.localizedCaseInsensitiveContains(query)
                 let categoryMatch = transaction.category?.name.localizedCaseInsensitiveContains(query) == true ||
                     transaction.category?.icon.localizedCaseInsensitiveContains(query) == true
@@ -190,6 +202,7 @@ class TransactionsViewModel: NSObject, ObservableObject {
             .reduce(0) { $0 + $1.amount }
 
         // Expense Comparison
+        hasPreviousMonthExpenses = false
         if let previousMonth = calendar.date(byAdding: .month, value: -1, to: selectedDate) {
             let previousMonthExpenses = allTransactions.filter { transaction in
                 calendar.isDate(transaction.date, equalTo: previousMonth, toGranularity: .month) &&
@@ -200,6 +213,7 @@ class TransactionsViewModel: NSObject, ObservableObject {
 
             if previousMonthExpenses > 0 {
                 expenseComparisonPercentage = (currentMonthExpenses / previousMonthExpenses) * 100
+                hasPreviousMonthExpenses = true
             } else {
                 expenseComparisonPercentage = 0
             }
@@ -221,39 +235,41 @@ class TransactionsViewModel: NSObject, ObservableObject {
         groupedTransactions = grouped.sorted { $0.key > $1.key }
     }
 
+    @MainActor
     func exportData(for period: ExportPeriod) {
         isExporting = true
         exportError = nil
 
+        // Read all Core Data objects on the main actor before doing any async work.
+        let allTransactions = fetchedResultsController.fetchedObjects ?? []
+        let transactionsToExport: [Transaction]
+
+        if let range = period.dateRange() {
+            transactionsToExport = allTransactions.filter {
+                $0.date >= range.start && $0.date <= range.end
+            }
+        } else {
+            transactionsToExport = allTransactions
+        }
+
+        let exportItems = transactionsToExport.map { transaction in
+            let categoryDisplay = [transaction.category?.icon, transaction.category?.name]
+                .compactMap { $0 }
+                .joined(separator: " ")
+
+            return TransactionExportItem(
+                date: transaction.date,
+                title: transaction.title ?? "",
+                type: TransactionType(rawValue: transaction.type)?.title ?? "Unknown",
+                category: categoryDisplay.isEmpty ? "No Category" : categoryDisplay,
+                account: transaction.account?.name ?? "No Account",
+                currency: settings.currencySymbol,
+                amount: transaction.amount,
+                note: transaction.note
+            )
+        }
+
         Task {
-            let allTransactions = fetchedResultsController.fetchedObjects ?? []
-            let transactionsToExport: [Transaction]
-
-            if let range = period.dateRange() {
-                transactionsToExport = allTransactions.filter {
-                    $0.date >= range.start && $0.date <= range.end
-                }
-            } else {
-                transactionsToExport = allTransactions
-            }
-
-            let exportItems = transactionsToExport.map { transaction in
-                let categoryDisplay = [transaction.category?.icon, transaction.category?.name]
-                    .compactMap { $0 }
-                    .joined(separator: " ")
-
-                return TransactionExportItem(
-                    date: transaction.date,
-                    title: transaction.title,
-                    type: TransactionType(rawValue: transaction.type)?.title ?? "Unknown",
-                    category: categoryDisplay.isEmpty ? "No Category" : categoryDisplay,
-                    account: transaction.account?.name ?? "No Account",
-                    currency: settings.currencySymbol,
-                    amount: transaction.amount,
-                    note: transaction.note
-                )
-            }
-
             do {
                 let url = try await exportService.exportTransactions(exportItems)
                 await MainActor.run {
@@ -263,7 +279,7 @@ class TransactionsViewModel: NSObject, ObservableObject {
                 }
             } catch {
                 await MainActor.run {
-                    print("Export failed: \(error)")
+                    CCLogger.error("Export failed: \(error)")
                     exportError = error.localizedDescription
                     isExporting = false
                 }

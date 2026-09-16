@@ -15,7 +15,7 @@ final class AccountsViewModelTests: XCTestCase {
     override func setUpWithError() throws {
         let persistence = PersistenceController(inMemory: true)
         context = persistence.viewContext
-        viewModel = AccountsViewModel(context: context)
+        viewModel = AccountsViewModel(accountService: AccountService(context: context))
     }
 
     @MainActor
@@ -55,5 +55,77 @@ final class AccountsViewModelTests: XCTestCase {
             XCTAssertEqual(viewModel.accounts[0].id, accountId, "Account ID should match")
             XCTAssertEqual(viewModel.balances[accountId], 60.0, "Balance should be 60.0 but was \(viewModel.balances[accountId] ?? -1.0)")
         }
+    }
+
+    @MainActor
+    func testAddAccount() {
+        // Given
+        XCTAssertEqual(viewModel.accounts.count, 0)
+
+        // When
+        viewModel.addAccount(name: "New Savings", type: .bank)
+
+        // Then
+        XCTAssertEqual(viewModel.accounts.count, 1)
+        XCTAssertEqual(viewModel.accounts[0].name, "New Savings")
+        XCTAssertEqual(viewModel.accounts[0].type, .bank)
+    }
+
+    @MainActor
+    func testUpdateAccount() {
+        // Given
+        viewModel.addAccount(name: "Original Name", type: .cash)
+        let addedAccount = viewModel.accounts[0]
+
+        // When
+        viewModel.updateAccount(id: addedAccount.id, name: "Updated Name", type: .card)
+
+        // Then
+        XCTAssertEqual(viewModel.accounts.count, 1)
+        XCTAssertEqual(viewModel.accounts[0].name, "Updated Name")
+        XCTAssertEqual(viewModel.accounts[0].type, .card)
+    }
+
+    @MainActor
+    func testDeleteAccount() {
+        // Given
+        viewModel.addAccount(name: "To Be Deleted", type: .card)
+        let addedAccount = viewModel.accounts[0]
+        XCTAssertEqual(viewModel.accounts.count, 1)
+
+        // When
+        viewModel.deleteAccount(addedAccount)
+
+        // Then
+        XCTAssertEqual(viewModel.accounts.count, 0)
+    }
+
+    @MainActor
+    func testDeleteAccountWithTransactionsIsBlocked() throws {
+        // Given
+        viewModel.addAccount(name: "In Use", type: .cash)
+        let addedAccount = viewModel.accounts[0]
+
+        let accountRequest = Account.fetchRequest()
+        accountRequest.predicate = NSPredicate(format: "id == %@", addedAccount.id as CVarArg)
+        let managedAccount = try XCTUnwrap(context.fetch(accountRequest).first)
+
+        let transaction = Transaction(context: context)
+        transaction.id = UUID()
+        transaction.amount = 10.0
+        transaction.type = TransactionType.expense.rawValue
+        transaction.date = Date()
+        transaction.title = ""
+        transaction.note = ""
+        transaction.account = managedAccount
+        try context.save()
+
+        // When
+        let deleted = viewModel.deleteAccount(addedAccount)
+
+        // Then
+        XCTAssertFalse(deleted, "Deletion should be refused while transactions reference the account")
+        XCTAssertNotNil(viewModel.errorMessage)
+        XCTAssertEqual(viewModel.accounts.count, 1, "Account should still exist")
     }
 }

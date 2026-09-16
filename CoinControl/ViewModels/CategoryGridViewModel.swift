@@ -8,7 +8,7 @@ import CoreData
 import Foundation
 
 class CategoryGridViewModel: ObservableObject {
-    @Published var categories: [Category] = []
+    @Published var categories: [CategoryModel] = []
 
     private let categoryService: CategoryServiceProtocol
     private let type: Int16
@@ -23,7 +23,7 @@ class CategoryGridViewModel: ObservableObject {
         do {
             categories = try categoryService.fetchCategories(by: type)
         } catch {
-            print("Failed to fetch categories: \(error)")
+            CCLogger.error("Failed to fetch categories: \(error)")
         }
     }
 }

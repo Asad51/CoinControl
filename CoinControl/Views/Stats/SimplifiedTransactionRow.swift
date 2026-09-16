@@ -16,7 +16,7 @@ struct SimplifiedTransactionRow: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text(transaction.title)
+                Text(transaction.title ?? "")
                     .font(.body)
 
                 Text(transaction.date, style: .date)

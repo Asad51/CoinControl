@@ -8,7 +8,7 @@ import Foundation
 
 protocol TransactionServiceProtocol {
     func getTransactionsFRC() -> NSFetchedResultsController<Transaction>
-    func saveTransaction(id: UUID?, type: Int16, amount: Double, date: Date, title: String, note: String, category: Category?, account: Account?) throws
+    func saveTransaction(id: UUID?, type: Int16, amount: Double, date: Date, title: String, note: String, category: CategoryModel?, account: AccountModel?) throws
     func deleteTransaction(_ transaction: Transaction) throws
     func fetchUniqueTitles() throws -> [String]
 }
@@ -38,11 +38,11 @@ class TransactionService: TransactionServiceProtocol {
         request.returnsDistinctResults = true
         request.propertiesToFetch = ["title"]
 
-        let results = try context.fetch(request) as? [[String: String]]
-        return results?.compactMap { $0["title"] }.sorted() ?? []
+        let results = try context.fetch(request) as? [[String: Any]]
+        return results?.compactMap { $0["title"] as? String }.sorted() ?? []
     }
 
-    func saveTransaction(id: UUID?, type: Int16, amount: Double, date: Date, title: String, note: String, category: Category?, account: Account?) throws {
+    func saveTransaction(id: UUID?, type: Int16, amount: Double, date: Date, title: String, note: String, category: CategoryModel?, account: AccountModel?) throws {
         let transaction: Transaction
 
         if let id {
@@ -64,8 +64,23 @@ class TransactionService: TransactionServiceProtocol {
         transaction.date = date
         transaction.note = note
         transaction.title = title
-        transaction.category = category
-        transaction.account = account
+
+        // Resolve CoreData entities from model IDs
+        if let categoryModel = category {
+            let categoryRequest = Category.fetchRequest()
+            categoryRequest.predicate = NSPredicate(format: "id == %@", categoryModel.id as CVarArg)
+            transaction.category = try context.fetch(categoryRequest).first
+        } else {
+            transaction.category = nil
+        }
+
+        if let accountModel = account {
+            let accountRequest = Account.fetchRequest()
+            accountRequest.predicate = NSPredicate(format: "id == %@", accountModel.id as CVarArg)
+            transaction.account = try context.fetch(accountRequest).first
+        } else {
+            transaction.account = nil
+        }
 
         try context.save()
     }

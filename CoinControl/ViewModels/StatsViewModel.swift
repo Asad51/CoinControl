@@ -83,13 +83,14 @@ class StatsViewModel: ObservableObject {
             let filteredTransactions = allTransactions.filter { $0.type == selectedType.rawValue }
             calculateStats(from: filteredTransactions)
         } catch {
-            print("Fetch failed: \(error)")
+            CCLogger.error("Fetch failed: \(error)")
         }
     }
 
     private func calculateStats(from transactions: [Transaction]) {
-        let grouped = Dictionary(grouping: transactions) { $0.category! }
-        let total = transactions.reduce(0) { $0 + $1.amount }
+        let validTransactions = transactions.filter { $0.category != nil }
+        let grouped = Dictionary(grouping: validTransactions) { $0.category! }
+        let total = validTransactions.reduce(0) { $0 + $1.amount }
 
         // Sort by amount descending
         let sortedData = grouped.map { category, items -> (Category, Double) in

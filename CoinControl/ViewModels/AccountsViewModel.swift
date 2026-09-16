@@ -9,42 +9,53 @@ import Foundation
 
 @MainActor
 class AccountsViewModel: ObservableObject {
-    @Published var accounts: [Account] = []
+    @Published var accounts: [AccountModel] = []
     @Published var balances: [UUID: Double] = [:]
+    @Published var errorMessage: String? = nil
 
-    private let context: NSManagedObjectContext
     private let accountService: AccountServiceProtocol
 
-    init(context: NSManagedObjectContext = PersistenceController.shared.viewContext,
-         accountService: AccountServiceProtocol? = nil)
-    {
-        self.context = context
-        self.accountService = accountService ?? AccountService(context: context)
+    init(accountService: AccountServiceProtocol = AccountService()) {
+        self.accountService = accountService
         fetchAccounts()
     }
 
     func fetchAccounts() {
         do {
             accounts = try accountService.fetchAccounts()
-            calculateBalances()
+            balances = try accountService.getBalances()
         } catch {
-            print("Failed to fetch accounts: \(error)")
+            CCLogger.error("Failed to fetch accounts or balances: \(error)")
         }
     }
 
-    private func calculateBalances() {
-        let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
+    func addAccount(name: String, type: AccountType) {
         do {
-            let transactions = try context.fetch(request)
-            var newBalances: [UUID: Double] = [:]
-            for transaction in transactions {
-                guard let account = transaction.account else { continue }
-                let amount = transaction.type == TransactionType.expense.rawValue ? -transaction.amount : transaction.amount
-                newBalances[account.id, default: 0.0] += amount
-            }
-            balances = newBalances
+            try accountService.addAccount(name: name, type: type)
+            fetchAccounts()
         } catch {
-            print("Failed to fetch transactions for balances: \(error)")
+            CCLogger.error("Failed to add account: \(error)")
+        }
+    }
+
+    func updateAccount(id: UUID, name: String, type: AccountType) {
+        do {
+            try accountService.updateAccount(id: id, name: name, type: type)
+            fetchAccounts()
+        } catch {
+            CCLogger.error("Failed to update account: \(error)")
+        }
+    }
+
+    @discardableResult
+    func deleteAccount(_ account: AccountModel) -> Bool {
+        do {
+            try accountService.deleteAccount(account)
+            fetchAccounts()
+            return true
+        } catch {
+            errorMessage = error.localizedDescription
+            return false
         }
     }
 }

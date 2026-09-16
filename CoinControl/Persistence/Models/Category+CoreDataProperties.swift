@@ -22,6 +22,10 @@ extension Category {
     @NSManaged var name: String
     @NSManaged var type: Int16
     @NSManaged var transactions: NSSet
+    
+    var toModel: CategoryModel {
+        CategoryModel(id: id, name: name, icon: icon, type: TransactionType(rawValue: type) ?? .expense)
+    }
 }
 
 // MARK: Generated accessors for transactions
