@@ -14,15 +14,6 @@ struct SettingsView: View {
     @State private var selectedFileURL: URL? = nil
     @State private var showingPreview = false
 
-    private let availableColors: [(String, Color)] = [
-        ("Blue", .tintBlue),
-        ("Green", .tintGreen),
-        ("Navy", .tintNavy),
-        ("Orange", .tintOrange),
-        ("Pink", .tintPink),
-        ("Violet", .tintViolet),
-    ]
-
     private let currencies = ["৳", "$", "€", "£", "¥", "₹"]
 
     var body: some View {
@@ -58,7 +49,7 @@ struct SettingsView: View {
                         .padding(.vertical, 4)
 
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 60))], spacing: 15) {
-                        ForEach(availableColors, id: \.0) { name, color in
+                        ForEach(Settings.availableAccentColors, id: \.0) { name, color in
                             VStack {
                                 Circle()
                                     .fill(color)
