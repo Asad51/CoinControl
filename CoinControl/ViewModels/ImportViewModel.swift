@@ -15,12 +15,18 @@ class ImportViewModel: ObservableObject {
     @Published var importedCount = 0
 
     private let importService: ImportServiceProtocol
+    private var hasLoadedFile = false
 
     init(importService: ImportServiceProtocol = ImportService()) {
         self.importService = importService
     }
 
     func loadAndParseFile(url: URL) {
+        // `onAppear` can fire more than once; only parse the file the first time
+        // so the user's selection state isn't discarded.
+        guard !hasLoadedFile else { return }
+        hasLoadedFile = true
+
         isLoading = true
         errorMessage = nil
         importCompleted = false

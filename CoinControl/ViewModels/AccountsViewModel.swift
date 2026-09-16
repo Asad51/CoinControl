@@ -11,6 +11,7 @@ import Foundation
 class AccountsViewModel: ObservableObject {
     @Published var accounts: [AccountModel] = []
     @Published var balances: [UUID: Double] = [:]
+    @Published var errorMessage: String? = nil
 
     private let accountService: AccountServiceProtocol
 
@@ -46,12 +47,15 @@ class AccountsViewModel: ObservableObject {
         }
     }
 
-    func deleteAccount(_ account: AccountModel) {
+    @discardableResult
+    func deleteAccount(_ account: AccountModel) -> Bool {
         do {
             try accountService.deleteAccount(account)
             fetchAccounts()
+            return true
         } catch {
-            print("Failed to delete account: \(error)")
+            errorMessage = error.localizedDescription
+            return false
         }
     }
 }

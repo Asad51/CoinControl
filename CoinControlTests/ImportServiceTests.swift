@@ -230,7 +230,115 @@ final class ImportServiceTests: XCTestCase {
         XCTAssertEqual(transactions.count, 0, "Deselected items should not be imported")
     }
 
+    // MARK: - Amount Parsing Tests
+
+    func testParseCSVNegativeAmountIsTreatedAsExpense() throws {
+        let csvContent = """
+        Date,Title,Type,Category,Account,Amount,Note
+        2024-01-15,Refund,Income,Work,Bank,-25.50,
+        """
+        let fileURL = try writeTempCSV(content: csvContent)
+        let items = try importService.parseTransactions(from: fileURL)
+        XCTAssertEqual(items.count, 1)
+        XCTAssertEqual(items[0].amount, 25.50, accuracy: 0.001, "Amount magnitude should be preserved")
+        XCTAssertEqual(items[0].type, .expense, "A negative amount represents an expense")
+    }
+
+    func testParseCSVParenthesizedAmountIsTreatedAsExpense() throws {
+        let csvContent = """
+        Date,Title,Type,Category,Account,Amount,Note
+        2024-01-15,Refund,Expense,Food,Wallet,(12.34),
+        """
+        let fileURL = try writeTempCSV(content: csvContent)
+        let items = try importService.parseTransactions(from: fileURL)
+        XCTAssertEqual(items.count, 1)
+        XCTAssertEqual(items[0].amount, 12.34, accuracy: 0.001)
+        XCTAssertEqual(items[0].type, .expense)
+    }
+
+    func testParseCSVStripsCurrencySymbolsAndGroupingSeparators() throws {
+        let csvContent = """
+        Date,Title,Type,Category,Account,Amount,Note
+        2024-01-15,Salary,Income,Work,Bank,"$1,234.56",
+        """
+        let fileURL = try writeTempCSV(content: csvContent)
+        let items = try importService.parseTransactions(from: fileURL)
+        XCTAssertEqual(items.count, 1)
+        XCTAssertEqual(items[0].amount, 1234.56, accuracy: 0.001)
+        XCTAssertEqual(items[0].type, .income)
+    }
+
+    // MARK: - Duplicate Detection Keys
+
+    func testDuplicateDetectionRequiresMatchingType() throws {
+        try seedExistingTransaction(title: "Coffee", amount: 5.50, type: .expense, accountName: "Wallet")
+
+        let csvContent = """
+        Date,Title,Type,Category,Account,Amount,Note
+        2024-01-15,Coffee,Income,Work,Wallet,5.50,
+        """
+        let fileURL = try writeTempCSV(content: csvContent)
+        let items = try importService.parseTransactions(from: fileURL)
+        XCTAssertEqual(items.count, 1)
+        XCTAssertFalse(items[0].isDuplicate, "Same date/title/amount but different type should not be a duplicate")
+    }
+
+    func testDuplicateDetectionRequiresMatchingAccount() throws {
+        try seedExistingTransaction(title: "Coffee", amount: 5.50, type: .expense, accountName: "Wallet")
+
+        let csvContent = """
+        Date,Title,Type,Category,Account,Amount,Note
+        2024-01-15,Coffee,Expense,Food,Bank,5.50,
+        """
+        let fileURL = try writeTempCSV(content: csvContent)
+        let items = try importService.parseTransactions(from: fileURL)
+        XCTAssertEqual(items.count, 1)
+        XCTAssertFalse(items[0].isDuplicate, "Same date/title/amount but different account should not be a duplicate")
+    }
+
+    // MARK: - Deletion Safety Tests
+
+    func testDeletingReferencedCategoryIsBlocked() throws {
+        try categoryService.addCategory(name: "Food", icon: "🍔", type: TransactionType.expense.rawValue)
+        let category = try categoryService.fetchCategories()[0]
+
+        try transactionService.saveTransaction(
+            id: nil,
+            type: TransactionType.expense.rawValue,
+            amount: 5.50,
+            date: Date(),
+            title: "Coffee",
+            note: "",
+            category: category,
+            account: nil
+        )
+
+        XCTAssertThrowsError(try categoryService.deleteCategory(category)) { error in
+            let nsError = error as NSError
+            XCTAssertEqual(nsError.domain, "CategoryService")
+            XCTAssertEqual(nsError.code, 409)
+        }
+        XCTAssertEqual(try categoryService.fetchCategories().count, 1, "Referenced category should still exist")
+    }
+
     // MARK: - Helpers
+
+    private func seedExistingTransaction(title: String, amount: Double, type: TransactionType, accountName: String) throws {
+        let account = Account(context: context)
+        account.id = UUID()
+        account.name = accountName
+        account.accountType = AccountType.cash.rawValue
+
+        let transaction = Transaction(context: context)
+        transaction.id = UUID()
+        transaction.title = title
+        transaction.amount = amount
+        transaction.type = type.rawValue
+        transaction.date = makeDate(year: 2024, month: 1, day: 15)
+        transaction.note = ""
+        transaction.account = account
+        try context.save()
+    }
 
     private func writeTempCSV(content: String) throws -> URL {
         let url = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString + ".csv")

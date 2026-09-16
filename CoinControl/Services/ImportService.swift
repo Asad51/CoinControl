@@ -97,30 +97,31 @@ class ImportService: ImportServiceProtocol {
 
             guard let date = parseDate(row[dateIndex]) else { continue }
             let title = row[titleIndex].trimmingCharacters(in: .whitespacesAndNewlines)
-            let type = parseType(row[typeIndex])
             let categoryName = row[categoryIndex].trimmingCharacters(in: .whitespacesAndNewlines)
             let accountName = row[accountIndex].trimmingCharacters(in: .whitespacesAndNewlines)
-            
-            // Clean up currency symbols or commas in amount
-            let cleanedAmountStr = row[amountIndex]
-                .replacingOccurrences(of: ",", with: "")
-                .trimmingCharacters(in: CharacterSet.decimalDigits.inverted.subtracting(CharacterSet(charactersIn: ".")))
-            guard let amount = Double(cleanedAmountStr) else { continue }
-            
+
+            // Clean up currency symbols/grouping separators while preserving the sign
+            guard let signedAmount = parseAmount(row[amountIndex]) else { continue }
+            let amount = abs(signedAmount)
+            // A negative amount always represents money going out
+            let type: TransactionType = signedAmount < 0 ? .expense : parseType(row[typeIndex])
+
             let note = noteIndex != nil && noteIndex! < row.count ? row[noteIndex!].trimmingCharacters(in: .whitespacesAndNewlines) : ""
 
             // Determine check flags
             let isNewCategory = !existingCategories.contains { $0.name.localizedCaseInsensitiveCompare(categoryName) == .orderedSame && $0.type == type }
             let isNewAccount = !existingAccounts.contains { $0.name.localizedCaseInsensitiveCompare(accountName) == .orderedSame }
             
-            // Duplicate check: Same Date (day precision), Title, and Amount
+            // Duplicate check: Same Date (day precision), Title, Type, Account and Amount
             let isDuplicate = existingTransactions.contains { existingTx in
                 let calendar = Calendar.current
                 let sameDay = calendar.isDate(existingTx.date, inSameDayAs: date)
                 let sameAmount = abs(existingTx.amount - amount) < 0.01
                 let sameTitle = (existingTx.title ?? "").localizedCaseInsensitiveCompare(title) == .orderedSame
-                
-                return sameDay && sameAmount && sameTitle
+                let sameType = existingTx.type == type.rawValue
+                let sameAccount = (existingTx.account?.name ?? "").localizedCaseInsensitiveCompare(accountName) == .orderedSame
+
+                return sameDay && sameAmount && sameTitle && sameType && sameAccount
             }
 
             var item = ParsedTransactionItem(
@@ -286,6 +287,32 @@ class ImportService: ImportServiceProtocol {
         }
         
         return nil
+    }
+
+    /// Parses an amount string such as `"$1,234.56"`, `"-12.00"` or `"(12.00)"`,
+    /// preserving the sign instead of trimming it away.
+    private func parseAmount(_ raw: String) -> Double? {
+        var text = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !text.isEmpty else { return nil }
+
+        // Accounting style negatives, e.g. (12.34)
+        let isParenthesized = text.hasPrefix("(") && text.hasSuffix(")")
+        if isParenthesized {
+            text = String(text.dropFirst().dropLast())
+        }
+
+        // Keep digits, separators and signs; drop currency symbols and whitespace.
+        text = String(text.filter { "0123456789.,+-".contains($0) })
+        // The CSV format uses '.' as the decimal separator, so ',' is grouping.
+        text = text.replacingOccurrences(of: ",", with: "")
+
+        // Normalise a trailing sign (e.g. "12.34-") to a leading sign.
+        if text.hasSuffix("-"), !text.hasPrefix("-"), !text.hasPrefix("+") {
+            text = "-" + text.dropLast()
+        }
+
+        guard let value = Double(text) else { return nil }
+        return isParenthesized ? -abs(value) : value
     }
 
     private func parseType(_ typeString: String) -> TransactionType {

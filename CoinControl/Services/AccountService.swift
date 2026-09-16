@@ -29,30 +29,22 @@ class AccountService: AccountServiceProtocol {
     }
 
     func getBalances() throws -> [UUID: Double] {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TransactionEntity")
-        fetchRequest.resultType = .dictionaryResultType
+        // Grouping by the `account` relationship in a dictionary fetch is unreliable,
+        // so aggregate in memory instead. Transactions without an account can't be
+        // attributed to a balance and are intentionally skipped.
+        let request = Transaction.fetchRequest()
+        request.predicate = NSPredicate(format: "account != nil")
+        let transactions = try context.fetch(request)
 
-        let sumExpressionDesc = NSExpressionDescription()
-        sumExpressionDesc.name = "sumAmount"
-        sumExpressionDesc.expression = NSExpression(forFunction: "sum:", arguments: [NSExpression(forKeyPath: "amount")])
-        sumExpressionDesc.expressionResultType = .doubleAttributeType
-
-        fetchRequest.propertiesToFetch = ["account", "type", sumExpressionDesc]
-        fetchRequest.propertiesToGroupBy = ["account", "type"]
-
-        let results = try context.fetch(fetchRequest) as? [[String: Any]] ?? []
-        var newBalances: [UUID: Double] = [:]
-        for dict in results {
-            guard let accountID = dict["account"] as? NSManagedObjectID,
-                  let type = dict["type"] as? Int16,
-                  let sumAmount = dict["sumAmount"] as? Double else { continue }
-
-            if let account = try? context.existingObject(with: accountID) as? Account {
-                let amount = type == TransactionType.expense.rawValue ? -sumAmount : sumAmount
-                newBalances[account.id, default: 0.0] += amount
-            }
+        var balances: [UUID: Double] = [:]
+        for transaction in transactions {
+            guard let account = transaction.account else { continue }
+            let signedAmount = transaction.type == TransactionType.expense.rawValue
+                ? -transaction.amount
+                : transaction.amount
+            balances[account.id, default: 0.0] += signedAmount
         }
-        return newBalances
+        return balances
     }
 
     func addAccount(name: String, type: AccountType) throws {
@@ -78,9 +70,22 @@ class AccountService: AccountServiceProtocol {
     func deleteAccount(_ accountModel: AccountModel) throws {
         let request = Account.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", accountModel.id as CVarArg)
-        if let account = try context.fetch(request).first {
-            context.delete(account)
-            try context.save()
+        guard let account = try context.fetch(request).first else { return }
+
+        // Deleting the account would orphan its transactions, so block it while referenced.
+        let countRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "TransactionEntity")
+        countRequest.predicate = NSPredicate(format: "account == %@", account)
+        let transactionCount = try context.count(for: countRequest)
+        guard transactionCount == 0 else {
+            let noun = transactionCount == 1 ? "transaction" : "transactions"
+            throw NSError(
+                domain: "AccountService",
+                code: 409,
+                userInfo: [NSLocalizedDescriptionKey: "“\(accountModel.name)” can’t be deleted because \(transactionCount) \(noun) still use it. Delete or reassign those transactions first."]
+            )
         }
+
+        context.delete(account)
+        try context.save()
     }
 }
